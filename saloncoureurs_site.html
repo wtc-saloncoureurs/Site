@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De Saloncoureurs — Biweekly</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5f4f0;
+    --surface: #ffffff;
+    --surface2: #f1efe9;
+    --border: rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.18);
+    --text: #1a1a18;
+    --text2: #5a5955;
+    --text3: #8a8880;
+    --blue-bg: #e6f1fb; --blue-fg: #0c447c;
+    --green-bg: #eaf3de; --green-fg: #3b6d11;
+    --red-bg: #fcebeb; --red-fg: #791f1f;
+    --amber-bg: #faeeda; --amber-fg: #633806;
+    --purple-bg: #eeedfe; --purple-fg: #3c3489;
+    --teal-bg: #e1f5ee; --teal-fg: #085041;
+    --radius: 12px; --radius-sm: 8px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1c1a; --surface: #262624; --surface2: #2e2e2b;
+      --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.15);
+      --text: #e8e6de; --text2: #a8a69e; --text3: #686660;
+      --blue-bg: #042c53; --blue-fg: #b5d4f4;
+      --green-bg: #173404; --green-fg: #c0dd97;
+      --red-bg: #501313; --red-fg: #f7c1c1;
+      --amber-bg: #412402; --amber-fg: #fac775;
+      --purple-bg: #26215c; --purple-fg: #cecbf6;
+      --teal-bg: #04342c; --teal-fg: #9fe1cb;
+    }
+  }
+
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; }
+
+  /* ── Layout ── */
+  .page { max-width: 780px; margin: 0 auto; padding: 20px 16px 48px; }
+
+  /* ── Header ── */
+  .site-header { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 10px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .logo { width: 52px; height: 52px; border-radius: 50%; background: var(--blue-bg); display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+  .header-title h1 { font-size: 19px; font-weight: 600; color: var(--text); }
+  .header-title p { font-size: 13px; color: var(--text2); margin-top: 2px; }
+  .header-right { margin-left: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+  .edition-badge { background: var(--blue-bg); color: var(--blue-fg); font-size: 12px; font-weight: 600; padding: 4px 14px; border-radius: 20px; }
+
+  /* ── Archive nav ── */
+  .archive-nav { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .archive-nav a { font-size: 12px; color: var(--text2); text-decoration: none; padding: 4px 10px; border: 0.5px solid var(--border2); border-radius: 20px; background: var(--surface); transition: background .15s; }
+  .archive-nav a:hover { background: var(--surface2); }
+  .archive-nav a.current { background: var(--blue-bg); color: var(--blue-fg); border-color: transparent; font-weight: 500; }
+  .archive-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .05em; }
+
+  /* ── Meta bar ── */
+  .meta-bar { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+  .pill { background: var(--surface); border: 0.5px solid var(--border); border-radius: 20px; padding: 5px 12px; font-size: 12px; color: var(--text2); display: flex; align-items: center; gap: 5px; }
+  .pill strong { color: var(--text); font-weight: 500; }
+
+  /* ── Grid ── */
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .full { grid-column: 1 / -1; }
+  @media (max-width: 540px) { .grid { grid-template-columns: 1fr; } .full { grid-column: 1; } }
+
+  /* ── Card ── */
+  .card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 16px 18px; }
+  .card-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--text3); margin-bottom: 12px; display: flex; align-items: center; gap: 7px; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .dot-blue { background: #378ADD; } .dot-green { background: #639922; }
+  .dot-red { background: #E24B4A; } .dot-amber { background: #BA7517; }
+  .dot-purple { background: #7F77DD; } .dot-teal { background: #1D9E75; }
+
+  /* ── Welcome ── */
+  .welcome-text { font-size: 14px; color: var(--text); line-height: 1.7; }
+
+  /* ── Events ── */
+  .event-item { display: flex; gap: 12px; align-items: flex-start; padding: 9px 0; border-bottom: 0.5px solid var(--border); }
+  .event-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .event-date { text-align: center; background: var(--surface2); border-radius: var(--radius-sm); padding: 5px 9px; min-width: 46px; flex-shrink: 0; }
+  .event-date .month { font-size: 10px; font-weight: 600; color: var(--text3); text-transform: uppercase; }
+  .event-date .day { font-size: 17px; font-weight: 600; color: var(--text); line-height: 1.2; }
+  .event-info .ev-title { font-size: 14px; font-weight: 500; color: var(--text); }
+  .event-info .ev-sub { font-size: 12px; color: var(--text2); margin-top: 2px; }
+  .ev-badge { display: inline-block; font-size: 11px; padding: 2px 7px; border-radius: 4px; margin-top: 4px; background: var(--surface2); color: var(--text2); }
+
+  /* ── Nieuwe renners ── */
+  .renner { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 0.5px solid var(--border); }
+  .renner:last-child { border-bottom: none; }
+  .avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--teal-bg); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: var(--teal-fg); flex-shrink: 0; }
+  .renner-name { font-size: 14px; font-weight: 500; color: var(--text); }
+  .renner-sub { font-size: 12px; color: var(--text2); }
+
+  /* ── Stats ── */
+  .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+  .stat-box { background: var(--surface2); border-radius: var(--radius-sm); padding: 10px 12px; }
+  .stat-label { font-size: 11px; color: var(--text3); margin-bottom: 2px; }
+  .stat-val { font-size: 22px; font-weight: 600; color: var(--text); line-height: 1; }
+  .stat-unit { font-size: 12px; font-weight: 400; color: var(--text2); }
+  .podium-row { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 0.5px solid var(--border); }
+  .podium-row:last-child { border-bottom: none; }
+  .rank { font-size: 16px; width: 24px; text-align: center; flex-shrink: 0; }
+  .p-name { flex: 1; font-size: 14px; color: var(--text); }
+  .p-km { font-size: 14px; font-weight: 500; color: var(--text); }
+
+  /* ── Sancties ── */
+  .sanction { padding: 9px 0; border-bottom: 0.5px solid var(--border); }
+  .sanction:last-child { border-bottom: none; padding-bottom: 0; }
+  .s-name { font-size: 14px; font-weight: 500; color: var(--text); }
+  .s-desc { font-size: 12px; color: var(--text2); margin-top: 2px; line-height: 1.5; }
+  .s-tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 4px; margin-top: 4px; background: var(--red-bg); color: var(--red-fg); font-weight: 500; }
+
+  /* ── Mijlpalen ── */
+  .milestone { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; border-bottom: 0.5px solid var(--border); }
+  .milestone:last-child { border-bottom: none; }
+  .m-icon { width: 30px; height: 30px; border-radius: 7px; background: var(--amber-bg); display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+  .m-title { font-size: 13px; font-weight: 500; color: var(--text); }
+  .m-sub { font-size: 12px; color: var(--text2); margin-top: 1px; }
+
+  /* ── Quote ── */
+  .quote { background: var(--surface2); border-radius: var(--radius); border-left: 3px solid var(--purple-fg); padding: 14px 18px; margin-top: 2px; }
+  .quote p { font-size: 14px; color: var(--text); font-style: italic; line-height: 1.65; }
+  .quote cite { display: block; font-size: 12px; color: var(--text2); margin-top: 7px; font-style: normal; }
+
+  /* ── Footer ── */
+  .site-footer { text-align: center; font-size: 12px; color: var(--text3); margin-top: 28px; padding-top: 16px; border-top: 0.5px solid var(--border); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="logo">🚴</div>
+    <div class="header-title">
+      <h1>De Saloncoureurs</h1>
+      <p>Biweekly Update</p>
+    </div>
+    <div class="header-right">
+      <div class="edition-badge">#1 — Week 32</div>
+      <nav class="archive-nav">
+        <span class="archive-label">Edities:</span>
+        <!-- Voeg hier per nieuwe editie een link toe -->
+        <a href="index.html" class="current">#1</a>
+        <!-- <a href="edities/editie-2.html">#2</a> -->
+        <!-- <a href="edities/editie-3.html">#3</a> -->
+      </nav>
+    </div>
+  </header>
+
+  <!-- META -->
+  <div class="meta-bar">
+    <div class="pill">🖋️ President: <strong>Naam</strong></div>
+    <div class="pill">🧢 Vicepresident: <strong>Naam</strong></div>
+    <div class="pill">📅 <strong>10 augustus 2025</strong></div>
+  </div>
+
+  <!-- GRID -->
+  <div class="grid">
+
+    <!-- Laatste nieuws -->
+    <div class="card full">
+      <div class="card-title"><div class="dot dot-blue"></div> Laatste nieuws</div>
+      <p class="welcome-text">
+        De president en vice-president draaien overuren — niet enkel op de fiets, maar ook achter de schermen.
+        Met trots lanceren we onze biweekly update: een tweeweeklijkse injectie van nieuws, prestaties, sancties
+        en events. Transparantie, motivatie en een vleugje koershumor: alles wat een echte saloncoureur nodig heeft.
+      </p>
+    </div>
+
+    <!-- Nieuwe renners -->
+    <div class="card">
+      <div class="card-title"><div class="dot dot-teal"></div> Nieuwe renners</div>
+      <!-- Voeg hier nieuwe leden toe -->
+      <div class="renner">
+        <div class="avatar">SB</div>
+        <div>
+          <div class="renner-name">Seba</div>
+          <div class="renner-sub">Nieuw lid peloton</div>
+        </div>
+      </div>
+      <div class="renner">
+        <div class="avatar">TH</div>
+        <div>
+          <div class="renner-name">Thomas</div>
+          <div class="renner-sub">Nieuw lid peloton</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Events -->
+    <div class="card">
+      <div class="card-title"><div class="dot dot-purple"></div> Aankomende events</div>
+      <!-- Voeg hier events toe: kopieer een .event-item blok -->
+      <div class="event-item">
+        <div class="event-date"><div class="month">aug</div><div class="day">16</div></div>
+        <div class="event-info">
+          <div class="ev-title">Weekend aan Zee</div>
+          <div class="ev-sub">16 &amp; 17 augustus</div>
+          <div class="ev-badge">Info: Jakob</div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-date"><div class="month">dec</div><div class="day">6</div></div>
+        <div class="event-info">
+          <div class="ev-title">Eindeseizoensvergadering</div>
+          <div class="ev-sub">Locatie nog te bepalen</div>
+          <div class="ev-badge">Aanwezigheid verplicht</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kilometerstand -->
+    <div class="card full">
+      <div class="card-title"><div class="dot dot-blue"></div> Kilometerstand</div>
+      <div class="stat-row">
+        <div class="stat-box">
+          <div class="stat-label">Totaal gefietst deze maand</div>
+          <!-- Pas XXX aan -->
+          <div class="stat-val">XXX <span class="stat-unit">km</span></div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Nog te gaan tot maanddoel</div>
+          <!-- Pas XXX aan -->
+          <div class="stat-val">XXX <span class="stat-unit">km</span></div>
+        </div>
+      </div>
+      <!-- Top 3: pas namen en km's aan -->
+      <div class="podium-row">
+        <div class="rank">🥇</div>
+        <div class="p-name">Naam</div>
+        <div class="p-km">XXX km</div>
+      </div>
+      <div class="podium-row">
+        <div class="rank">🥈</div>
+        <div class="p-name">Naam</div>
+        <div class="p-km">XXX km</div>
+      </div>
+      <div class="podium-row">
+        <div class="rank">🥉</div>
+        <div class="p-name">Naam</div>
+        <div class="p-km">XXX km</div>
+      </div>
+    </div>
+
+    <!-- Sancties -->
+    <div class="card">
+      <div class="card-title"><div class="dot dot-red"></div> Sancties</div>
+      <!-- Voeg sancties toe of verwijder blokken -->
+      <div class="sanction">
+        <div class="s-name">Jérémy Flamen</div>
+        <div class="s-desc">2x afwezig zonder geldig excuus</div>
+        <div class="s-tag">Rit volledig in het rood + borstel</div>
+      </div>
+      <div class="sanction">
+        <div class="s-name">Thibault Ghekiere</div>
+        <div class="s-desc">Reden nog in behandeling</div>
+        <div class="s-tag">Sanctie te bepalen</div>
+      </div>
+    </div>
+
+    <!-- Mijlpalen -->
+    <div class="card">
+      <div class="card-title"><div class="dot dot-amber"></div> Mijlpalen</div>
+      <!-- Voeg hier prestaties / bijzondere momenten toe -->
+      <div class="milestone">
+        <div class="m-icon">⭐</div>
+        <div>
+          <div class="m-title">Prestatie van de week</div>
+          <div class="m-sub">Naam — omschrijving</div>
+        </div>
+      </div>
+      <div class="milestone">
+        <div class="m-icon">🏁</div>
+        <div>
+          <div class="m-title">Nog een moment</div>
+          <div class="m-sub">Naam — omschrijving</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quote -->
+    <div class="full">
+      <div class="quote">
+        <!-- Pas de quote aan per editie -->
+        <p>"Koersen is simpel: wie het hardst rijdt, wint."</p>
+        <cite>— Eddy Merckx</cite>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+
+  <footer class="site-footer">
+    De Saloncoureurs &copy; 2025 · Biweekly Update
+  </footer>
+
+</div><!-- /page -->
+</body>
+</html>
