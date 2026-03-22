@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De Saloncoureurs — Galerij</title>
+<link rel="stylesheet" href="stijl.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">🚴 De Saloncoureurs</a>
+    <div class="nav-links">
+      <a href="index.html">Biweekly</a>
+      <a href="kalender.html">Kalender</a>
+      <a href="galerij.html" class="active">Galerij</a>
+      <a href="seizoen.html">Seizoen</a>
+      <a href="leden.html">Leden</a>
+    </div>
+    <button class="nav-burger" onclick="toggleMenu()">☰</button>
+  </div>
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="index.html">Biweekly</a>
+    <a href="kalender.html">Kalender</a>
+    <a href="galerij.html" class="active">Galerij</a>
+    <a href="seizoen.html">Seizoen</a>
+    <a href="leden.html">Leden</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="page-title">
+    <h2>Fotogalerij</h2>
+    <p>Herinneringen van onze ritten en events</p>
+  </div>
+
+  <!-- HOE FOTO'S TOEVOEGEN:
+       Optie 1 (aanbevolen): Upload foto's naar een Google Photos album, deel het album,
+                              en gebruik de gedeelde afbeeldings-URL als src.
+       Optie 2: Gooi foto's in een /fotos/ map in je GitHub repository
+                en gebruik src="fotos/jouwfoto.jpg"
+       Vervang de placeholder-blokken hieronder door echte <img> tags. -->
+
+  <!-- Album: Weekend aan Zee -->
+  <div class="card full" style="margin-bottom:10px">
+    <div class="card-title"><div class="dot dot-purple"></div> Weekend aan Zee — aug 2025</div>
+    <div class="foto-grid">
+
+      <!-- Vervang de placeholder divs door:
+           <div class="foto-item" onclick="openLight(this)">
+             <img src="https://jouw-foto-url.jpg" alt="Beschrijving">
+             <div class="foto-caption">Beschrijving</div>
+           </div>
+      -->
+
+      <div class="foto-item">
+        <div class="foto-placeholder">📷</div>
+        <div class="foto-caption">Foto 1</div>
+      </div>
+      <div class="foto-item">
+        <div class="foto-placeholder">📷</div>
+        <div class="foto-caption">Foto 2</div>
+      </div>
+      <div class="foto-item">
+        <div class="foto-placeholder">📷</div>
+        <div class="foto-caption">Foto 3</div>
+      </div>
+      <div class="foto-item">
+        <div class="foto-placeholder">📷</div>
+        <div class="foto-caption">Foto 4</div>
+      </div>
+      <div class="foto-item">
+        <div class="foto-placeholder">📷</div>
+        <div class="foto-caption">Foto 5</div>
+      </div>
+      <div class="foto-item">
+        <div class="foto-placeholder">📷</div>
+        <div class="foto-caption">Foto 6</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Album: Groepsrit Vlaamse Ardennen -->
+  <div class="card full">
+    <div class="card-title"><div class="dot dot-green"></div> Groepsrit Vlaamse Ardennen — aug 2025</div>
+    <div class="foto-grid">
+      <div class="foto-item"><div class="foto-placeholder">📷</div></div>
+      <div class="foto-item"><div class="foto-placeholder">📷</div></div>
+      <div class="foto-item"><div class="foto-placeholder">📷</div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLight()">
+  <button class="lightbox-close" onclick="closeLight()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function openLight(el) {
+  const img = el.querySelector('img');
+  if (!img) return;
+  document.getElementById('lightbox-img').src = img.src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLight() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLight(); });
+</script>
+</body>
+</html>

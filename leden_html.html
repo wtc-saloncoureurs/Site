@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De Saloncoureurs — Leden & Reglement</title>
+<link rel="stylesheet" href="stijl.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">🚴 De Saloncoureurs</a>
+    <div class="nav-links">
+      <a href="index.html">Biweekly</a>
+      <a href="kalender.html">Kalender</a>
+      <a href="galerij.html">Galerij</a>
+      <a href="seizoen.html">Seizoen</a>
+      <a href="leden.html" class="active">Leden</a>
+    </div>
+    <button class="nav-burger" onclick="toggleMenu()">☰</button>
+  </div>
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="index.html">Biweekly</a>
+    <a href="kalender.html">Kalender</a>
+    <a href="galerij.html">Galerij</a>
+    <a href="seizoen.html">Seizoen</a>
+    <a href="leden.html" class="active">Leden</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="page-title">
+    <h2>Leden & Reglement</h2>
+    <p>Het peloton en de regels van het spel</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- Ledenlijst -->
+    <div class="card full">
+      <div class="card-title"><div class="dot dot-teal"></div> Het Peloton</div>
+      <div class="leden-grid">
+
+        <!-- Kopieer een .lid-card blok per lid.
+             Klassen voor .lid-functie: blauw (standaard), .groen, .grijs -->
+
+        <div class="lid-card">
+          <div class="lid-avatar">NN</div>
+          <div class="lid-naam">Naam</div>
+          <div class="lid-bijnaam">"Bijnaam"</div>
+          <div class="lid-functie">President</div>
+          <!-- <a class="lid-strava" href="https://www.strava.com/athletes/xxxx" target="_blank">Strava →</a> -->
+        </div>
+
+        <div class="lid-card">
+          <div class="lid-avatar">NN</div>
+          <div class="lid-naam">Naam</div>
+          <div class="lid-bijnaam">"Bijnaam"</div>
+          <div class="lid-functie">Vicepresident</div>
+        </div>
+
+        <div class="lid-card">
+          <div class="lid-avatar">JA</div>
+          <div class="lid-naam">Jakob</div>
+          <div class="lid-bijnaam">"De Marketeer"</div>
+          <div class="lid-functie groen">Social & Marketing</div>
+        </div>
+
+        <div class="lid-card">
+          <div class="lid-avatar">JF</div>
+          <div class="lid-naam">Jérémy Flamen</div>
+          <div class="lid-bijnaam">"De Spook"</div>
+          <div class="lid-functie grijs">Renner</div>
+        </div>
+
+        <div class="lid-card">
+          <div class="lid-avatar">TG</div>
+          <div class="lid-naam">Thibault Ghekiere</div>
+          <div class="lid-bijnaam">"Bijnaam"</div>
+          <div class="lid-functie grijs">Renner</div>
+        </div>
+
+        <div class="lid-card">
+          <div class="lid-avatar">SB</div>
+          <div class="lid-naam">Seba</div>
+          <div class="lid-bijnaam">"Nieuwkomer"</div>
+          <div class="lid-functie grijs">Renner</div>
+        </div>
+
+        <div class="lid-card">
+          <div class="lid-avatar">TH</div>
+          <div class="lid-naam">Thomas</div>
+          <div class="lid-bijnaam">"Nieuwkomer"</div>
+          <div class="lid-functie grijs">Renner</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Reglement -->
+    <div class="card full">
+      <div class="card-title"><div class="dot dot-red"></div> Clubreglement</div>
+
+      <div class="reglement-sectie">
+        <h3>1. Aanwezigheid & afwezigheid</h3>
+        <p>Van elk lid wordt verwacht dat het aanwezig is op de geplande groepsritten. Afwezigheid moet tijdig (minimum 24u vooraf) gemeld worden aan de president of vicepresident. Ongemelde afwezigheid leidt automatisch tot een sanctie.</p>
+      </div>
+
+      <div class="reglement-sectie">
+        <h3>2. Veiligheid op de weg</h3>
+        <ul>
+          <li>Helm is verplicht op elke rit.</li>
+          <li>Verlichting verplicht bij schemering en donker.</li>
+          <li>Groepsregels worden gerespecteerd: geen plotse remmen, duidelijk communiceren.</li>
+          <li>Verkeerswetgeving is altijd van toepassing.</li>
+        </ul>
+      </div>
+
+      <div class="reglement-sectie">
+        <h3>3. Respect & sfeer</h3>
+        <p>De Saloncoureurs staat voor gezelligheid, humor en wederzijds respect. Pesterijen, discriminatie of toxisch gedrag worden niet getolereerd. De president beslist in geval van conflict.</p>
+      </div>
+
+      <div class="reglement-sectie">
+        <h3>4. Sancties</h3>
+        <p>Het sanctiesysteem is bedoeld als ludiek maar eerlijk instrument. Sancties worden opgelegd door de president en vicepresident en gepubliceerd in de biweekly. Een sanctie is bindend tenzij een gegrond bezwaar wordt ingediend.</p>
+        <br>
+        <table class="sanctie-tabel">
+          <thead>
+            <tr>
+              <th>Overtreding</th>
+              <th>Sanctie</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1x ongemelde afwezigheid</td><td>Waarschuwing</td></tr>
+            <tr><td>2x ongemelde afwezigheid</td><td>Rit volledig in het rood + taak</td></tr>
+            <tr><td>Helm vergeten</td><td>Rondje extra aan het einde</td></tr>
+            <tr><td>Te laat op het vertrekpunt</td><td>Koffie voor iedereen</td></tr>
+            <tr><td>Verkeerde afslag nemen</td><td>Eeuwige schande + Strava-segment vernoemd</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="reglement-sectie">
+        <h3>5. Wijzigingen aan het reglement</h3>
+        <p>Het reglement kan worden aangepast door de president na overleg met de vicepresident. Wijzigingen worden aangekondigd via de biweekly en de WhatsApp-groep.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer class="site-footer">De Saloncoureurs &copy; 2025</footer>
+</div>
+
+<script>
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+</script>
+</body>
+</html>

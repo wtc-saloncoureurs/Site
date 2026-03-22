@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De Saloncoureurs — Seizoen 2025</title>
+<link rel="stylesheet" href="stijl.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">🚴 De Saloncoureurs</a>
+    <div class="nav-links">
+      <a href="index.html">Biweekly</a>
+      <a href="kalender.html">Kalender</a>
+      <a href="galerij.html">Galerij</a>
+      <a href="seizoen.html" class="active">Seizoen</a>
+      <a href="leden.html">Leden</a>
+    </div>
+    <button class="nav-burger" onclick="toggleMenu()">☰</button>
+  </div>
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="index.html">Biweekly</a>
+    <a href="kalender.html">Kalender</a>
+    <a href="galerij.html">Galerij</a>
+    <a href="seizoen.html" class="active">Seizoen</a>
+    <a href="leden.html">Leden</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="page-title">
+    <h2>Seizoen 2025</h2>
+    <p>Cumulatieve statistieken, records en Hall of Fame</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- Seizoenstotalen -->
+    <div class="card full">
+      <div class="card-title"><div class="dot dot-blue"></div> Seizoenstotalen</div>
+      <div class="stat-row">
+        <div class="stat-box">
+          <div class="stat-label">Totaal km seizoen</div>
+          <!-- Pas aan -->
+          <div class="stat-val">0 <span class="stat-unit">km</span></div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Aantal ritten</div>
+          <div class="stat-val">0 <span class="stat-unit">ritten</span></div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Totaal hoogtemeters</div>
+          <div class="stat-val">0 <span class="stat-unit">hm</span></div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Actieve leden</div>
+          <div class="stat-val">0 <span class="stat-unit">renners</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Klassement -->
+    <div class="card full">
+      <div class="card-title"><div class="dot dot-blue"></div> Klassement — km seizoen</div>
+      <div class="stats-leader">
+
+        <!-- Kopieer een .leader-row blok per lid en pas naam, initialen en km aan.
+             De breedte van de bar = (jouw_km / max_km * 100)%  -->
+
+        <div class="leader-row">
+          <div class="leader-pos">1</div>
+          <div class="leader-avatar">AA</div>
+          <div class="leader-name">Naam</div>
+          <div class="leader-bar-wrap"><div class="leader-bar" style="width:100%"></div></div>
+          <div class="leader-km">XXX km</div>
+        </div>
+        <div class="leader-row">
+          <div class="leader-pos">2</div>
+          <div class="leader-avatar">BB</div>
+          <div class="leader-name">Naam</div>
+          <div class="leader-bar-wrap"><div class="leader-bar" style="width:80%"></div></div>
+          <div class="leader-km">XXX km</div>
+        </div>
+        <div class="leader-row">
+          <div class="leader-pos">3</div>
+          <div class="leader-avatar">CC</div>
+          <div class="leader-name">Naam</div>
+          <div class="leader-bar-wrap"><div class="leader-bar" style="width:65%"></div></div>
+          <div class="leader-km">XXX km</div>
+        </div>
+        <div class="leader-row">
+          <div class="leader-pos">4</div>
+          <div class="leader-avatar">DD</div>
+          <div class="leader-name">Naam</div>
+          <div class="leader-bar-wrap"><div class="leader-bar" style="width:50%"></div></div>
+          <div class="leader-km">XXX km</div>
+        </div>
+        <div class="leader-row">
+          <div class="leader-pos">5</div>
+          <div class="leader-avatar">EE</div>
+          <div class="leader-name">Naam</div>
+          <div class="leader-bar-wrap"><div class="leader-bar" style="width:40%"></div></div>
+          <div class="leader-km">XXX km</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Persoonlijke records -->
+    <div class="card">
+      <div class="card-title"><div class="dot dot-green"></div> Persoonlijke records seizoen</div>
+      <div class="pr-grid">
+        <div class="pr-item">
+          <div class="pr-label">Langste rit</div>
+          <div class="pr-val">XXX km</div>
+          <div class="pr-who">Naam</div>
+        </div>
+        <div class="pr-item">
+          <div class="pr-label">Meeste hoogtemeters</div>
+          <div class="pr-val">XXX hm</div>
+          <div class="pr-who">Naam</div>
+        </div>
+        <div class="pr-item">
+          <div class="pr-label">Snelste gemiddelde</div>
+          <div class="pr-val">XX km/h</div>
+          <div class="pr-who">Naam</div>
+        </div>
+        <div class="pr-item">
+          <div class="pr-label">Meeste ritten</div>
+          <div class="pr-val">XX ritten</div>
+          <div class="pr-who">Naam</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hall of Fame -->
+    <div class="card">
+      <div class="card-title"><div class="dot dot-amber"></div> Hall of Fame</div>
+      <!-- Voeg bijzondere prestaties toe per seizoen -->
+      <div class="hof-item">
+        <div class="hof-medal">🏆</div>
+        <div>
+          <div class="hof-title">Kilometervreter 2025</div>
+          <div class="hof-sub">Naam — meeste km van het seizoen</div>
+        </div>
+      </div>
+      <div class="hof-item">
+        <div class="hof-medal">⛰️</div>
+        <div>
+          <div class="hof-title">Klimmerskoning 2025</div>
+          <div class="hof-sub">Naam — meeste hoogtemeters</div>
+        </div>
+      </div>
+      <div class="hof-item">
+        <div class="hof-medal">🚀</div>
+        <div>
+          <div class="hof-title">Snelste Saloncoureur</div>
+          <div class="hof-sub">Naam — hoogste gemiddeld vermogen</div>
+        </div>
+      </div>
+      <div class="hof-item">
+        <div class="hof-medal">🎖️</div>
+        <div>
+          <div class="hof-title">Trouwste Renner</div>
+          <div class="hof-sub">Naam — meeste groepsritten bijgewoond</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rode lantaarn -->
+    <div class="card full">
+      <div class="card-title"><div class="dot dot-red"></div> Sanctiegeschiedenis seizoen</div>
+      <table class="sanctie-tabel">
+        <thead>
+          <tr>
+            <th>Datum</th>
+            <th>Renner</th>
+            <th>Reden</th>
+            <th>Sanctie</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Voeg rijen toe per sanctie -->
+          <tr>
+            <td>10/08/2025</td>
+            <td>Jérémy Flamen</td>
+            <td>2x afwezig</td>
+            <td>Rit in het rood + borstel</td>
+          </tr>
+          <tr>
+            <td>10/08/2025</td>
+            <td>Thibault Ghekiere</td>
+            <td>Te bepalen</td>
+            <td>Te bepalen</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <footer class="site-footer">De Saloncoureurs &copy; 2025</footer>
+</div>
+
+<script>
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De Saloncoureurs — Kalender</title>
+<link rel="stylesheet" href="stijl.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">🚴 De Saloncoureurs</a>
+    <div class="nav-links">
+      <a href="index.html">Biweekly</a>
+      <a href="kalender.html" class="active">Kalender</a>
+      <a href="galerij.html">Galerij</a>
+      <a href="seizoen.html">Seizoen</a>
+      <a href="leden.html">Leden</a>
+    </div>
+    <button class="nav-burger" onclick="toggleMenu()">☰</button>
+  </div>
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="index.html">Biweekly</a>
+    <a href="kalender.html" class="active">Kalender</a>
+    <a href="galerij.html">Galerij</a>
+    <a href="seizoen.html">Seizoen</a>
+    <a href="leden.html">Leden</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="page-title">
+    <h2>Rittenkalender</h2>
+    <p>Alle geplande ritten en events voor het seizoen 2025</p>
+  </div>
+
+  <div class="card full" style="margin-bottom:10px">
+    <div class="card-title"><div class="dot dot-green"></div> Augustus 2025</div>
+
+    <div class="cal-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--green-bg);border:1px solid var(--green-fg)"></div> Rit</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--purple-bg);border:1px solid var(--purple-fg)"></div> Event</div>
+    </div>
+
+    <!-- Kalender grid augustus 2025 -->
+    <!-- Ma Di Wo Do Vr Za Zo -->
+    <div class="cal-grid">
+      <div class="cal-day-name">Ma</div>
+      <div class="cal-day-name">Di</div>
+      <div class="cal-day-name">Wo</div>
+      <div class="cal-day-name">Do</div>
+      <div class="cal-day-name">Vr</div>
+      <div class="cal-day-name">Za</div>
+      <div class="cal-day-name">Zo</div>
+
+      <!-- Week 1 -->
+      <div class="cal-day other-month"><div class="cal-num">28</div></div>
+      <div class="cal-day other-month"><div class="cal-num">29</div></div>
+      <div class="cal-day other-month"><div class="cal-num">30</div></div>
+      <div class="cal-day other-month"><div class="cal-num">31</div></div>
+      <div class="cal-day"><div class="cal-num">1</div></div>
+      <div class="cal-day has-rit"><div class="cal-num">2</div><div class="cal-rit-label">Ochtendsrit</div></div>
+      <div class="cal-day"><div class="cal-num">3</div></div>
+
+      <!-- Week 2 -->
+      <div class="cal-day"><div class="cal-num">4</div></div>
+      <div class="cal-day"><div class="cal-num">5</div></div>
+      <div class="cal-day"><div class="cal-num">6</div></div>
+      <div class="cal-day"><div class="cal-num">7</div></div>
+      <div class="cal-day"><div class="cal-num">8</div></div>
+      <div class="cal-day has-rit"><div class="cal-num">9</div><div class="cal-rit-label">Groepsrit</div></div>
+      <div class="cal-day"><div class="cal-num">10</div></div>
+
+      <!-- Week 3 -->
+      <div class="cal-day"><div class="cal-num">11</div></div>
+      <div class="cal-day"><div class="cal-num">12</div></div>
+      <div class="cal-day"><div class="cal-num">13</div></div>
+      <div class="cal-day"><div class="cal-num">14</div></div>
+      <div class="cal-day"><div class="cal-num">15</div></div>
+      <div class="cal-day has-event"><div class="cal-num">16</div><div class="cal-event-label">Weekend Zee</div></div>
+      <div class="cal-day has-event"><div class="cal-num">17</div><div class="cal-event-label">Weekend Zee</div></div>
+
+      <!-- Week 4 -->
+      <div class="cal-day"><div class="cal-num">18</div></div>
+      <div class="cal-day"><div class="cal-num">19</div></div>
+      <div class="cal-day"><div class="cal-num">20</div></div>
+      <div class="cal-day"><div class="cal-num">21</div></div>
+      <div class="cal-day"><div class="cal-num">22</div></div>
+      <div class="cal-day has-rit"><div class="cal-num">23</div><div class="cal-rit-label">Groepsrit</div></div>
+      <div class="cal-day"><div class="cal-num">24</div></div>
+
+      <!-- Week 5 -->
+      <div class="cal-day"><div class="cal-num">25</div></div>
+      <div class="cal-day"><div class="cal-num">26</div></div>
+      <div class="cal-day"><div class="cal-num">27</div></div>
+      <div class="cal-day"><div class="cal-num">28</div></div>
+      <div class="cal-day"><div class="cal-num">29</div></div>
+      <div class="cal-day has-rit"><div class="cal-num">30</div><div class="cal-rit-label">Ochtendsrit</div></div>
+      <div class="cal-day"><div class="cal-num">31</div></div>
+    </div>
+  </div>
+
+  <!-- Lijstweergave van ritten -->
+  <div class="card full">
+    <div class="card-title"><div class="dot dot-green"></div> Alle ritten & events</div>
+    <div class="rit-list">
+
+      <!-- Kopieer een .rit-item blok om een rit toe te voegen -->
+      <div class="rit-item">
+        <div class="rit-date-col">
+          <div class="r-day">2</div>
+          <div class="r-month">aug</div>
+        </div>
+        <div class="rit-info">
+          <div class="r-title">Ochtendsrit — Ronde van de Kempen</div>
+          <div class="r-sub">Vertrek 7u30 aan het marktplein · 85 km · 650 hm</div>
+          <div class="rit-badges">
+            <span class="rbadge rbadge-green">85 km</span>
+            <span class="rbadge rbadge-blue">650 hm</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rit-item">
+        <div class="rit-date-col">
+          <div class="r-day">9</div>
+          <div class="r-month">aug</div>
+        </div>
+        <div class="rit-info">
+          <div class="r-title">Groepsrit — Vlaamse Ardennen</div>
+          <div class="r-sub">Vertrek 8u00 aan het café · 110 km · 1100 hm</div>
+          <div class="rit-badges">
+            <span class="rbadge rbadge-green">110 km</span>
+            <span class="rbadge rbadge-blue">1100 hm</span>
+            <span class="rbadge rbadge-amber">Zwaar</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rit-item">
+        <div class="rit-date-col">
+          <div class="r-day">16</div>
+          <div class="r-month">aug</div>
+        </div>
+        <div class="rit-info">
+          <div class="r-title">🏖️ Weekend aan Zee</div>
+          <div class="r-sub">16 & 17 augustus · Info bij Jakob</div>
+          <div class="rit-badges">
+            <span class="rbadge" style="background:var(--purple-bg);color:var(--purple-fg)">Event</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rit-item">
+        <div class="rit-date-col">
+          <div class="r-day">6</div>
+          <div class="r-month">dec</div>
+        </div>
+        <div class="rit-info">
+          <div class="r-title">🍻 Eindeseizoensvergadering</div>
+          <div class="r-sub">Locatie nog te bepalen · Aanwezigheid verplicht</div>
+          <div class="rit-badges">
+            <span class="rbadge" style="background:var(--purple-bg);color:var(--purple-fg)">Event</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="site-footer">De Saloncoureurs &copy; 2025</footer>
+</div>
+
+<script>
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+</script>
+</body>
+</html>
