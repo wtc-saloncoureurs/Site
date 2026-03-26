@@ -1,176 +1,260 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>De Saloncoureurs — Kalender</title>
-<link rel="stylesheet" href="stijl.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalender — De Saloncoureurs</title>
+    <link rel="stylesheet" href="stijl.css">
+    <style>
+        /* Specifieke stijlen voor de kalender die waarschijnlijk niet in stijl.css staan */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin-top: 15px;
+        }
+        .calendar-day-head {
+            font-weight: bold;
+            text-align: center;
+            padding: 5px;
+            font-size: 0.8rem;
+            color: var(--text3);
+            text-transform: uppercase;
+        }
+        .calendar-day {
+            aspect-ratio: 1 / 1;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            position: relative;
+            background: var(--surface);
+        }
+        .calendar-day.today {
+            border: 2px solid var(--blue-fg);
+            background: var(--blue-bg);
+        }
+        .calendar-day.today::after {
+            content: 'Vandaag';
+            position: absolute;
+            bottom: 2px;
+            right: 4px;
+            font-size: 8px;
+            color: var(--blue-fg);
+            font-weight: bold;
+        }
+        .calendar-day.has-event {
+            background: var(--teal-bg);
+        }
+        .day-number {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .event-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--red-fg);
+            margin: 2px auto;
+        }
+        .event-list {
+            margin-top: 20px;
+        }
+        .month-display {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+            color: var(--navy3);
+            text-transform: capitalize;
+        }
+    </style>
 </head>
 <body>
 
 <nav class="topnav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">🚴 De Saloncoureurs</a>
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" style="width:28px;height:28px;object-fit:contain;">
+      De Saloncoureurs
+    </a>
     <div class="nav-links">
-      <a href="index.html">Biweekly</a>
+      <a href="index.html">Homepage</a>
+      <a href="kalender.html" class="active">Kalender</a>
       <a href="leden.html">Leden</a>
+      <a href="statuten.html">Statuten</a>
+      <a href="galerij.html">Galerij</a>
+      <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank">Sociale Media ↗</a>
+      <a href="https://wtc-saloncoureurs.web.app/" target="_blank">Tracker ↗</a>
     </div>
     <button class="nav-burger" onclick="toggleMenu()">☰</button>
   </div>
   <div class="nav-mobile" id="mobileMenu">
-    <a href="index.html">Biweekly</a>
-    <a href="leden.html">Leden</a>
+      <a href="index.html">Homepage</a>
+      <a href="kalender.html" class="active">Kalender</a>
+      <a href="leden.html">Leden</a>
+      <a href="statuten.html">Statuten</a>
+      <a href="galerij.html">Galerij</a>
   </div>
 </nav>
 
 <div class="page">
+  <header class="site-header">
+    <div class="logo" style="background:var(--navy3);padding:4px;">
+      <img src="logo.png" style="width:44px;height:44px;object-fit:contain;">
+    </div>
+    <div class="header-title">
+      <h1>De Saloncoureurs</h1>
+      <p>Kalender 2026</p>
+    </div>
+  </header>
 
-  <div class="page-title">
-    <h2>Rittenkalender</h2>
-    <p>Alle geplande ritten en events voor het seizoen 2025</p>
-  </div>
-
-  <div class="card full" style="margin-bottom:10px">
-    <div class="card-title"><div class="dot dot-green"></div> Augustus 2025</div>
-
-    <div class="cal-legend">
-      <div class="legend-item"><div class="legend-dot" style="background:var(--green-bg);border:1px solid var(--green-fg)"></div> Rit</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--purple-bg);border:1px solid var(--purple-fg)"></div> Event</div>
+  <div class="grid">
+    <div class="card full">
+      <div class="card-title"><div class="dot dot-blue"></div> Maandoverzicht</div>
+      <div id="calendar-title" class="month-display"></div>
+      <div class="calendar-grid" id="calendar-grid">
+        </div>
     </div>
 
-    <!-- Kalender grid augustus 2025 -->
-    <!-- Ma Di Wo Do Vr Za Zo -->
-    <div class="cal-grid">
-      <div class="cal-day-name">Ma</div>
-      <div class="cal-day-name">Di</div>
-      <div class="cal-day-name">Wo</div>
-      <div class="cal-day-name">Do</div>
-      <div class="cal-day-name">Vr</div>
-      <div class="cal-day-name">Za</div>
-      <div class="cal-day-name">Zo</div>
-
-      <!-- Week 1 -->
-      <div class="cal-day other-month"><div class="cal-num">28</div></div>
-      <div class="cal-day other-month"><div class="cal-num">29</div></div>
-      <div class="cal-day other-month"><div class="cal-num">30</div></div>
-      <div class="cal-day other-month"><div class="cal-num">31</div></div>
-      <div class="cal-day"><div class="cal-num">1</div></div>
-      <div class="cal-day has-rit"><div class="cal-num">2</div><div class="cal-rit-label">Ochtendsrit</div></div>
-      <div class="cal-day"><div class="cal-num">3</div></div>
-
-      <!-- Week 2 -->
-      <div class="cal-day"><div class="cal-num">4</div></div>
-      <div class="cal-day"><div class="cal-num">5</div></div>
-      <div class="cal-day"><div class="cal-num">6</div></div>
-      <div class="cal-day"><div class="cal-num">7</div></div>
-      <div class="cal-day"><div class="cal-num">8</div></div>
-      <div class="cal-day has-rit"><div class="cal-num">9</div><div class="cal-rit-label">Groepsrit</div></div>
-      <div class="cal-day"><div class="cal-num">10</div></div>
-
-      <!-- Week 3 -->
-      <div class="cal-day"><div class="cal-num">11</div></div>
-      <div class="cal-day"><div class="cal-num">12</div></div>
-      <div class="cal-day"><div class="cal-num">13</div></div>
-      <div class="cal-day"><div class="cal-num">14</div></div>
-      <div class="cal-day"><div class="cal-num">15</div></div>
-      <div class="cal-day has-event"><div class="cal-num">16</div><div class="cal-event-label">Weekend Zee</div></div>
-      <div class="cal-day has-event"><div class="cal-num">17</div><div class="cal-event-label">Weekend Zee</div></div>
-
-      <!-- Week 4 -->
-      <div class="cal-day"><div class="cal-num">18</div></div>
-      <div class="cal-day"><div class="cal-num">19</div></div>
-      <div class="cal-day"><div class="cal-num">20</div></div>
-      <div class="cal-day"><div class="cal-num">21</div></div>
-      <div class="cal-day"><div class="cal-num">22</div></div>
-      <div class="cal-day has-rit"><div class="cal-num">23</div><div class="cal-rit-label">Groepsrit</div></div>
-      <div class="cal-day"><div class="cal-num">24</div></div>
-
-      <!-- Week 5 -->
-      <div class="cal-day"><div class="cal-num">25</div></div>
-      <div class="cal-day"><div class="cal-num">26</div></div>
-      <div class="cal-day"><div class="cal-num">27</div></div>
-      <div class="cal-day"><div class="cal-num">28</div></div>
-      <div class="cal-day"><div class="cal-num">29</div></div>
-      <div class="cal-day has-rit"><div class="cal-num">30</div><div class="cal-rit-label">Ochtendsrit</div></div>
-      <div class="cal-day"><div class="cal-num">31</div></div>
+    <div class="card full">
+      <div class="card-title"><div class="dot dot-purple"></div> Geplande Zaken 2026</div>
+      <div class="event-list" id="event-list">
+        </div>
     </div>
   </div>
 
-  <!-- Lijstweergave van ritten -->
-  <div class="card full">
-    <div class="card-title"><div class="dot dot-green"></div> Alle ritten & events</div>
-    <div class="rit-list">
-
-      <!-- Kopieer een .rit-item blok om een rit toe te voegen -->
-      <div class="rit-item">
-        <div class="rit-date-col">
-          <div class="r-day">2</div>
-          <div class="r-month">aug</div>
-        </div>
-        <div class="rit-info">
-          <div class="r-title">Ochtendsrit — Ronde van de Kempen</div>
-          <div class="r-sub">Vertrek 7u30 aan het marktplein · 85 km · 650 hm</div>
-          <div class="rit-badges">
-            <span class="rbadge rbadge-green">85 km</span>
-            <span class="rbadge rbadge-blue">650 hm</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="rit-item">
-        <div class="rit-date-col">
-          <div class="r-day">9</div>
-          <div class="r-month">aug</div>
-        </div>
-        <div class="rit-info">
-          <div class="r-title">Groepsrit — Vlaamse Ardennen</div>
-          <div class="r-sub">Vertrek 8u00 aan het café · 110 km · 1100 hm</div>
-          <div class="rit-badges">
-            <span class="rbadge rbadge-green">110 km</span>
-            <span class="rbadge rbadge-blue">1100 hm</span>
-            <span class="rbadge rbadge-amber">Zwaar</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="rit-item">
-        <div class="rit-date-col">
-          <div class="r-day">16</div>
-          <div class="r-month">aug</div>
-        </div>
-        <div class="rit-info">
-          <div class="r-title">🏖️ Weekend aan Zee</div>
-          <div class="r-sub">16 & 17 augustus · Info bij Jakob</div>
-          <div class="rit-badges">
-            <span class="rbadge" style="background:var(--purple-bg);color:var(--purple-fg)">Event</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="rit-item">
-        <div class="rit-date-col">
-          <div class="r-day">6</div>
-          <div class="r-month">dec</div>
-        </div>
-        <div class="rit-info">
-          <div class="r-title">🍻 Eindeseizoensvergadering</div>
-          <div class="r-sub">Locatie nog te bepalen · Aanwezigheid verplicht</div>
-          <div class="rit-badges">
-            <span class="rbadge" style="background:var(--purple-bg);color:var(--purple-fg)">Event</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <footer class="site-footer">De Saloncoureurs &copy; 2025</footer>
+  <footer class="site-footer">De Saloncoureurs &copy; 2026 · Kalender</footer>
 </div>
 
 <script>
 function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
 }
+
+// Data van de evenementen
+const events2026 = [
+    { date: '2026-03-27', title: 'Fietsweekend Leisele', type: 'weekend' },
+    { date: '2026-03-28', title: 'Fietsweekend Leisele', type: 'weekend' },
+    { date: '2026-03-29', title: 'Fietsweekend Leisele', type: 'weekend' },
+    { date: '2026-05-31', title: 'Rikolto rit - goede doel steunen', type: 'special' },
+    { date: '2026-06-14', title: 'Vaderdagrit / Bardosrit', type: 'special' },
+    { date: '2026-06-21', title: 'Triathlon Kortrijk', type: 'special' }
+];
+
+function generateCalendar() {
+    const now = new Date();
+    const currentMonth = now.getMonth();
+    const currentYear = now.getFullYear();
+    const today = now.getDate();
+
+    const monthNames = ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"];
+    document.getElementById('calendar-title').innerText = `${monthNames[currentMonth]} ${currentYear}`;
+
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    
+    // Pas JS getDay (0=Zon) aan naar ons systeem (0=Ma, ..., 6=Zon)
+    let startOffset = firstDay === 0 ? 6 : firstDay - 1;
+
+    const grid = document.getElementById('calendar-grid');
+    const dayLabels = ['Ma', 'Di', 'Wo', 'Do', 'Vr', 'Za', 'Zo'];
+    
+    // Voeg labels toe
+    dayLabels.forEach(label => {
+        const div = document.createElement('div');
+        div.className = 'calendar-day-head';
+        div.innerText = label;
+        grid.appendChild(div);
+    });
+
+    // Lege vakjes voor het begin van de maand
+    for (let i = 0; i < startOffset; i++) {
+        const empty = document.createElement('div');
+        grid.appendChild(empty);
+    }
+
+    // Dagen van de maand
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const dayDiv = document.createElement('div');
+        dayDiv.className = 'calendar-day';
+        if (day === today && currentMonth === new Date().getMonth()) dayDiv.classList.add('today');
+
+        dayDiv.innerHTML = `<span class="day-number">${day}</span>`;
+
+        // Check voor zondag
+        const d = new Date(currentYear, currentMonth, day);
+        if (d.getDay() === 0) {
+            dayDiv.classList.add('has-event');
+            dayDiv.innerHTML += `<div class="event-dot"></div>`;
+        }
+
+        // Check voor specifieke events
+        if (events2026.some(e => e.date === dateStr)) {
+            dayDiv.classList.add('has-event');
+            dayDiv.style.background = 'var(--amber-bg)';
+            if (!dayDiv.querySelector('.event-dot')) {
+                dayDiv.innerHTML += `<div class="event-dot" style="background:var(--amber-fg)"></div>`;
+            }
+        }
+
+        grid.appendChild(dayDiv);
+    }
+
+    renderEventList();
+}
+
+function renderEventList() {
+    const listContainer = document.getElementById('event-list');
+    
+    // We tonen alle evenementen van 2026 voor het overzicht
+    // Maar we genereren ook de wekelijkse zondagsritten
+    
+    let allPlanned = [...events2026];
+    
+    // Voeg alle zondagen van maart t/m oktober toe (het seizoen)
+    for (let m = 2; m <= 9; m++) { // Maart is index 2
+        let daysInMonth = new Date(2026, m + 1, 0).getDate();
+        for (let d = 1; d <= daysInMonth; d++) {
+            let date = new Date(2026, m, d);
+            if (date.getDay() === 0) {
+                let dateStr = `2026-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+                
+                // Alleen toevoegen als er nog geen speciaal event op die dag is (zoals Vaderdag)
+                if (!allPlanned.some(e => e.date === dateStr)) {
+                    allPlanned.push({ date: dateStr, title: 'Zondagsrit', type: 'sunday' });
+                }
+            }
+        }
+    }
+
+    // Sorteren op datum
+    allPlanned.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    // Renderen in de lijst
+    allPlanned.forEach(ev => {
+        const d = new Date(ev.date);
+        const day = d.getDate();
+        const month = d.toLocaleString('nl-BE', { month: 'short' });
+        
+        const item = document.createElement('div');
+        item.className = 'event-item';
+        item.innerHTML = `
+            <div class="event-date"><div class="month">${month}</div><div class="day">${day}</div></div>
+            <div class="event-info">
+                <div class="ev-title">${ev.title}</div>
+                <div class="ev-sub">Start om 09:00 aan het lokaal</div>
+            </div>
+        `;
+        listContainer.appendChild(item);
+    });
+}
+
+generateCalendar();
 </script>
+
 </body>
 </html>
