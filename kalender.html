@@ -6,7 +6,7 @@
     <title>Kalender — De Saloncoureurs</title>
     <link rel="stylesheet" href="stijl.css">
     <style>
-        /* Specifieke stijlen voor de kalender die waarschijnlijk niet in stijl.css staan */
+        /* Specifieke stijlen voor de kalender */
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -17,55 +17,68 @@
             font-weight: bold;
             text-align: center;
             padding: 5px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text3);
             text-transform: uppercase;
         }
         .calendar-day {
+            min-height: 80px; /* Iets hoger gemaakt voor tekstruimte */
             aspect-ratio: 1 / 1;
             border: 1px solid var(--border);
             border-radius: var(--radius-sm);
-            padding: 5px;
+            padding: 4px;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             position: relative;
             background: var(--surface);
+            overflow: hidden;
         }
         .calendar-day.today {
             border: 2px solid var(--blue-fg);
             background: var(--blue-bg);
         }
-        .calendar-day.today::after {
-            content: 'Vandaag';
-            position: absolute;
-            bottom: 2px;
-            right: 4px;
-            font-size: 8px;
-            color: var(--blue-fg);
-            font-weight: bold;
-        }
-        .calendar-day.has-event {
-            background: var(--teal-bg);
-        }
         .day-number {
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 4px;
         }
-        .event-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--red-fg);
-            margin: 2px auto;
+        
+        /* De tekst van de rit zelf */
+        .event-label {
+            font-size: 9px;
+            line-height: 1.1;
+            padding: 2px 4px;
+            border-radius: 3px;
+            background: var(--surface2);
+            color: var(--text);
+            margin-top: 2px;
+            word-wrap: break-word;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
-        .event-list {
-            margin-top: 20px;
+
+        /* Verschillende kleuren per type rit */
+        .event-sunday { background: var(--teal-bg); color: var(--teal-fg); border-left: 2px solid var(--teal-fg); }
+        .event-special { background: var(--amber-bg); color: var(--amber-fg); border-left: 2px solid var(--amber-fg); }
+        .event-weekend { background: var(--purple-bg); color: var(--purple-fg); border-left: 2px solid var(--purple-fg); }
+
+        .calendar-day.today::after {
+            content: 'VANDAAG';
+            position: absolute;
+            top: 2px;
+            right: 4px;
+            font-size: 7px;
+            color: var(--blue-fg);
+            font-weight: 900;
         }
+
         .month-display {
             font-size: 1.5rem;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             text-align: center;
             color: var(--navy3);
             text-transform: capitalize;
@@ -86,17 +99,8 @@
       <a href="leden.html">Leden</a>
       <a href="statuten.html">Statuten</a>
       <a href="galerij.html">Galerij</a>
-      <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank">Sociale Media ↗</a>
-      <a href="https://wtc-saloncoureurs.web.app/" target="_blank">Tracker ↗</a>
     </div>
     <button class="nav-burger" onclick="toggleMenu()">☰</button>
-  </div>
-  <div class="nav-mobile" id="mobileMenu">
-      <a href="index.html">Homepage</a>
-      <a href="kalender.html" class="active">Kalender</a>
-      <a href="leden.html">Leden</a>
-      <a href="statuten.html">Statuten</a>
-      <a href="galerij.html">Galerij</a>
   </div>
 </nav>
 
@@ -113,20 +117,18 @@
 
   <div class="grid">
     <div class="card full">
-      <div class="card-title"><div class="dot dot-blue"></div> Maandoverzicht</div>
+      <div class="card-title"><div class="dot dot-blue"></div> Interactieve Agenda</div>
       <div id="calendar-title" class="month-display"></div>
-      <div class="calendar-grid" id="calendar-grid">
-        </div>
+      <div class="calendar-grid" id="calendar-grid"></div>
     </div>
 
     <div class="card full">
-      <div class="card-title"><div class="dot dot-purple"></div> Geplande Zaken 2026</div>
-      <div class="event-list" id="event-list">
-        </div>
+      <div class="card-title"><div class="dot dot-purple"></div> Volledig Overzicht 2026</div>
+      <div class="event-list" id="event-list"></div>
     </div>
   </div>
 
-  <footer class="site-footer">De Saloncoureurs &copy; 2026 · Kalender</footer>
+  <footer class="site-footer">De Saloncoureurs &copy; 2026</footer>
 </div>
 
 <script>
@@ -134,12 +136,12 @@ function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
 }
 
-// Data van de evenementen
+// Data van de speciale evenementen
 const events2026 = [
     { date: '2026-03-27', title: 'Fietsweekend Leisele', type: 'weekend' },
     { date: '2026-03-28', title: 'Fietsweekend Leisele', type: 'weekend' },
     { date: '2026-03-29', title: 'Fietsweekend Leisele', type: 'weekend' },
-    { date: '2026-05-31', title: 'Rikolto rit - goede doel steunen', type: 'special' },
+    { date: '2026-05-31', title: 'Rikolto rit - goede doel', type: 'special' },
     { date: '2026-06-14', title: 'Vaderdagrit / Bardosrit', type: 'special' },
     { date: '2026-06-21', title: 'Triathlon Kortrijk', type: 'special' }
 ];
@@ -148,7 +150,7 @@ function generateCalendar() {
     const now = new Date();
     const currentMonth = now.getMonth();
     const currentYear = now.getFullYear();
-    const today = now.getDate();
+    const todayDate = now.getDate();
 
     const monthNames = ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"];
     document.getElementById('calendar-title').innerText = `${monthNames[currentMonth]} ${currentYear}`;
@@ -156,13 +158,12 @@ function generateCalendar() {
     const firstDay = new Date(currentYear, currentMonth, 1).getDay();
     const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
     
-    // Pas JS getDay (0=Zon) aan naar ons systeem (0=Ma, ..., 6=Zon)
+    // Maandag als eerste dag van de week (0=Ma, 6=Zo)
     let startOffset = firstDay === 0 ? 6 : firstDay - 1;
 
     const grid = document.getElementById('calendar-grid');
     const dayLabels = ['Ma', 'Di', 'Wo', 'Do', 'Vr', 'Za', 'Zo'];
     
-    // Voeg labels toe
     dayLabels.forEach(label => {
         const div = document.createElement('div');
         div.className = 'calendar-day-head';
@@ -170,35 +171,38 @@ function generateCalendar() {
         grid.appendChild(div);
     });
 
-    // Lege vakjes voor het begin van de maand
     for (let i = 0; i < startOffset; i++) {
-        const empty = document.createElement('div');
-        grid.appendChild(empty);
+        grid.appendChild(document.createElement('div'));
     }
 
-    // Dagen van de maand
     for (let day = 1; day <= daysInMonth; day++) {
+        const dateObj = new Date(currentYear, currentMonth, day);
         const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        
         const dayDiv = document.createElement('div');
         dayDiv.className = 'calendar-day';
-        if (day === today && currentMonth === new Date().getMonth()) dayDiv.classList.add('today');
+        if (day === todayDate && currentMonth === new Date().getMonth()) dayDiv.classList.add('today');
 
         dayDiv.innerHTML = `<span class="day-number">${day}</span>`;
 
-        // Check voor zondag
-        const d = new Date(currentYear, currentMonth, day);
-        if (d.getDay() === 0) {
-            dayDiv.classList.add('has-event');
-            dayDiv.innerHTML += `<div class="event-dot"></div>`;
+        // Logica voor rittitels op de kalender
+        let eventTitle = "";
+        let eventClass = "";
+
+        // 1. Check voor speciale events (deze overschrijven de zondagsrit)
+        const specificEvent = events2026.find(e => e.date === dateStr);
+        if (specificEvent) {
+            eventTitle = specificEvent.title;
+            eventClass = `event-${specificEvent.type}`;
+        } 
+        // 2. Als het zondag is en er geen speciaal event is
+        else if (dateObj.getDay() === 0) {
+            eventTitle = "Zondagsrit";
+            eventClass = "event-sunday";
         }
 
-        // Check voor specifieke events
-        if (events2026.some(e => e.date === dateStr)) {
-            dayDiv.classList.add('has-event');
-            dayDiv.style.background = 'var(--amber-bg)';
-            if (!dayDiv.querySelector('.event-dot')) {
-                dayDiv.innerHTML += `<div class="event-dot" style="background:var(--amber-fg)"></div>`;
-            }
+        if (eventTitle) {
+            dayDiv.innerHTML += `<div class="event-label ${eventClass}">${eventTitle}</div>`;
         }
 
         grid.appendChild(dayDiv);
@@ -209,21 +213,15 @@ function generateCalendar() {
 
 function renderEventList() {
     const listContainer = document.getElementById('event-list');
-    
-    // We tonen alle evenementen van 2026 voor het overzicht
-    // Maar we genereren ook de wekelijkse zondagsritten
-    
     let allPlanned = [...events2026];
     
-    // Voeg alle zondagen van maart t/m oktober toe (het seizoen)
-    for (let m = 2; m <= 9; m++) { // Maart is index 2
+    // Voeg zondagsritten toe voor de lijst onderaan (Maart t/m Oktober)
+    for (let m = 2; m <= 9; m++) {
         let daysInMonth = new Date(2026, m + 1, 0).getDate();
         for (let d = 1; d <= daysInMonth; d++) {
             let date = new Date(2026, m, d);
             if (date.getDay() === 0) {
                 let dateStr = `2026-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-                
-                // Alleen toevoegen als er nog geen speciaal event op die dag is (zoals Vaderdag)
                 if (!allPlanned.some(e => e.date === dateStr)) {
                     allPlanned.push({ date: dateStr, title: 'Zondagsrit', type: 'sunday' });
                 }
@@ -231,10 +229,8 @@ function renderEventList() {
         }
     }
 
-    // Sorteren op datum
     allPlanned.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-    // Renderen in de lijst
     allPlanned.forEach(ev => {
         const d = new Date(ev.date);
         const day = d.getDate();
