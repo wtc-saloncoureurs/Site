@@ -6,7 +6,7 @@
 <title>De Saloncoureurs — Galerij</title>
 <link rel="stylesheet" href="stijl.css">
 <style>
-  .album { margin-bottom: 12px; }
+  .album { margin-bottom: 24px; }
   .album-header {
     display: flex;
     align-items: center;
@@ -120,6 +120,7 @@
     font-size: 28px; color: var(--gold);
     cursor: pointer; background: none; border: none;
     padding: 8px; opacity: .7;
+    user-select: none;
   }
   .lightbox-nav:hover { opacity: 1; }
   .lightbox-prev { left: 16px; }
@@ -135,19 +136,23 @@
       De Saloncoureurs
     </a>
     <div class="nav-links">
-      <a href="index.html">Site</a>
+      <a href="index.html">Homepage</a>
+      <a href="kalender.html">Kalender</a>
       <a href="leden.html">Leden</a>
       <a href="statuten.html">Statuten</a>
       <a href="galerij.html" class="active">Galerij</a>
+      <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank">Sociale Media ↗</a>
       <a href="https://wtc-saloncoureurs.web.app/" target="_blank">Tracker ↗</a>
     </div>
     <button class="nav-burger" onclick="toggleMenu()">☰</button>
   </div>
   <div class="nav-mobile" id="mobileMenu">
-    <a href="index.html">Site</a>
+    <a href="index.html">Homepage</a>
+    <a href="kalender.html">Kalender</a>
     <a href="leden.html">Leden</a>
     <a href="statuten.html">Statuten</a>
     <a href="galerij.html" class="active">Galerij</a>
+    <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank">Sociale Media ↗</a>
     <a href="https://wtc-saloncoureurs.web.app/" target="_blank">Tracker ↗</a>
   </div>
 </nav>
@@ -164,7 +169,6 @@
     </div>
   </header>
 
-  <!-- ALBUM: Triathlon Kortrijk -->
   <div class="album">
     <div class="album-header">
       <div class="album-icon">🏊</div>
@@ -204,7 +208,6 @@
     </div>
   </div>
 
-  <!-- ALBUM: Tandem Rit -->
   <div class="album">
     <div class="album-header">
       <div class="album-icon">🚴</div>
@@ -238,7 +241,6 @@
     </div>
   </div>
 
-  <!-- ALBUM: Vaderdagrit -->
   <div class="album">
     <div class="album-header">
       <div class="album-icon">👨</div>
@@ -246,20 +248,23 @@
         <div class="album-titel">Vaderdagrit</div>
         <div class="album-sub">2025</div>
       </div>
-      <div class="album-count">1 foto</div>
+      <div class="album-count">2 foto's</div>
     </div>
     <div class="foto-grid">
       <div class="foto-item" onclick="openLight(0, 'vaderdag')">
         <img src="fotos/vaderdagrit-1.jpg" alt="Vaderdagrit 2025">
         <div class="foto-overlay"><div class="foto-label">Vaderdagrit 2025</div></div>
       </div>
+      <div class="foto-item" onclick="openLight(1, 'vaderdag')">
+        <img src="fotos/vaderdagrit-2.jpg" alt="Vaderdagrit 2025 nabespreking">
+        <div class="foto-overlay"><div class="foto-label">Vaderdagrit 2025 nabespreking</div></div>
+      </div>
     </div>
   </div>
 
-  <!-- ALBUM: Weekend -->
   <div class="album">
     <div class="album-header">
-      <div class="album-icon">🏖️</div>
+      <div class="album-icon">🍻</div>
       <div class="album-info">
         <div class="album-titel">Weekend</div>
         <div class="album-sub">April 2025</div>
@@ -284,7 +289,6 @@
 
 </div>
 
-<!-- Lightbox -->
 <div class="lightbox" id="lightbox" onclick="closeLight(event)">
   <button class="lightbox-close" onclick="closeLight()">✕</button>
   <button class="lightbox-nav lightbox-prev" onclick="navLight(-1, event)">‹</button>
@@ -294,7 +298,7 @@
 </div>
 
 <footer class="site-footer" style="max-width:780px;margin:0 auto;padding:0 16px 32px">
-  De Saloncoureurs &copy; 2025
+  De Saloncoureurs &copy; 2026
 </footer>
 
 <script>
@@ -320,6 +324,7 @@ const albums = {
   ],
   vaderdag: [
     { src: 'fotos/vaderdagrit-1.jpg', cap: 'Vaderdagrit 2025' },
+    { src: 'fotos/vaderdagrit-2.jpg', cap: 'Vaderdagrit 2025 nabespreking' },
   ],
   weekend: [
     { src: 'fotos/weekend2025-1.jpg', cap: 'Weekend 2025' },
@@ -344,7 +349,7 @@ function closeLight(e) {
 }
 
 function navLight(dir, e) {
-  e.stopPropagation();
+  if (e) e.stopPropagation();
   const arr = albums[curAlbum];
   curIdx = (curIdx + dir + arr.length) % arr.length;
   document.getElementById('lightbox-img').src = arr[curIdx].src;
@@ -352,9 +357,11 @@ function navLight(dir, e) {
 }
 
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('open');
-  if (e.key === 'ArrowRight') navLight(1, { stopPropagation: () => {} });
-  if (e.key === 'ArrowLeft')  navLight(-1, { stopPropagation: () => {} });
+  const lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') lb.classList.remove('open');
+  if (e.key === 'ArrowRight') navLight(1);
+  if (e.key === 'ArrowLeft')  navLight(-1);
 });
 </script>
 </body>
