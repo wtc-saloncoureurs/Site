@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -6,55 +7,55 @@
     <title>Kalender — De Saloncoureurs</title>
     <link rel="stylesheet" href="stijl.css">
     <style>
-        /* Navigatie knoppen stijl */
         .calendar-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             background: var(--surface2);
-            padding: 10px;
+            padding: 10px 14px;
             border-radius: var(--radius-sm);
         }
         .nav-btn {
-            background: var(--navy3);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
+            background: var(--gold-pale);
+            color: var(--gold);
+            border: 0.5px solid var(--border2);
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 600;
             font-size: 14px;
+            font-family: inherit;
             transition: opacity 0.2s;
         }
-        .nav-btn:hover { opacity: 0.9; }
-        .nav-btn:disabled { background: var(--border); cursor: not-available; }
+        .nav-btn:hover { opacity: 0.8; }
 
         .month-display {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--navy3);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gold);
             text-transform: capitalize;
             margin: 0;
         }
 
-        /* Kalender Grid */
+        /* Kalender grid */
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
+            gap: 4px;
         }
         .calendar-day-head {
-            font-weight: bold;
+            font-weight: 700;
             text-align: center;
-            padding: 5px;
-            font-size: 0.75rem;
+            padding: 5px 2px;
+            font-size: 0.7rem;
             color: var(--text3);
             text-transform: uppercase;
+            letter-spacing: .04em;
         }
         .calendar-day {
-            min-height: 90px;
-            border: 1px solid var(--border);
+            min-height: 80px;
+            border: 0.5px solid var(--border);
             border-radius: var(--radius-sm);
             padding: 4px;
             display: flex;
@@ -62,26 +63,80 @@
             background: var(--surface);
             position: relative;
         }
-        .calendar-day.today { border: 2px solid var(--blue-fg); background: var(--blue-bg); }
-        .day-number { font-size: 12px; font-weight: 700; margin-bottom: 4px; }
-        
+        .calendar-day.today {
+            border: 1.5px solid var(--gold);
+            background: var(--gold-pale);
+        }
+        .calendar-day.today::after {
+            content: '●';
+            position: absolute; top: 3px; right: 5px;
+            font-size: 7px; color: var(--gold);
+        }
+        .day-number {
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 3px;
+            color: var(--text);
+        }
+        .calendar-day.today .day-number { color: var(--gold); }
+
         .event-label {
             font-size: 9px;
-            line-height: 1.1;
+            line-height: 1.2;
             padding: 2px 4px;
             border-radius: 3px;
             margin-top: 2px;
-            font-weight: 500;
+            font-weight: 600;
         }
-
-        .event-sunday { background: var(--teal-bg); color: var(--teal-fg); border-left: 2px solid var(--teal-fg); }
-        .event-special { background: var(--amber-bg); color: var(--amber-fg); border-left: 2px solid var(--amber-fg); }
+        .event-sunday  { background: var(--teal-bg);   color: var(--teal-fg);   border-left: 2px solid var(--teal-fg); }
+        .event-special { background: var(--amber-bg);  color: var(--amber-fg);  border-left: 2px solid var(--amber-fg); }
         .event-weekend { background: var(--purple-bg); color: var(--purple-fg); border-left: 2px solid var(--purple-fg); }
 
-        .calendar-day.today::after {
-            content: 'VANDAAG';
-            position: absolute; top: 2px; right: 4px;
-            font-size: 7px; color: var(--blue-fg); font-weight: 900;
+        /* Legenda */
+        .legend {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--text2);
+        }
+        .legend-dot {
+            width: 10px; height: 10px;
+            border-radius: 2px;
+        }
+
+        /* ── Mobiel: kleinere cellen ── */
+        @media (max-width: 540px) {
+            .calendar-day { min-height: 54px; padding: 3px; }
+            .day-number { font-size: 11px; }
+            .event-label { font-size: 8px; padding: 1px 3px; }
+            .calendar-day-head { font-size: 0.65rem; padding: 4px 1px; }
+            .month-display { font-size: 1rem; }
+            .nav-btn { padding: 6px 10px; font-size: 13px; }
+            .legend { gap: 8px; }
+            .legend-item { font-size: 11px; }
+        }
+
+        @media (max-width: 360px) {
+            .calendar-grid { gap: 2px; }
+            .calendar-day { min-height: 44px; }
+            .event-label { display: none; }
+            .calendar-day.has-event::before {
+                content: '•';
+                font-size: 14px;
+                font-weight: 900;
+                display: block;
+                margin-top: 2px;
+            }
+            .calendar-day.has-sunday::before  { color: var(--teal-fg); }
+            .calendar-day.has-special::before { color: var(--amber-fg); }
+            .calendar-day.has-weekend::before { color: var(--purple-fg); }
         }
     </style>
 </head>
@@ -104,23 +159,29 @@
     </div>
     <button class="nav-burger" onclick="toggleMenu()">☰</button>
   </div>
+  <!-- Mobiel menu — was volledig afwezig in de originele code -->
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="index.html">Homepage</a>
+    <a href="kalender.html" class="active">Kalender</a>
+    <a href="leden.html">Leden</a>
+    <a href="statuten.html">Statuten</a>
+    <a href="galerij.html">Galerij</a>
+    <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank">Sociale Media ↗</a>
+    <a href="https://wtc-saloncoureurs.web.app/" target="_blank">Tracker ↗</a>
+  </div>
 </nav>
 
 <div class="page">
-  <header class="site-header">
-    <div class="logo" style="background:var(--navy3);padding:4px;">
-      <img src="logo.png" style="width:44px;height:44px;object-fit:contain;">
-    </div>
-    <div class="header-title">
-      <h1>De Saloncoureurs</h1>
-      <p>Interactieve Kalender</p>
-    </div>
-  </header>
+
+  <div class="page-title">
+    <h2>Kalender</h2>
+    <p>Alle ritten en events van het seizoen</p>
+  </div>
 
   <div class="grid">
     <div class="card full">
       <div class="card-title"><div class="dot dot-blue"></div> Agenda 2026</div>
-      
+
       <div class="calendar-nav">
         <button class="nav-btn" onclick="changeMonth(-1)">« Vorige</button>
         <h2 id="month-label" class="month-display">Maand Jaar</h2>
@@ -128,6 +189,22 @@
       </div>
 
       <div class="calendar-grid" id="calendar-grid"></div>
+
+      <!-- Legenda -->
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-dot" style="background:var(--teal-bg);border-left:2px solid var(--teal-fg)"></div>
+          Zondagsrit
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:var(--amber-bg);border-left:2px solid var(--amber-fg)"></div>
+          Speciaal event
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:var(--purple-bg);border-left:2px solid var(--purple-fg)"></div>
+          Weekend
+        </div>
+      </div>
     </div>
   </div>
 
@@ -139,17 +216,15 @@ function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
 }
 
-// We starten op de huidige datum
 let viewDate = new Date();
 
-// Speciale evenementen data
 const specialEvents = [
     { date: '2026-03-27', title: 'Fietsweekend Leisele', type: 'weekend' },
     { date: '2026-03-28', title: 'Fietsweekend Leisele', type: 'weekend' },
     { date: '2026-03-29', title: 'Fietsweekend Leisele', type: 'weekend' },
-    { date: '2026-05-31', title: 'Rikolto rit - goede doel', type: 'special' },
-    { date: '2026-06-14', title: 'Vaderdagrit / Bardosrit', type: 'special' },
-    { date: '2026-06-21', title: 'Triathlon Kortrijk', type: 'special' }
+    { date: '2026-05-31', title: 'Rikolto rit', type: 'special' },
+    { date: '2026-06-14', title: 'Vaderdagrit', type: 'special' },
+    { date: '2026-06-21', title: 'Triathlon Kortrijk', type: 'special' },
 ];
 
 function changeMonth(delta) {
@@ -158,66 +233,59 @@ function changeMonth(delta) {
 }
 
 function renderCalendar() {
-    const year = viewDate.getFullYear();
+    const year  = viewDate.getFullYear();
     const month = viewDate.getMonth();
-    const grid = document.getElementById('calendar-grid');
+    const grid  = document.getElementById('calendar-grid');
     const label = document.getElementById('month-label');
-    
-    grid.innerHTML = ''; // Maak grid leeg
 
-    const monthNames = ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"];
+    grid.innerHTML = '';
+
+    const monthNames = ["Januari","Februari","Maart","April","Mei","Juni","Juli","Augustus","September","Oktober","November","December"];
     label.innerText = `${monthNames[month]} ${year}`;
 
-    // Header dagen (Ma-Zo)
-    ['Ma', 'Di', 'Wo', 'Do', 'Vr', 'Za', 'Zo'].forEach(d => {
+    ['Ma','Di','Wo','Do','Vr','Za','Zo'].forEach(d => {
         const h = document.createElement('div');
         h.className = 'calendar-day-head';
         h.innerText = d;
         grid.appendChild(h);
     });
 
-    const firstDay = new Date(year, month, 1).getDay();
+    const firstDay    = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-    let startOffset = firstDay === 0 ? 6 : firstDay - 1;
+    const startOffset = firstDay === 0 ? 6 : firstDay - 1;
 
-    // Lege vakjes voor start
-    for (let i = 0; i < startOffset; i++) grid.appendChild(document.createElement('div'));
+    for (let i = 0; i < startOffset; i++) {
+        grid.appendChild(document.createElement('div'));
+    }
 
     const today = new Date();
 
     for (let d = 1; d <= daysInMonth; d++) {
         const dateObj = new Date(year, month, d);
-        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-        
+        const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+
         const dayDiv = document.createElement('div');
         dayDiv.className = 'calendar-day';
-        
-        // Markeer vandaag
+
         if (year === today.getFullYear() && month === today.getMonth() && d === today.getDate()) {
             dayDiv.classList.add('today');
         }
 
         dayDiv.innerHTML = `<span class="day-number">${d}</span>`;
 
-        // LOGICA VOOR RITTEN
-        let eventHTML = "";
-        
-        // 1. Check Speciale Events
         const spec = specialEvents.find(e => e.date === dateStr);
         if (spec) {
-            eventHTML = `<div class="event-label event-${spec.type}">${spec.title}</div>`;
-        } 
-        // 2. Check Zondagsritten (Maart t/m November 2026)
-        else if (dateObj.getDay() === 0 && year === 2026 && month >= 2 && month <= 10) {
-            eventHTML = `<div class="event-label event-sunday">Zondagsrit</div>`;
+            dayDiv.innerHTML += `<div class="event-label event-${spec.type}">${spec.title}</div>`;
+            dayDiv.classList.add('has-event', `has-${spec.type}`);
+        } else if (dateObj.getDay() === 0 && year === 2026 && month >= 2 && month <= 10) {
+            dayDiv.innerHTML += `<div class="event-label event-sunday">Zondagsrit</div>`;
+            dayDiv.classList.add('has-event', 'has-sunday');
         }
 
-        dayDiv.innerHTML += eventHTML;
         grid.appendChild(dayDiv);
     }
 }
 
-// Eerste keer laden
 renderCalendar();
 </script>
 
