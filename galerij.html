@@ -6,7 +6,7 @@
 <title>De Saloncoureurs — Galerij</title>
 <link rel="stylesheet" href="stijl.css">
 <style>
-  .album { margin-bottom: 24px; }
+  .album { margin-bottom: 12px; }
   .album-header {
     display: flex;
     align-items: center;
@@ -120,7 +120,6 @@
     font-size: 28px; color: var(--gold);
     cursor: pointer; background: none; border: none;
     padding: 8px; opacity: .7;
-    user-select: none;
   }
   .lightbox-nav:hover { opacity: 1; }
   .lightbox-prev { left: 16px; }
@@ -136,34 +135,36 @@
       De Saloncoureurs
     </a>
     <div class="nav-links">
-      <a href="index.html">Homepage</a>
-      <a href="kalender.html">Kalender</a>
+      <a href="index.html">Site</a>
       <a href="leden.html">Leden</a>
       <a href="statuten.html">Statuten</a>
       <a href="galerij.html" class="active">Galerij</a>
-      <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank">Sociale Media ↗</a>
       <a href="https://wtc-saloncoureurs.web.app/" target="_blank">Tracker ↗</a>
     </div>
     <button class="nav-burger" onclick="toggleMenu()">☰</button>
   </div>
   <div class="nav-mobile" id="mobileMenu">
-    <a href="index.html">Homepage</a>
-    <a href="kalender.html">Kalender</a>
+    <a href="index.html">Site</a>
     <a href="leden.html">Leden</a>
     <a href="statuten.html">Statuten</a>
     <a href="galerij.html" class="active">Galerij</a>
-    <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank">Sociale Media ↗</a>
     <a href="https://wtc-saloncoureurs.web.app/" target="_blank">Tracker ↗</a>
   </div>
 </nav>
 
 <div class="page">
 
-  <div class="page-title">
-    <h2>Galerij</h2>
-    <p>Herinneringen van onze ritten en events</p>
-  </div>
+  <header class="site-header">
+    <div class="logo" style="background:var(--navy3);padding:4px;">
+      <img src="logo.png" style="width:44px;height:44px;object-fit:contain;">
+    </div>
+    <div class="header-title">
+      <h1>De Saloncoureurs</h1>
+      <p>Galerij</p>
+    </div>
+  </header>
 
+  <!-- ALBUM: Triathlon Kortrijk -->
   <div class="album">
     <div class="album-header">
       <div class="album-icon">🏊</div>
@@ -203,6 +204,7 @@
     </div>
   </div>
 
+  <!-- ALBUM: Tandem Rit -->
   <div class="album">
     <div class="album-header">
       <div class="album-icon">🚴</div>
@@ -236,6 +238,7 @@
     </div>
   </div>
 
+  <!-- ALBUM: Vaderdagrit -->
   <div class="album">
     <div class="album-header">
       <div class="album-icon">👨</div>
@@ -243,23 +246,20 @@
         <div class="album-titel">Vaderdagrit</div>
         <div class="album-sub">2025</div>
       </div>
-      <div class="album-count">2 foto's</div>
+      <div class="album-count">1 foto</div>
     </div>
     <div class="foto-grid">
       <div class="foto-item" onclick="openLight(0, 'vaderdag')">
         <img src="fotos/vaderdagrit-1.jpg" alt="Vaderdagrit 2025">
         <div class="foto-overlay"><div class="foto-label">Vaderdagrit 2025</div></div>
       </div>
-      <div class="foto-item" onclick="openLight(1, 'vaderdag')">
-        <img src="fotos/vaderdagrit-2.jpg" alt="Vaderdagrit 2025 nabespreking">
-        <div class="foto-overlay"><div class="foto-label">Vaderdagrit 2025 nabespreking</div></div>
-      </div>
     </div>
   </div>
 
+  <!-- ALBUM: Weekend -->
   <div class="album">
     <div class="album-header">
-      <div class="album-icon">🍻</div>
+      <div class="album-icon">🏖️</div>
       <div class="album-info">
         <div class="album-titel">Weekend</div>
         <div class="album-sub">April 2025</div>
@@ -284,6 +284,7 @@
 
 </div>
 
+<!-- Lightbox -->
 <div class="lightbox" id="lightbox" onclick="closeLight(event)">
   <button class="lightbox-close" onclick="closeLight()">✕</button>
   <button class="lightbox-nav lightbox-prev" onclick="navLight(-1, event)">‹</button>
@@ -293,7 +294,7 @@
 </div>
 
 <footer class="site-footer" style="max-width:780px;margin:0 auto;padding:0 16px 32px">
-  De Saloncoureurs &copy; 2026
+  De Saloncoureurs &copy; 2025
 </footer>
 
 <script>
@@ -301,7 +302,6 @@ function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
 }
 
-// Hier staan de bronnen voor de lightbox
 const albums = {
   triathlon: [
     { src: 'fotos/triathlon-1.jpg', cap: 'Triathlon Kortrijk 2025' },
@@ -320,7 +320,6 @@ const albums = {
   ],
   vaderdag: [
     { src: 'fotos/vaderdagrit-1.jpg', cap: 'Vaderdagrit 2025' },
-    { src: 'fotos/vaderdagrit-2.jpg', cap: 'Vaderdagrit 2025 nabespreking' },
   ],
   weekend: [
     { src: 'fotos/weekend2025-1.jpg', cap: 'Weekend 2025' },
@@ -332,8 +331,7 @@ const albums = {
 let curAlbum = '', curIdx = 0;
 
 function openLight(idx, album) {
-  curAlbum = album; 
-  curIdx = idx;
+  curAlbum = album; curIdx = idx;
   const item = albums[album][idx];
   document.getElementById('lightbox-img').src = item.src;
   document.getElementById('lightbox-caption').textContent = item.cap;
@@ -341,27 +339,22 @@ function openLight(idx, album) {
 }
 
 function closeLight(e) {
-  // Sluit alleen als op de achtergrond of de sluitknop wordt geklikt
   if (e && e.target !== document.getElementById('lightbox') && !e.target.classList.contains('lightbox-close')) return;
   document.getElementById('lightbox').classList.remove('open');
 }
 
 function navLight(dir, e) {
-  if (e) e.stopPropagation();
+  e.stopPropagation();
   const arr = albums[curAlbum];
   curIdx = (curIdx + dir + arr.length) % arr.length;
   document.getElementById('lightbox-img').src = arr[curIdx].src;
   document.getElementById('lightbox-caption').textContent = arr[curIdx].cap;
 }
 
-// Toetsenbord ondersteuning
 document.addEventListener('keydown', e => {
-  const lb = document.getElementById('lightbox');
-  if (!lb.classList.contains('open')) return;
-
-  if (e.key === 'Escape') lb.classList.remove('open');
-  if (e.key === 'ArrowRight') navLight(1);
-  if (e.key === 'ArrowLeft')  navLight(-1);
+  if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('open');
+  if (e.key === 'ArrowRight') navLight(1, { stopPropagation: () => {} });
+  if (e.key === 'ArrowLeft')  navLight(-1, { stopPropagation: () => {} });
 });
 </script>
 </body>
