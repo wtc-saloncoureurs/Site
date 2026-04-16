@@ -246,12 +246,11 @@ function toggleMenu() {
 }
 
 // ═══════════════════════════════════════════════════════
-// Wout: vervang de regio/project-id hieronder door de
-// echte waarden uit je Firebase console.
-// Firebase Console → Functions → getPublicStats → URL kopiëren
-// Bv: https://europe-west1-wtc-saloncoureurs.cloudfunctions.net/getPublicStats
+// Rechtstreeks van Firestore — geen deployment nodig!
+// Werkt omdat stats/kilometers publiek leesbaar zijn.
 // ═══════════════════════════════════════════════════════
-const DATA_URL = null; // ← Wout: vervang null door de URL hierboven
+const FIRESTORE_BASE = 'https://firestore.googleapis.com/v1/projects/wtc-saloncoureurs/databases/(default)/documents';
+const DATA_URL = null; // niet meer nodig — zie laadData() hieronder
 
 const SEIZOEN_DOEL = 40000;
 const SEIZOEN_START = new Date('2026-01-01');
@@ -287,12 +286,46 @@ function goudKleur(pct) {
 }
 
 async function laadData() {
-  if (!DATA_URL) { toonDemo(); return; }
   try {
-    const res = await fetch(DATA_URL);
-    if (!res.ok) throw new Error();
-    toonData(await res.json());
-  } catch { toonFout(); }
+    // Haal stats op uit Firestore REST API
+    const [statsRes, kmRes] = await Promise.all([
+      fetch(`${FIRESTORE_BASE}/stats?pageSize=50`),
+      fetch(`${FIRESTORE_BASE}/kilometers?pageSize=1`)
+    ]);
+
+    if (!statsRes.ok) throw new Error('Stats ophalen mislukt');
+    const statsData = await statsRes.json();
+
+    // Verwerk Firestore documenten naar ons formaat
+    const leden = (statsData.documents || []).map(doc => {
+      const f = doc.fields || {};
+      const km = parseFloat(f.totalKm?.doubleValue || f.totalKm?.integerValue || 0);
+      const lastRide = f.lastRideDate?.stringValue || null;
+      const laasteFormatted = lastRide
+        ? new Date(lastRide).toLocaleDateString('nl-BE', { day: 'numeric', month: 'short' })
+        : '—';
+      const firstname = f.firstname?.stringValue || '';
+      const lastname = f.lastname?.stringValue || '';
+      return {
+        naam: firstname,
+        initialen: ((firstname[0] || '') + (lastname[0] || '')).toUpperCase(),
+        km: Math.round(km),
+        laaste: laasteFormatted,
+      };
+    });
+
+    const totaalKm = leden.reduce((s, l) => s + l.km, 0);
+
+    toonData({
+      totaalKm,
+      lastUpdated: new Date().toISOString(),
+      leden,
+    });
+
+  } catch(e) {
+    console.error(e);
+    toonFout();
+  }
 }
 
 function toonDemo() {
