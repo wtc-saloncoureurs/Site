@@ -304,7 +304,7 @@ function maakLeaderboard(containerId, leden, veldFn, eenheidFn, subFn) {
         <div class="leader-info">
           <div class="leader-naam">
             ${lid.naam}
-            <span style="font-size:13px">${isLaatste ? '🧹' : '🍺'}</span>
+            ${isLaatste ? '<span style="font-size:13px">🧹</span>' : ''}
           </div>
           ${subFn ? `<div class="leader-sub">${subFn(lid)}</div>` : ''}
           <div class="leader-bar-wrap" style="margin-top:4px">
