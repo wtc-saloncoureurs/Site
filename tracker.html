@@ -41,19 +41,11 @@
   .progress-fill-hero {
     height: 18px;
     border-radius: 9px;
-    background: linear-gradient(to right, #e74c3c, #f39c12, #f1c40f, #2ecc71);
-    background-size: 400px 18px;
+    background: linear-gradient(to right, #fdf3d0, #f0c84a, #d4a92a, #a07010, #6b4a08);
     transition: width .8s ease;
     position: relative;
   }
-  .progress-fill-hero::after {
-    content: attr(data-pct);
-    position: absolute; right: 6px; top: 50%;
-    transform: translateY(-50%);
-    font-size: 11px; font-weight:700; color:#fff;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-  }
-  .progress-labels-hero { display:flex; justify-content:space-between; font-size:11px; color:#9fd9b4; }
+  .progress-labels-hero { display:flex; justify-content:space-between; font-size:11px; color:var(--text2); }
 
   /* Dagen balk */
   .dagen-bar { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
@@ -138,23 +130,23 @@
       De Saloncoureurs
     </a>
     <div class="nav-links">
-      <a href="index.html">Homepage</a>
-      <a href="kalender.html">Kalender</a>
-      <a href="leden.html">Leden</a>
-      <a href="statuten.html">Statuten</a>
-      <a href="galerij.html">Galerij</a>
-      <a href="tracker.html" class="active">Tracker</a>
+      <a href="/Site/index.html">Homepage</a>
+      <a href="/Site/kalender.html">Kalender</a>
+      <a href="/Site/leden.html">Leden</a>
+      <a href="/Site/statuten.html">Statuten</a>
+      <a href="/Site/galerij.html">Galerij</a>
+      <a href="/Site/tracker.html" class="active">Tracker</a>
       <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank">Sociale Media ↗</a>
     </div>
     <button class="nav-burger" onclick="toggleMenu()">☰</button>
   </div>
   <div class="nav-mobile" id="mobileMenu">
-    <a href="index.html">Homepage</a>
-    <a href="kalender.html">Kalender</a>
-    <a href="leden.html">Leden</a>
-    <a href="statuten.html">Statuten</a>
-    <a href="galerij.html">Galerij</a>
-    <a href="tracker.html" class="active">Tracker</a>
+    <a href="/Site/index.html">Homepage</a>
+    <a href="/Site/kalender.html">Kalender</a>
+    <a href="/Site/leden.html">Leden</a>
+    <a href="/Site/statuten.html">Statuten</a>
+    <a href="/Site/galerij.html">Galerij</a>
+    <a href="/Site/tracker.html" class="active">Tracker</a>
     <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank">Sociale Media ↗</a>
   </div>
 </nav>
@@ -254,10 +246,12 @@ function toggleMenu() {
 }
 
 // ═══════════════════════════════════════════════════════
-// Wout: vervang null door de Firebase JSON-endpoint URL
-// Bv: const DATA_URL = 'https://wtc-saloncoureurs.web.app/data.json';
+// Wout: vervang de regio/project-id hieronder door de
+// echte waarden uit je Firebase console.
+// Firebase Console → Functions → getPublicStats → URL kopiëren
+// Bv: https://europe-west1-wtc-saloncoureurs.cloudfunctions.net/getPublicStats
 // ═══════════════════════════════════════════════════════
-const DATA_URL = null;
+const DATA_URL = null; // ← Wout: vervang null door de URL hierboven
 
 const SEIZOEN_DOEL = 40000;
 const SEIZOEN_START = new Date('2026-01-01');
