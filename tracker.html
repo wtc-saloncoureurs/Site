@@ -253,8 +253,8 @@ const FIRESTORE_BASE = 'https://firestore.googleapis.com/v1/projects/wtc-salonco
 const DATA_URL = null; // niet meer nodig — zie laadData() hieronder
 
 const SEIZOEN_DOEL = 40000;
-const SEIZOEN_START = new Date('2026-01-01');
-const SEIZOEN_EINDE = new Date('2026-12-31');
+const SEIZOEN_START = new Date(new Date().getFullYear(), 1, 1);  // 1 februari
+const SEIZOEN_EINDE = new Date(new Date().getFullYear(), 10, 30); // 30 november
 
 const DOELEN_CONFIG = [
   { icon:'🚴', tekst:'40.000 km', type:'km', doel:40000 },
