@@ -6,117 +6,85 @@
 <title>De Saloncoureurs — Tracker</title>
 <link rel="stylesheet" href="stijl.css">
 <style>
-  /* Spinner */
   .tracker-loading { text-align:center; padding:40px 20px; color:var(--text2); font-size:14px; }
   .spinner { width:32px; height:32px; border:3px solid var(--border); border-top-color:var(--gold); border-radius:50%; animation:spin .8s linear infinite; margin:0 auto 12px; }
   @keyframes spin { to { transform:rotate(360deg); } }
-
   .tracker-error { display:none; background:var(--red-bg); border:0.5px solid rgba(224,90,90,0.25); border-radius:var(--radius); padding:16px 18px; font-size:13px; color:var(--red-fg); margin-bottom:12px; }
+  .demo-banner { background:rgba(212,169,42,0.1); border:0.5px solid var(--border2); border-radius:var(--radius-sm); padding:8px 14px; font-size:12px; color:var(--text2); margin-bottom:12px; display:none; }
 
-  /* Totaal km hero */
-  .km-hero {
-    background: var(--navy3);
-    border: 0.5px solid var(--border2);
-    border-radius: var(--radius);
-    padding: 20px;
-    margin-bottom: 10px;
-    position: relative;
-    overflow: hidden;
-  }
+  /* Km hero */
+  .km-hero { background:var(--navy3); border:0.5px solid var(--border2); border-radius:var(--radius); padding:20px; margin-bottom:10px; }
   .km-hero-top { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
   .km-hero-icon { font-size:32px; }
   .km-hero-label { font-size:13px; color:var(--text2); font-weight:600; text-transform:uppercase; letter-spacing:.05em; }
   .km-hero-val { font-size:42px; font-weight:800; color:var(--gold); line-height:1; margin-top:2px; }
   .km-hero-sub { font-size:13px; color:var(--text2); margin-top:4px; }
-
-  /* Voortgangsbalk — rood naar geel naar groen zoals de app */
-  .progress-track-hero {
-    height: 18px;
-    background: rgba(0,0,0,0.3);
-    border-radius: 9px;
-    overflow: hidden;
-    margin: 14px 0 6px;
-    border: 0.5px solid rgba(255,255,255,0.1);
-  }
-  .progress-fill-hero {
-    height: 18px;
-    border-radius: 9px;
-    background: linear-gradient(to right, #fdf3d0, #f0c84a, #d4a92a, #a07010, #6b4a08);
-    transition: width .8s ease;
-    position: relative;
-  }
+  .progress-track-hero { height:18px; background:rgba(0,0,0,0.3); border-radius:9px; overflow:hidden; margin:14px 0 6px; border:0.5px solid rgba(255,255,255,0.1); }
+  .progress-fill-hero { height:18px; border-radius:9px; background:linear-gradient(to right,#fdf3d0,#f0c84a,#d4a92a,#a07010,#6b4a08); transition:width .8s ease; position:relative; }
+  .progress-fill-hero::after { content:attr(data-pct); position:absolute; right:8px; top:50%; transform:translateY(-50%); font-size:11px; font-weight:700; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,0.6); }
   .progress-labels-hero { display:flex; justify-content:space-between; font-size:11px; color:var(--text2); }
-
-  /* Dagen balk */
   .dagen-bar { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
   .dagen-item { flex:1; min-width:80px; background:var(--surface2); border-radius:var(--radius-sm); padding:10px; text-align:center; border:0.5px solid var(--border); }
   .dagen-val { font-size:22px; font-weight:700; color:var(--gold); }
   .dagen-label { font-size:10px; color:var(--text2); margin-top:2px; text-transform:uppercase; letter-spacing:.04em; }
+  .last-update { font-size:11px; color:var(--text2); text-align:right; margin-top:10px; }
 
-  /* Leaderboard */
-  .leader-card {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px 18px;
-    margin-bottom: 10px;
+  /* ── Sticky subtab balk ── */
+  .klassement-card { background:var(--surface); border:0.5px solid var(--border); border-radius:var(--radius); overflow:hidden; margin-bottom:10px; }
+  .subtab-bar {
+    display:flex;
+    background:var(--surface2);
+    border-bottom:0.5px solid var(--border2);
+    position:sticky;
+    top:52px; /* hoogte van topnav */
+    z-index:50;
   }
-  .leader-card .card-title { color: var(--gold); }
+  .subtab-btn {
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:3px;
+    padding:10px 4px 8px;
+    background:none;
+    border:none;
+    border-bottom:2px solid transparent;
+    cursor:pointer;
+    font-family:inherit;
+    transition:background .15s, border-color .15s;
+  }
+  .subtab-btn:hover { background:var(--gold-pale); }
+  .subtab-btn.active { border-bottom-color:var(--gold); background:var(--gold-pale); }
+  .subtab-icon { font-size:18px; line-height:1; }
+  .subtab-label { font-size:10px; font-weight:600; color:var(--text2); text-transform:uppercase; letter-spacing:.04em; white-space:nowrap; }
+  .subtab-btn.active .subtab-label { color:var(--gold); }
 
-  .leader-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 0;
-    border-bottom: 0.5px solid rgba(255,255,255,0.07);
-  }
+  /* Klassement inhoud */
+  .klassement-body { padding:14px 16px; }
+  .klassement-tab { display:none; }
+  .klassement-tab.active { display:block; }
+
+  .klassement-titel { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--gold); margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+
+  /* Leaderboard rijen */
+  .leader-row { display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:0.5px solid var(--border); }
   .leader-row:last-child { border-bottom:none; }
-
-  .leader-pos { font-size:14px; font-weight:800; width:26px; text-align:center; flex-shrink:0; }
+  .leader-pos { font-size:14px; font-weight:800; width:28px; text-align:center; flex-shrink:0; }
   .leader-pos.p1 { color:#FFD700; }
   .leader-pos.p2 { color:#C0C0C0; }
   .leader-pos.p3 { color:#CD7F32; }
-  .leader-pos.pn { color:#6b7280; }
+  .leader-pos.pn { color:var(--text3); }
+  .leader-info { flex:1; min-width:0; }
+  .leader-naam { font-size:14px; font-weight:600; color:var(--text); display:flex; align-items:center; gap:5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .leader-sub { font-size:11px; color:var(--text2); margin-top:2px; }
+  .leader-bar-wrap { flex:2; }
+  .leader-track { height:10px; background:var(--surface2); border-radius:5px; overflow:hidden; }
+  .leader-fill { height:10px; border-radius:5px; transition:width .6s ease; }
+  .leader-val { font-size:13px; font-weight:700; color:var(--gold); white-space:nowrap; min-width:64px; text-align:right; flex-shrink:0; }
 
-  .leader-naam { flex:1; font-size:14px; font-weight:600; color:#fff; }
-  .leader-sub { font-size:11px; color:#9fd9b4; margin-top:1px; }
+  /* Geen data pill */
+  .geen-data { font-size:12px; color:var(--text3); text-align:center; padding:20px; }
 
-  /* Voortgangsbalk per lid — rood naar groen zoals de app */
-  .leader-bar-wrap { flex:2; display:flex; flex-direction:column; gap:3px; }
-  .leader-track { height:10px; background:rgba(0,0,0,0.3); border-radius:5px; overflow:hidden; }
-  .leader-fill {
-    height:10px; border-radius:5px;
-    background: linear-gradient(to right, #e74c3c, #f39c12, #f1c40f, #2ecc71);
-    background-size: 300px 10px;
-    transition: width .6s ease;
-  }
-  .leader-km-val { font-size:13px; font-weight:700; color:#f1c40f; white-space:nowrap; min-width:70px; text-align:right; }
-  .leader-last { font-size:10px; color:#9fd9b4; }
-
-  /* Bier-icon als beloning zoals in de app */
-  .beer-icon { font-size:22px; margin-left:4px; opacity:0.85; }
-
-  /* Doelen sectie */
-  .doelen-card {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px 18px;
-    margin-bottom: 10px;
-  }
-  .doel-row { display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:0.5px solid var(--border); }
-  .doel-row:last-child { border-bottom:none; }
-  .doel-icon { font-size:18px; flex-shrink:0; }
-  .doel-tekst { flex:1; font-size:13px; color:var(--text); }
-  .doel-badge { font-size:11px; font-weight:600; padding:3px 9px; border-radius:20px; flex-shrink:0; }
-  .doel-badge.behaald { background:rgba(46,204,113,0.15); color:#2ecc71; border:0.5px solid rgba(46,204,113,0.3); }
-  .doel-badge.bezig   { background:var(--gold-pale); color:var(--gold); border:0.5px solid var(--border2); }
-  .doel-badge.open    { background:var(--surface2); color:var(--text3); border:0.5px solid var(--border); }
-
-  /* Demo-banner */
-  .demo-banner { background:rgba(212,169,42,0.1); border:0.5px solid var(--border2); border-radius:var(--radius-sm); padding:8px 14px; font-size:12px; color:var(--text2); margin-bottom:12px; display:none; }
-
-  .last-update { font-size:11px; color:#9fd9b4; text-align:right; margin-top:10px; }
   .fallback-link { display:inline-block; margin-top:4px; font-size:12px; color:var(--gold); text-decoration:none; padding:6px 14px; border:0.5px solid var(--border2); border-radius:var(--radius-sm); background:var(--gold-pale); }
   .fallback-link:hover { opacity:.8; }
 </style>
@@ -130,23 +98,23 @@
       De Saloncoureurs
     </a>
     <div class="nav-links">
-      <a href="/Site/index.html">Homepage</a>
-      <a href="/Site/kalender.html">Kalender</a>
-      <a href="/Site/leden.html">Leden</a>
-      <a href="/Site/statuten.html">Statuten</a>
-      <a href="/Site/galerij.html">Galerij</a>
-      <a href="/Site/tracker.html" class="active">Tracker</a>
+      <a href="index.html">Homepage</a>
+      <a href="kalender.html">Kalender</a>
+      <a href="leden.html">Leden</a>
+      <a href="statuten.html">Statuten</a>
+      <a href="galerij.html">Galerij</a>
+      <a href="tracker.html" class="active">Tracker</a>
       <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank">Sociale Media ↗</a>
     </div>
     <button class="nav-burger" onclick="toggleMenu()">☰</button>
   </div>
   <div class="nav-mobile" id="mobileMenu">
-    <a href="/Site/index.html">Homepage</a>
-    <a href="/Site/kalender.html">Kalender</a>
-    <a href="/Site/leden.html">Leden</a>
-    <a href="/Site/statuten.html">Statuten</a>
-    <a href="/Site/galerij.html">Galerij</a>
-    <a href="/Site/tracker.html" class="active">Tracker</a>
+    <a href="index.html">Homepage</a>
+    <a href="kalender.html">Kalender</a>
+    <a href="leden.html">Leden</a>
+    <a href="statuten.html">Statuten</a>
+    <a href="galerij.html">Galerij</a>
+    <a href="tracker.html" class="active">Tracker</a>
     <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank">Sociale Media ↗</a>
   </div>
 </nav>
@@ -169,7 +137,7 @@
   </div>
 
   <div class="demo-banner" id="demoBanner">
-    🔧 Demo-modus — Wout: stel <code>DATA_URL</code> in op de Firebase JSON-endpoint voor live Strava data.
+    🔧 Demo-modus — live data volgt zodra Wout de extra velden opslaat in Firestore.
   </div>
 
   <div id="trackerContent">
@@ -178,7 +146,7 @@
       Live data ophalen van Strava...
     </div>
 
-    <!-- Totaal km hero -->
+    <!-- Km hero -->
     <div class="km-hero" id="kmHero" style="display:none">
       <div class="km-hero-top">
         <div class="km-hero-icon">🚴</div>
@@ -187,7 +155,6 @@
           <div class="km-hero-val" id="kmTotaal">—</div>
           <div class="km-hero-sub" id="kmSub">— / 40.000 km</div>
         </div>
-        <div class="beer-icon" id="beerIcon" style="margin-left:auto;display:none">🍺</div>
       </div>
       <div class="progress-track-hero">
         <div class="progress-fill-hero" id="kmBar" style="width:0%" data-pct="0%"></div>
@@ -214,19 +181,66 @@
       <div class="last-update" id="lastUpdate"></div>
     </div>
 
-    <!-- Leaderboard -->
-    <div class="leader-card" id="leaderCard" style="display:none">
-      <div class="card-title" style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;display:flex;align-items:center;gap:7px;">
-        <div style="width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0"></div>
-        Klassement
-      </div>
-      <div id="leaderList"></div>
-    </div>
+    <!-- Klassement kaart met subtabs -->
+    <div class="klassement-card" id="klassementCard" style="display:none">
 
-    <!-- Doelstellingen -->
-    <div class="doelen-card" id="doelenCard" style="display:none">
-      <div class="card-title"><div class="dot dot-amber"></div> Doelstellingen</div>
-      <div id="doelenList"></div>
+      <!-- Sticky subtab balk -->
+      <div class="subtab-bar">
+        <button class="subtab-btn active" onclick="wisselTab('km', this)">
+          <span class="subtab-icon">🚴</span>
+          <span class="subtab-label">KM</span>
+        </button>
+        <button class="subtab-btn" onclick="wisselTab('berg', this)">
+          <span class="subtab-icon">⛰️</span>
+          <span class="subtab-label">Berg</span>
+        </button>
+        <button class="subtab-btn" onclick="wisselTab('snelheid', this)">
+          <span class="subtab-icon">⚡</span>
+          <span class="subtab-label">Snelheid</span>
+        </button>
+        <button class="subtab-btn" onclick="wisselTab('top', this)">
+          <span class="subtab-icon">🚀</span>
+          <span class="subtab-label">Top</span>
+        </button>
+        <button class="subtab-btn" onclick="wisselTab('ritten', this)">
+          <span class="subtab-icon">📅</span>
+          <span class="subtab-label">Ritten</span>
+        </button>
+      </div>
+
+      <div class="klassement-body">
+
+        <!-- Tab: KM klassement -->
+        <div class="klassement-tab active" id="tab-km">
+          <div class="klassement-titel">🚴 Kilometers — seizoen</div>
+          <div id="list-km"></div>
+        </div>
+
+        <!-- Tab: Bergklassement -->
+        <div class="klassement-tab" id="tab-berg">
+          <div class="klassement-titel">⛰️ Bergklassement — totale hoogtemeters</div>
+          <div id="list-berg"></div>
+        </div>
+
+        <!-- Tab: Snelste rit -->
+        <div class="klassement-tab" id="tab-snelheid">
+          <div class="klassement-titel">⚡ Snelste rit — hoogste gemiddelde snelheid</div>
+          <div id="list-snelheid"></div>
+        </div>
+
+        <!-- Tab: Topsnelheid -->
+        <div class="klassement-tab" id="tab-top">
+          <div class="klassement-titel">🚀 Topsnelheid — hoogste geregistreerde snelheid</div>
+          <div id="list-top"></div>
+        </div>
+
+        <!-- Tab: Ritten -->
+        <div class="klassement-tab" id="tab-ritten">
+          <div class="klassement-titel">📅 Meeste ritten — aantal ritten dit seizoen</div>
+          <div id="list-ritten"></div>
+        </div>
+
+      </div>
     </div>
 
     <div style="text-align:center;margin-top:8px" id="fallbackDiv" style="display:none">
@@ -245,198 +259,173 @@ function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
 }
 
-// ═══════════════════════════════════════════════════════
-// Rechtstreeks van Firestore — geen deployment nodig!
-// Werkt omdat stats/kilometers publiek leesbaar zijn.
-// ═══════════════════════════════════════════════════════
+function wisselTab(tab, btn) {
+  document.querySelectorAll('.subtab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.klassement-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+}
+
 const FIRESTORE_BASE = 'https://firestore.googleapis.com/v1/projects/wtc-saloncoureurs/databases/(default)/documents';
-const DATA_URL = null; // niet meer nodig — zie laadData() hieronder
-
 const SEIZOEN_DOEL = 40000;
-const SEIZOEN_START = new Date(new Date().getFullYear(), 1, 1);  // 1 februari
-const SEIZOEN_EINDE = new Date(new Date().getFullYear(), 10, 30); // 30 november
+const SEIZOEN_START = new Date(new Date().getFullYear(), 1, 1);
+const SEIZOEN_EINDE = new Date(new Date().getFullYear(), 10, 30);
 
-const DOELEN_CONFIG = [
-  { icon:'🚴', tekst:'40.000 km', type:'km', doel:40000 },
-  { icon:'❤️', tekst:'3 goede doelen', type:'count', doel:3, huidig:0 },
-  { icon:'👥', tekst:'10 groepsritten', type:'count', doel:10, huidig:3 },
-  { icon:'🏟️', tekst:'5 voetbalstadia', type:'count', doel:5, huidig:0 },
-  { icon:'⛰️', tekst:'De Alpen trotseren', type:'bool', huidig:false },
-  { icon:'🔄', tekst:'5 km rond een rondpunt', type:'count', doel:5, huidig:0 },
-];
-
-// Goud kleur op basis van percentage: 0% = lichtgoud, 100% = donkergoud
 function goudKleur(pct) {
-  // Interpoleer tussen #fdf3d0 (licht) en #6b4a08 (donker)
-  const stops = [
-    [253, 243, 208], // #fdf3d0 — lichtgoud
-    [240, 200,  74], // #f0c84a
-    [212, 169,  42], // #d4a92a
-    [160, 112,  16], // #a07010
-    [107,  74,   8], // #6b4a08 — donkergoud
-  ];
+  const stops = [[253,243,208],[240,200,74],[212,169,42],[160,112,16],[107,74,8]];
   const idx = pct * (stops.length - 1);
   const lo = stops[Math.floor(idx)];
-  const hi = stops[Math.min(Math.ceil(idx), stops.length - 1)];
+  const hi = stops[Math.min(Math.ceil(idx), stops.length-1)];
   const t = idx - Math.floor(idx);
-  const r = Math.round(lo[0] + (hi[0]-lo[0]) * t);
-  const g = Math.round(lo[1] + (hi[1]-lo[1]) * t);
-  const b = Math.round(lo[2] + (hi[2]-lo[2]) * t);
-  return `rgb(${r},${g},${b})`;
+  return `rgb(${Math.round(lo[0]+(hi[0]-lo[0])*t)},${Math.round(lo[1]+(hi[1]-lo[1])*t)},${Math.round(lo[2]+(hi[2]-lo[2])*t)})`;
+}
+
+const medals = ['🥇','🥈','🥉'];
+const posKlasse = ['p1','p2','p3'];
+
+function maakLeaderboard(containerId, leden, veldFn, eenheidFn, subFn) {
+  const sorted = [...leden].filter(l => veldFn(l) > 0).sort((a,b) => veldFn(b) - veldFn(a));
+  const maxVal = sorted.length ? veldFn(sorted[0]) : 1;
+
+  if (!sorted.length) {
+    document.getElementById(containerId).innerHTML =
+      '<div class="geen-data">Nog geen data beschikbaar — volgt na de volgende Strava-update.</div>';
+    return;
+  }
+
+  document.getElementById(containerId).innerHTML = sorted.map((lid, i) => {
+    const val = veldFn(lid);
+    const breedte = ((val / maxVal) * 100).toFixed(1);
+    const kleur = goudKleur(val / maxVal);
+    const isLaatste = val === 0;
+    return `
+      <div class="leader-row">
+        <div class="leader-pos ${posKlasse[i]||'pn'}">${medals[i]||(i+1)}</div>
+        <div class="leader-info">
+          <div class="leader-naam">
+            ${lid.naam}
+            <span style="font-size:13px">${isLaatste ? '🧹' : '🍺'}</span>
+          </div>
+          ${subFn ? `<div class="leader-sub">${subFn(lid)}</div>` : ''}
+          <div class="leader-bar-wrap" style="margin-top:4px">
+            <div class="leader-track">
+              <div class="leader-fill" style="width:${breedte}%;background:${kleur}"></div>
+            </div>
+          </div>
+        </div>
+        <div class="leader-val">${eenheidFn(val)}</div>
+      </div>`;
+  }).join('');
 }
 
 async function laadData() {
   try {
-    // Haal stats op uit Firestore REST API
-    const [statsRes, kmRes] = await Promise.all([
-      fetch(`${FIRESTORE_BASE}/stats?pageSize=50`),
-      fetch(`${FIRESTORE_BASE}/kilometers?pageSize=1`)
-    ]);
-
+    const statsRes = await fetch(`${FIRESTORE_BASE}/stats?pageSize=50`);
     if (!statsRes.ok) throw new Error('Stats ophalen mislukt');
     const statsData = await statsRes.json();
 
-    // Verwerk Firestore documenten naar ons formaat
     const leden = (statsData.documents || []).map(doc => {
       const f = doc.fields || {};
-      const km = parseFloat(f.totalKm?.doubleValue || f.totalKm?.integerValue || 0);
       const lastRide = f.lastRideDate?.stringValue || null;
-      const laasteFormatted = lastRide
-        ? new Date(lastRide).toLocaleDateString('nl-BE', { day: 'numeric', month: 'short' })
-        : '—';
-      const firstname = f.firstname?.stringValue || '';
-      const lastname = f.lastname?.stringValue || '';
       return {
-        naam: firstname,
-        initialen: ((firstname[0] || '') + (lastname[0] || '')).toUpperCase(),
-        km: Math.round(km),
-        laaste: laasteFormatted,
+        naam: f.firstname?.stringValue || '',
+        initialen: ((f.firstname?.stringValue?.[0]||'') + (f.lastname?.stringValue?.[0]||'')).toUpperCase(),
+        km: Math.round(parseFloat(f.totalKm?.doubleValue || f.totalKm?.integerValue || 0)),
+        laaste: lastRide ? new Date(lastRide).toLocaleDateString('nl-BE',{day:'numeric',month:'short'}) : '—',
+        // Extra velden — beschikbaar zodra Wout ze opslaat
+        totalElevation: Math.round(parseFloat(f.totalElevation?.doubleValue || f.totalElevation?.integerValue || 0)),
+        maxAvgSpeed: parseFloat(f.maxAvgSpeed?.doubleValue || f.maxAvgSpeed?.integerValue || 0),
+        maxSpeed: parseFloat(f.maxSpeed?.doubleValue || f.maxSpeed?.integerValue || 0),
+        longestRide: parseFloat(f.longestRide?.doubleValue || f.longestRide?.integerValue || 0),
+        aantalRitten: parseInt(f.aantalRitten?.integerValue || 0),
       };
     });
 
-    const totaalKm = leden.reduce((s, l) => s + l.km, 0);
-
-    toonData({
-      totaalKm,
-      lastUpdated: new Date().toISOString(),
-      leden,
-    });
-
+    toonData(leden);
   } catch(e) {
     console.error(e);
-    toonFout();
+    // Fallback naar demo
+    toonDemo();
   }
 }
 
 function toonDemo() {
   document.getElementById('demoBanner').style.display = 'block';
-  toonData({
-    totaalKm: 5770,
-    lastUpdated: new Date().toISOString(),
-    leden: [
-      { naam:'Mattéo', initialen:'MA', km:1452, laaste:'26 mrt' },
-      { naam:'Nico',   initialen:'NI', km:1181, laaste:'24 mrt' },
-      { naam:'Willem', initialen:'WI', km:781,  laaste:'22 mrt' },
-      { naam:'Jakob',  initialen:'JA', km:603,  laaste:'24 mrt' },
-      { naam:'Wout',   initialen:'WO', km:490,  laaste:'22 mrt' },
-      { naam:'Toon',   initialen:'TO', km:347,  laaste:'22 mrt' },
-      { naam:'Brico',  initialen:'BR', km:310,  laaste:'21 mrt' },
-      { naam:'Seba',   initialen:'SB', km:180,  laaste:'18 mrt' },
-      { naam:'Thibault',initialen:'TH',km:140,  laaste:'15 mrt' },
-      { naam:'Andreas', initialen:'AN',km:120,  laaste:'10 mrt' },
-      { naam:'Michel',  initialen:'MI',km:95,   laaste:'08 mrt' },
-      { naam:'Jérémie', initialen:'JE',km:0,    laaste:'—' },
-    ]
-  }, true);
+  toonData([
+    { naam:'Mattéo', initialen:'MA', km:1452, laaste:'26 mrt', totalElevation:12400, maxAvgSpeed:33.2, maxSpeed:62.1, longestRide:160, aantalRitten:22 },
+    { naam:'Nico',   initialen:'NI', km:1181, laaste:'24 mrt', totalElevation:9800,  maxAvgSpeed:31.8, maxSpeed:58.4, longestRide:130, aantalRitten:18 },
+    { naam:'Willem', initialen:'WI', km:781,  laaste:'22 mrt', totalElevation:7200,  maxAvgSpeed:29.4, maxSpeed:55.0, longestRide:112, aantalRitten:14 },
+    { naam:'Jakob',  initialen:'JA', km:603,  laaste:'24 mrt', totalElevation:5100,  maxAvgSpeed:28.1, maxSpeed:52.3, longestRide:98,  aantalRitten:11 },
+    { naam:'Wout',   initialen:'WO', km:490,  laaste:'22 mrt', totalElevation:4200,  maxAvgSpeed:27.6, maxSpeed:49.8, longestRide:87,  aantalRitten:9  },
+    { naam:'Toon',   initialen:'TO', km:347,  laaste:'22 mrt', totalElevation:2800,  maxAvgSpeed:26.9, maxSpeed:47.2, longestRide:72,  aantalRitten:7  },
+    { naam:'Brico',  initialen:'BR', km:310,  laaste:'21 mrt', totalElevation:2400,  maxAvgSpeed:32.1, maxSpeed:61.0, longestRide:65,  aantalRitten:6  },
+    { naam:'Seba',   initialen:'SB', km:180,  laaste:'18 mrt', totalElevation:1200,  maxAvgSpeed:25.4, maxSpeed:44.1, longestRide:48,  aantalRitten:4  },
+    { naam:'Thibault',initialen:'TH',km:140,  laaste:'15 mrt', totalElevation:900,   maxAvgSpeed:24.8, maxSpeed:42.6, longestRide:38,  aantalRitten:3  },
+    { naam:'Andreas', initialen:'AN',km:120,  laaste:'10 mrt', totalElevation:700,   maxAvgSpeed:23.2, maxSpeed:40.1, longestRide:32,  aantalRitten:3  },
+    { naam:'Michel',  initialen:'MI',km:95,   laaste:'08 mrt', totalElevation:500,   maxAvgSpeed:22.1, maxSpeed:38.4, longestRide:28,  aantalRitten:2  },
+    { naam:'Jérémie', initialen:'JE',km:0,    laaste:'—',      totalElevation:0,     maxAvgSpeed:0,    maxSpeed:0,    longestRide:0,   aantalRitten:0  },
+  ]);
 }
 
-function toonData(data, isDemo=false) {
+function toonData(leden) {
   document.getElementById('loadingSpinner').style.display = 'none';
   document.getElementById('kmHero').style.display = 'block';
-  document.getElementById('leaderCard').style.display = 'block';
-  document.getElementById('doelenCard').style.display = 'block';
+  document.getElementById('klassementCard').style.display = 'block';
   document.getElementById('fallbackDiv').style.display = 'block';
 
-  const km = data.totaalKm || 0;
-  const pct = Math.min((km / SEIZOEN_DOEL) * 100, 100);
-
+  const totaalKm = leden.reduce((s,l) => s + l.km, 0);
+  const pct = Math.min((totaalKm / SEIZOEN_DOEL) * 100, 100);
   const nu = new Date();
   const totaal = Math.round((SEIZOEN_EINDE - SEIZOEN_START) / 86400000);
   const verstreken = Math.max(0, Math.round((nu - SEIZOEN_START) / 86400000));
   const resterend = Math.max(0, totaal - verstreken);
-  const kmNodig = resterend > 0 ? Math.ceil((SEIZOEN_DOEL - km) / resterend) : 0;
+  const kmNodig = resterend > 0 ? Math.ceil((SEIZOEN_DOEL - totaalKm) / resterend) : 0;
 
-  document.getElementById('kmTotaal').textContent = km.toLocaleString('nl-BE') + ' km';
-  document.getElementById('kmSub').textContent = `${km.toLocaleString('nl-BE')} / ${SEIZOEN_DOEL.toLocaleString('nl-BE')} km (${pct.toFixed(1)}%)`;
+  document.getElementById('kmTotaal').textContent = totaalKm.toLocaleString('nl-BE') + ' km';
+  document.getElementById('kmSub').textContent = `${totaalKm.toLocaleString('nl-BE')} / ${SEIZOEN_DOEL.toLocaleString('nl-BE')} km (${pct.toFixed(1)}%)`;
   document.getElementById('kmDagen').textContent = `${verstreken} van de ${totaal} dagen (${((verstreken/totaal)*100).toFixed(1)}%)`;
-
   const bar = document.getElementById('kmBar');
   bar.style.width = pct.toFixed(1) + '%';
   bar.setAttribute('data-pct', pct.toFixed(1) + '%');
-
   document.getElementById('dagenVerstreken').textContent = verstreken;
   document.getElementById('dagenResterend').textContent = resterend;
   document.getElementById('kmPerDag').textContent = kmNodig;
+  document.getElementById('lastUpdate').textContent = `Laatste update: ${new Date().toLocaleDateString('nl-BE')} ${new Date().toLocaleTimeString('nl-BE',{hour:'2-digit',minute:'2-digit'})}`;
 
-  if (pct >= 100) document.getElementById('beerIcon').style.display = 'block';
+  // KM klassement
+  maakLeaderboard('list-km', leden,
+    l => l.km,
+    v => `${v.toLocaleString('nl-BE')} km`,
+    l => `Laatste rit: ${l.laaste}`
+  );
 
-  if (data.lastUpdated) {
-    const d = new Date(data.lastUpdated);
-    document.getElementById('lastUpdate').textContent =
-      `Laatste update: ${d.toLocaleDateString('nl-BE')} ${d.toLocaleTimeString('nl-BE',{hour:'2-digit',minute:'2-digit'})}` +
-      (isDemo ? ' · demo-modus' : '');
-  }
+  // Bergklassement
+  maakLeaderboard('list-berg', leden,
+    l => l.totalElevation,
+    v => `${v.toLocaleString('nl-BE')} hm`,
+    l => `Laatste rit: ${l.laaste}`
+  );
 
-  // Leaderboard
-  if (data.leden?.length) {
-    const sorted = [...data.leden].sort((a,b) => b.km - a.km);
-    const maxKm = sorted[0].km || 1;
-    const posKlasse = ['p1','p2','p3'];
-    const medals = ['🥇','🥈','🥉'];
-    document.getElementById('leaderList').innerHTML = sorted.map((lid, i) => {
-      const breedte = ((lid.km / maxKm)*100).toFixed(1);
-      const kleur = goudKleur(lid.km / maxKm);
-      const isLaatste = lid.km === 0;
-      return `
-        <div class="leader-row">
-          <div class="leader-pos ${posKlasse[i]||'pn'}">${medals[i] || (i+1)}</div>
-          <div style="flex:1">
-            <div style="display:flex;align-items:center;gap:6px">
-              <span class="leader-naam">${lid.naam}</span>
-              ${isLaatste ? '<span style="font-size:14px">🧹</span>' : '<span style="font-size:14px">🍺</span>'}
-            </div>
-            <div class="leader-sub">Laatste rit: ${lid.laaste || '—'}</div>
-            <div class="leader-bar-wrap" style="margin-top:4px">
-              <div class="leader-track">
-                <div class="leader-fill" style="width:${breedte}%;background:${kleur}"></div>
-              </div>
-            </div>
-          </div>
-          <div class="leader-km-val">${lid.km.toLocaleString('nl-BE')} km</div>
-        </div>`;
-    }).join('');
-  }
+  // Snelste rit (hoogste gem. snelheid)
+  maakLeaderboard('list-snelheid', leden,
+    l => l.maxAvgSpeed,
+    v => `${v.toFixed(1)} km/h`,
+    l => `Langste rit: ${l.longestRide > 0 ? l.longestRide.toFixed(0) + ' km' : '—'}`
+  );
 
-  // Doelstellingen
-  document.getElementById('doelenList').innerHTML = DOELEN_CONFIG.map(d => {
-    let status, tekst;
-    if (d.type === 'km') {
-      const p = (km/d.doel)*100;
-      status = p>=100?'behaald':p>0?'bezig':'open';
-      tekst = p>=100?'✓ Behaald':`${p.toFixed(1)}%`;
-    } else if (d.type === 'count') {
-      status = d.huidig>=d.doel?'behaald':d.huidig>0?'bezig':'open';
-      tekst = d.huidig>=d.doel?'✓ Behaald':`${d.huidig}/${d.doel}`;
-    } else {
-      status = d.huidig?'behaald':'open';
-      tekst = d.huidig?'✓ Behaald':'Open';
-    }
-    return `<div class="doel-row">
-      <div class="doel-icon">${d.icon}</div>
-      <div class="doel-tekst">${d.tekst}</div>
-      <div class="doel-badge ${status}">${tekst}</div>
-    </div>`;
-  }).join('');
+  // Topsnelheid
+  maakLeaderboard('list-top', leden,
+    l => l.maxSpeed,
+    v => `${v.toFixed(1)} km/h`,
+    l => `Laatste rit: ${l.laaste}`
+  );
+
+  // Ritten klassement
+  maakLeaderboard('list-ritten', leden,
+    l => l.aantalRitten,
+    v => `${v} ritten`,
+    l => `Langste rit: ${l.longestRide > 0 ? l.longestRide.toFixed(0) + ' km' : '—'}`
+  );
 }
 
 function toonFout() {
