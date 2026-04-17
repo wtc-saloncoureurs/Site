@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Navy achtergrond -->
+  <circle cx="50" cy="50" r="50" fill="#0f1f3d"/>
+  <!-- Schild vorm -->
+  <path d="M50 8 L85 22 L85 55 Q85 78 50 92 Q15 78 15 55 L15 22 Z"
+        fill="none" stroke="#d4a92a" stroke-width="3.5" stroke-linejoin="round"/>
+  <!-- WTC tekst -->
+  <text x="50" y="52" font-family="Arial, sans-serif" font-size="18"
+        font-weight="800" fill="#d4a92a" text-anchor="middle">WTC</text>
+  <!-- Kleine fietsers lijn -->
+  <path d="M32 62 Q50 58 68 62" fill="none" stroke="#d4a92a" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Pijl/pin onderaan -->
+  <path d="M44 72 L50 82 L56 72" fill="#d4a92a" opacity="0.8"/>
+</svg>
