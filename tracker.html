@@ -410,7 +410,7 @@ function toonData(leden) {
   maakLeaderboard('list-snelheid', leden,
     l => l.maxAvgSpeed,
     v => `${v.toFixed(1)} km/h`,
-    l => `Langste rit: ${l.longestRide > 0 ? l.longestRide.toFixed(0) + ' km' : '—'}`
+    l => `Gereden rit: ${l.longestRide > 0 ? l.longestRide.toFixed(0) + ' km' : '—'}`
   );
 
   // Topsnelheid
