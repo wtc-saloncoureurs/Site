@@ -12,6 +12,20 @@
   .tracker-error { display:none; background:var(--red-bg); border:0.5px solid rgba(224,90,90,0.25); border-radius:var(--radius); padding:16px 18px; font-size:13px; color:var(--red-fg); margin-bottom:12px; }
   .demo-banner { background:rgba(212,169,42,0.1); border:0.5px solid var(--border2); border-radius:var(--radius-sm); padding:8px 14px; font-size:12px; color:var(--text2); margin-bottom:12px; display:none; }
 
+  /* Seizoensbanner */
+  .seizoen-banner {
+    background:rgba(212,169,42,0.08);
+    border:0.5px solid var(--border2);
+    border-radius:var(--radius-sm);
+    padding:8px 14px;
+    font-size:12px;
+    color:var(--text2);
+    margin-bottom:10px;
+    text-align:center;
+    letter-spacing:.02em;
+  }
+  .seizoen-banner strong { color:var(--gold); }
+
   /* Km hero */
   .km-hero { background:var(--navy3); border:0.5px solid var(--border2); border-radius:var(--radius); padding:20px; margin-bottom:10px; }
   .km-hero-top { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
@@ -36,7 +50,7 @@
     background:var(--surface2);
     border-bottom:0.5px solid var(--border2);
     position:sticky;
-    top:52px; /* hoogte van topnav */
+    top:52px;
     z-index:50;
   }
   .subtab-btn {
@@ -131,13 +145,18 @@
     </div>
   </header>
 
+  <!-- Seizoensvermelding -->
+  <div class="seizoen-banner">
+    🚴 Alle statistieken in deze tracker zijn van toepassing op het <strong>seizoen 2026</strong> — vanaf 1 februari 2026.
+  </div>
+
   <div class="tracker-error" id="trackerError">
     ⚠️ Data kon niet geladen worden.
     <a href="https://wtc-saloncoureurs.web.app/" target="_blank" style="color:var(--red-fg);font-weight:600">Open de tracker app ↗</a>
   </div>
 
   <div class="demo-banner" id="demoBanner">
-    🔧 Demo-modus — live data volgt zodra Wout de extra velden opslaat in Firestore.
+    🔧 Demo-modus — live data wordt automatisch geladen via Strava.
   </div>
 
   <div id="trackerContent">
@@ -212,31 +231,31 @@
 
         <!-- Tab: KM klassement -->
         <div class="klassement-tab active" id="tab-km">
-          <div class="klassement-titel">🚴 Kilometers — seizoen</div>
+          <div class="klassement-titel">🚴 Kilometers — seizoen 2026</div>
           <div id="list-km"></div>
         </div>
 
         <!-- Tab: Bergklassement -->
         <div class="klassement-tab" id="tab-berg">
-          <div class="klassement-titel">⛰️ Bergklassement — totale hoogtemeters</div>
+          <div class="klassement-titel">⛰️ Bergklassement — totale hoogtemeters seizoen 2026</div>
           <div id="list-berg"></div>
         </div>
 
         <!-- Tab: Snelste rit -->
         <div class="klassement-tab" id="tab-snelheid">
-          <div class="klassement-titel">⚡ Snelste rit — hoogste gemiddelde snelheid</div>
+          <div class="klassement-titel">⚡ Snelste rit — hoogste gemiddelde snelheid seizoen 2026</div>
           <div id="list-snelheid"></div>
         </div>
 
         <!-- Tab: Topsnelheid -->
         <div class="klassement-tab" id="tab-top">
-          <div class="klassement-titel">🚀 Topsnelheid — hoogste geregistreerde snelheid</div>
+          <div class="klassement-titel">🚀 Topsnelheid — hoogste geregistreerde snelheid seizoen 2026</div>
           <div id="list-top"></div>
         </div>
 
         <!-- Tab: Ritten -->
         <div class="klassement-tab" id="tab-ritten">
-          <div class="klassement-titel">📅 Meeste ritten — aantal ritten dit seizoen</div>
+          <div class="klassement-titel">📅 Meeste ritten — aantal ritten seizoen 2026</div>
           <div id="list-ritten"></div>
         </div>
 
@@ -332,11 +351,15 @@ async function laadData() {
         initialen: ((f.firstname?.stringValue?.[0]||'') + (f.lastname?.stringValue?.[0]||'')).toUpperCase(),
         km: Math.round(parseFloat(f.totalKm?.doubleValue || f.totalKm?.integerValue || 0)),
         laaste: lastRide ? new Date(lastRide).toLocaleDateString('nl-BE',{day:'numeric',month:'short'}) : '—',
-        // Extra velden — beschikbaar zodra Wout ze opslaat
         totalElevation: Math.round(parseFloat(f.totalElevation?.doubleValue || f.totalElevation?.integerValue || 0)),
         maxAvgSpeed: parseFloat(f.maxAvgSpeed?.doubleValue || f.maxAvgSpeed?.integerValue || 0),
+        maxAvgSpeedDistance: parseFloat(f.maxAvgSpeedDistance?.doubleValue || f.maxAvgSpeedDistance?.integerValue || 0),
+        maxAvgSpeedDate: f.maxAvgSpeedDate?.stringValue || null,
         maxSpeed: parseFloat(f.maxSpeed?.doubleValue || f.maxSpeed?.integerValue || 0),
+        maxSpeedDistance: parseFloat(f.maxSpeedDistance?.doubleValue || f.maxSpeedDistance?.integerValue || 0),
+        maxSpeedDate: f.maxSpeedDate?.stringValue || null,
         longestRide: parseFloat(f.longestRide?.doubleValue || f.longestRide?.integerValue || 0),
+        longestRideDate: f.longestRideDate?.stringValue || null,
         aantalRitten: parseInt(f.aantalRitten?.integerValue || 0),
       };
     });
@@ -344,7 +367,6 @@ async function laadData() {
     toonData(leden);
   } catch(e) {
     console.error(e);
-    // Fallback naar demo
     toonDemo();
   }
 }
@@ -352,18 +374,18 @@ async function laadData() {
 function toonDemo() {
   document.getElementById('demoBanner').style.display = 'block';
   toonData([
-    { naam:'Mattéo', initialen:'MA', km:1452, laaste:'26 mrt', totalElevation:12400, maxAvgSpeed:33.2, maxSpeed:62.1, longestRide:160, aantalRitten:22 },
-    { naam:'Nico',   initialen:'NI', km:1181, laaste:'24 mrt', totalElevation:9800,  maxAvgSpeed:31.8, maxSpeed:58.4, longestRide:130, aantalRitten:18 },
-    { naam:'Willem', initialen:'WI', km:781,  laaste:'22 mrt', totalElevation:7200,  maxAvgSpeed:29.4, maxSpeed:55.0, longestRide:112, aantalRitten:14 },
-    { naam:'Jakob',  initialen:'JA', km:603,  laaste:'24 mrt', totalElevation:5100,  maxAvgSpeed:28.1, maxSpeed:52.3, longestRide:98,  aantalRitten:11 },
-    { naam:'Wout',   initialen:'WO', km:490,  laaste:'22 mrt', totalElevation:4200,  maxAvgSpeed:27.6, maxSpeed:49.8, longestRide:87,  aantalRitten:9  },
-    { naam:'Toon',   initialen:'TO', km:347,  laaste:'22 mrt', totalElevation:2800,  maxAvgSpeed:26.9, maxSpeed:47.2, longestRide:72,  aantalRitten:7  },
-    { naam:'Brico',  initialen:'BR', km:310,  laaste:'21 mrt', totalElevation:2400,  maxAvgSpeed:32.1, maxSpeed:61.0, longestRide:65,  aantalRitten:6  },
-    { naam:'Seba',   initialen:'SB', km:180,  laaste:'18 mrt', totalElevation:1200,  maxAvgSpeed:25.4, maxSpeed:44.1, longestRide:48,  aantalRitten:4  },
-    { naam:'Thibault',initialen:'TH',km:140,  laaste:'15 mrt', totalElevation:900,   maxAvgSpeed:24.8, maxSpeed:42.6, longestRide:38,  aantalRitten:3  },
-    { naam:'Andreas', initialen:'AN',km:120,  laaste:'10 mrt', totalElevation:700,   maxAvgSpeed:23.2, maxSpeed:40.1, longestRide:32,  aantalRitten:3  },
-    { naam:'Michel',  initialen:'MI',km:95,   laaste:'08 mrt', totalElevation:500,   maxAvgSpeed:22.1, maxSpeed:38.4, longestRide:28,  aantalRitten:2  },
-    { naam:'Jérémie', initialen:'JE',km:0,    laaste:'—',      totalElevation:0,     maxAvgSpeed:0,    maxSpeed:0,    longestRide:0,   aantalRitten:0  },
+    { naam:'Mattéo',  initialen:'MA', km:1452, laaste:'26 mrt', totalElevation:12400, maxAvgSpeed:33.2, maxAvgSpeedDistance:147, maxAvgSpeedDate:'14 mrt', maxSpeed:62.1, maxSpeedDistance:147, maxSpeedDate:'14 mrt', longestRide:160, longestRideDate:'20 mrt', aantalRitten:22 },
+    { naam:'Nico',    initialen:'NI', km:1181, laaste:'24 mrt', totalElevation:9800,  maxAvgSpeed:31.8, maxAvgSpeedDistance:130, maxAvgSpeedDate:'10 mrt', maxSpeed:58.4, maxSpeedDistance:130, maxSpeedDate:'10 mrt', longestRide:130, longestRideDate:'18 mrt', aantalRitten:18 },
+    { naam:'Willem',  initialen:'WI', km:781,  laaste:'22 mrt', totalElevation:7200,  maxAvgSpeed:29.4, maxAvgSpeedDistance:112, maxAvgSpeedDate:'08 mrt', maxSpeed:55.0, maxSpeedDistance:112, maxSpeedDate:'08 mrt', longestRide:112, longestRideDate:'15 mrt', aantalRitten:14 },
+    { naam:'Jakob',   initialen:'JA', km:603,  laaste:'24 mrt', totalElevation:5100,  maxAvgSpeed:28.1, maxAvgSpeedDistance:98,  maxAvgSpeedDate:'12 mrt', maxSpeed:52.3, maxSpeedDistance:98,  maxSpeedDate:'12 mrt', longestRide:98,  longestRideDate:'12 mrt', aantalRitten:11 },
+    { naam:'Wout',    initialen:'WO', km:490,  laaste:'22 mrt', totalElevation:4200,  maxAvgSpeed:27.6, maxAvgSpeedDistance:87,  maxAvgSpeedDate:'05 mrt', maxSpeed:49.8, maxSpeedDistance:87,  maxSpeedDate:'05 mrt', longestRide:87,  longestRideDate:'05 mrt', aantalRitten:9  },
+    { naam:'Toon',    initialen:'TO', km:347,  laaste:'22 mrt', totalElevation:2800,  maxAvgSpeed:26.9, maxAvgSpeedDistance:72,  maxAvgSpeedDate:'01 mrt', maxSpeed:47.2, maxSpeedDistance:72,  maxSpeedDate:'01 mrt', longestRide:72,  longestRideDate:'01 mrt', aantalRitten:7  },
+    { naam:'Brico',   initialen:'BR', km:310,  laaste:'21 mrt', totalElevation:2400,  maxAvgSpeed:32.1, maxAvgSpeedDistance:65,  maxAvgSpeedDate:'18 feb', maxSpeed:61.0, maxSpeedDistance:65,  maxSpeedDate:'18 feb', longestRide:65,  longestRideDate:'18 feb', aantalRitten:6  },
+    { naam:'Seba',    initialen:'SB', km:180,  laaste:'18 mrt', totalElevation:1200,  maxAvgSpeed:25.4, maxAvgSpeedDistance:48,  maxAvgSpeedDate:'15 feb', maxSpeed:44.1, maxSpeedDistance:48,  maxSpeedDate:'15 feb', longestRide:48,  longestRideDate:'15 feb', aantalRitten:4  },
+    { naam:'Thibault',initialen:'TH', km:140,  laaste:'15 mrt', totalElevation:900,   maxAvgSpeed:24.8, maxAvgSpeedDistance:38,  maxAvgSpeedDate:'10 feb', maxSpeed:42.6, maxSpeedDistance:38,  maxSpeedDate:'10 feb', longestRide:38,  longestRideDate:'10 feb', aantalRitten:3  },
+    { naam:'Andreas', initialen:'AN', km:120,  laaste:'10 mrt', totalElevation:700,   maxAvgSpeed:23.2, maxAvgSpeedDistance:32,  maxAvgSpeedDate:'05 feb', maxSpeed:40.1, maxSpeedDistance:32,  maxSpeedDate:'05 feb', longestRide:32,  longestRideDate:'05 feb', aantalRitten:3  },
+    { naam:'Michel',  initialen:'MI', km:95,   laaste:'08 mrt', totalElevation:500,   maxAvgSpeed:22.1, maxAvgSpeedDistance:28,  maxAvgSpeedDate:'02 feb', maxSpeed:38.4, maxSpeedDistance:28,  maxSpeedDate:'02 feb', longestRide:28,  longestRideDate:'02 feb', aantalRitten:2  },
+    { naam:'Jérémie', initialen:'JE', km:0,    laaste:'—',      totalElevation:0,     maxAvgSpeed:0,    maxAvgSpeedDistance:0,   maxAvgSpeedDate:null,     maxSpeed:0,    maxSpeedDistance:0,   maxSpeedDate:null,     longestRide:0,   longestRideDate:null,     aantalRitten:0  },
   ]);
 }
 
@@ -406,25 +428,37 @@ function toonData(leden) {
     l => `Laatste rit: ${l.laaste}`
   );
 
-  // Snelste rit (hoogste gem. snelheid)
+  // Snelste rit (hoogste gemiddelde snelheid)
   maakLeaderboard('list-snelheid', leden,
     l => l.maxAvgSpeed,
     v => `${v.toFixed(1)} km/h`,
-    l => `Gereden rit: ${l.longestRide > 0 ? l.longestRide.toFixed(0) + ' km' : '—'}`
+    l => {
+      const afstand = l.maxAvgSpeedDistance > 0 ? l.maxAvgSpeedDistance.toFixed(0) + ' km' : '—';
+      const datum = l.maxAvgSpeedDate || '—';
+      return `Snelste rit: ${afstand} — ${datum}`;
+    }
   );
 
   // Topsnelheid
   maakLeaderboard('list-top', leden,
     l => l.maxSpeed,
     v => `${v.toFixed(1)} km/h`,
-    l => `Laatste rit: ${l.laaste}`
+    l => {
+      const afstand = l.maxSpeedDistance > 0 ? l.maxSpeedDistance.toFixed(0) + ' km' : '—';
+      const datum = l.maxSpeedDate || '—';
+      return `Snelste rit: ${afstand} — ${datum}`;
+    }
   );
 
   // Ritten klassement
   maakLeaderboard('list-ritten', leden,
     l => l.aantalRitten,
     v => `${v} ritten`,
-    l => `Langste rit: ${l.longestRide > 0 ? l.longestRide.toFixed(0) + ' km' : '—'}`
+    l => {
+      const afstand = l.longestRide > 0 ? l.longestRide.toFixed(0) + ' km' : '—';
+      const datum = l.longestRideDate || '—';
+      return `Langste rit: ${afstand} — ${datum}`;
+    }
   );
 }
 
