@@ -325,16 +325,18 @@ function controleerAntwoord(gekozenKnop, isCorrect) {
     resultaatDiv.innerHTML = '<strong>✗ Fout...</strong> Hoewel dit een geldig excuus lijkt, is het juiste antwoord <strong>E</strong>. Bij Michel is het namelijk nooit één reden!';
   }
 }
-  // Seizoensdoelen — kilometers dynamisch laden uit Firestore
-(async () => {
+  (async () => {
   try {
     const res = await fetch(
-      'https://firestore.googleapis.com/v1/projects/wtc-saloncoureurs/databases/(default)/documents/club/totaal'
+      'https://firestore.googleapis.com/v1/projects/wtc-saloncoureurs/databases/(default)/documents/stats?pageSize=50'
     );
     if (!res.ok) return;
     const data = await res.json();
-    const f = data.fields || {};
-    const totaal = parseFloat( f.totalKm?.doubleValue ?? f.totalKm?.integerValue ?? f.totalKm?.stringValue ?? 0);
+    const docs = data.documents || [];
+    const totaal = docs.reduce((som, doc) => {
+      const f = doc.fields || {};
+      return som + parseFloat(f.totalKm?.doubleValue || f.totalKm?.integerValue || 0);
+    }, 0);
     const doel = 40000;
     const pct = Math.min((totaal / doel) * 100, 100);
     const afgerond = Math.round(totaal);
