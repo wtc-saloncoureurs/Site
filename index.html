@@ -233,16 +233,16 @@
     </div>
 
     <div class="card full">
-      <div class="card-title"><div class="dot dot-blue"></div> 🎯 Seizoensdoelen</div>
-      <div class="stat-row" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
-        <div class="stat-box">
-          <div class="stat-label">Kilometers</div>
-          <div class="stat-val">5.548 <span class="stat-unit">/ 40.000 km</span></div>
-          <div style="margin-top:6px;height:4px;background:var(--border);border-radius:2px">
-            <div style="width:13.9%;height:4px;background:var(--gold);border-radius:2px"></div>
-          </div>
-          <div style="font-size:11px;color:var(--text3);margin-top:3px">13,9%</div>
-        </div>
+  <div class="card-title"><div class="dot dot-blue"></div> 🎯 Seizoensdoelen</div>
+  <div class="stat-row" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
+    <div class="stat-box">
+      <div class="stat-label">Kilometers</div>
+      <div class="stat-val" id="seizoen-km">— <span class="stat-unit">/ 40.000 km</span></div>
+      <div style="margin-top:6px;height:4px;background:var(--border);border-radius:2px">
+        <div id="seizoen-km-bar" style="width:0%;height:4px;background:var(--gold);border-radius:2px"></div>
+      </div>
+      <div id="seizoen-km-pct" style="font-size:11px;color:var(--text3);margin-top:3px">—</div>
+    </div>
         <div class="stat-box">
           <div class="stat-label">Goede doelen</div>
           <div class="stat-val">0 <span class="stat-unit">/ 3</span></div>
@@ -325,6 +325,28 @@ function controleerAntwoord(gekozenKnop, isCorrect) {
     resultaatDiv.innerHTML = '<strong>✗ Fout...</strong> Hoewel dit een geldig excuus lijkt, is het juiste antwoord <strong>E</strong>. Bij Michel is het namelijk nooit één reden!';
   }
 }
+  // Seizoensdoelen — kilometers dynamisch laden uit Firestore
+(async () => {
+  try {
+    const res = await fetch(
+      'https://firestore.googleapis.com/v1/projects/wtc-saloncoureurs/databases/(default)/documents/club/totaal'
+    );
+    if (!res.ok) return;
+    const data = await res.json();
+    const f = data.fields || {};
+    const totaal = parseFloat(f.totalKm?.doubleValue || f.totalKm?.integerValue || 0);
+    const doel = 40000;
+    const pct = Math.min((totaal / doel) * 100, 100);
+    const afgerond = Math.round(totaal);
+
+    document.getElementById('seizoen-km').innerHTML =
+      `${afgerond.toLocaleString('nl-BE')} <span class="stat-unit">/ 40.000 km</span>`;
+    document.getElementById('seizoen-km-bar').style.width = pct.toFixed(1) + '%';
+    document.getElementById('seizoen-km-pct').textContent = pct.toFixed(1) + '%';
+  } catch (e) {
+    console.warn('Seizoensdoel km kon niet geladen worden:', e);
+  }
+})();
 </script>
 </body>
 </html>
