@@ -334,7 +334,7 @@ function controleerAntwoord(gekozenKnop, isCorrect) {
     if (!res.ok) return;
     const data = await res.json();
     const f = data.fields || {};
-    const totaal = parseFloat(f.totalKm?.doubleValue || f.totalKm?.integerValue || 0);
+    const totaal = parseFloat( f.totalKm?.doubleValue ?? f.totalKm?.integerValue ?? f.totalKm?.stringValue ?? 0);
     const doel = 40000;
     const pct = Math.min((totaal / doel) * 100, 100);
     const afgerond = Math.round(totaal);
