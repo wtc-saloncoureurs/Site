@@ -145,7 +145,6 @@
       <a href="galerij.html" class="active">Galerij</a>
       <a href="tracker.html">Tracker</a>
       <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank">Sociale Media ↗</a>
-      
     </div>
     <button class="nav-burger" onclick="toggleMenu()">☰</button>
   </div>
@@ -175,11 +174,42 @@
   <!-- Filter balk -->
   <div class="filter-bar" id="filterBar">
     <button class="filter-btn active" onclick="filterAlbums('all', this)">Alle</button>
+    <button class="filter-btn" onclick="filterAlbums('2026', this)">2026</button>
     <button class="filter-btn" onclick="filterAlbums('2025', this)">2025</button>
     <button class="filter-btn" onclick="filterAlbums('triathlon', this)">Triathlon</button>
     <button class="filter-btn" onclick="filterAlbums('tandem', this)">Tandem Rit</button>
     <button class="filter-btn" onclick="filterAlbums('vaderdag', this)">Vaderdagrit</button>
     <button class="filter-btn" onclick="filterAlbums('weekend', this)">Weekend</button>
+  </div>
+
+  <!-- ALBUM: Weekend 2026 -->
+  <div class="album" data-tags="2026 weekend">
+    <div class="album-header">
+      <div class="album-icon">🍻</div>
+      <div class="album-info">
+        <div class="album-titel">Weekend 2026</div>
+        <div class="album-sub">April 2026</div>
+      </div>
+      <div class="album-count"></div>
+    </div>
+    <div class="foto-grid">
+      <div class="foto-item" onclick="openLight(0, 'weekend2026')">
+        <img src="fotos/weekend2026-1.jpg" alt="Weekend 2026" loading="lazy">
+        <div class="foto-overlay"><div class="foto-label">Weekend 2026</div></div>
+      </div>
+      <div class="foto-item" onclick="openLight(1, 'weekend2026')">
+        <img src="fotos/weekend2026-2.jpg" alt="Weekend 2026" loading="lazy">
+        <div class="foto-overlay"><div class="foto-label">Weekend 2026</div></div>
+      </div>
+      <div class="foto-item" onclick="openLight(2, 'weekend2026')">
+        <img src="fotos/weekend2026-3.jpg" alt="Weekend 2026" loading="lazy">
+        <div class="foto-overlay"><div class="foto-label">Weekend 2026</div></div>
+      </div>
+      <div class="foto-item" onclick="openLight(3, 'weekend2026')">
+        <img src="fotos/weekend2026-4.jpg" alt="Weekend 2026" loading="lazy">
+        <div class="foto-overlay"><div class="foto-label">Weekend 2026</div></div>
+      </div>
+    </div>
   </div>
 
   <!-- ALBUM: Triathlon Kortrijk -->
@@ -278,28 +308,32 @@
     </div>
   </div>
 
-  <!-- ALBUM: Weekend -->
+  <!-- ALBUM: Weekend 2025 -->
   <div class="album" data-tags="2025 weekend">
     <div class="album-header">
       <div class="album-icon">🍻</div>
       <div class="album-info">
-        <div class="album-titel">Weekend</div>
+        <div class="album-titel">Weekend 2025</div>
         <div class="album-sub">April 2025</div>
       </div>
       <div class="album-count"></div>
     </div>
     <div class="foto-grid">
-      <div class="foto-item" onclick="openLight(0, 'weekend')">
+      <div class="foto-item" onclick="openLight(0, 'weekend2025')">
         <img src="fotos/weekend2025-1.jpg" alt="Weekend 2025" loading="lazy">
         <div class="foto-overlay"><div class="foto-label">Weekend 2025</div></div>
       </div>
-      <div class="foto-item" onclick="openLight(1, 'weekend')">
+      <div class="foto-item" onclick="openLight(1, 'weekend2025')">
         <img src="fotos/weekend2025-2.jpg" alt="Weekend 2025" loading="lazy">
         <div class="foto-overlay"><div class="foto-label">Weekend 2025</div></div>
       </div>
-      <div class="foto-item" onclick="openLight(2, 'weekend')">
+      <div class="foto-item" onclick="openLight(2, 'weekend2025')">
         <img src="fotos/weekend2025-3.jpg" alt="Weekend 2025" loading="lazy">
         <div class="foto-overlay"><div class="foto-label">Weekend 2025</div></div>
+      </div>
+      <div class="foto-item" onclick="openLight(3, 'weekend2025')">
+        <img src="fotos/fietsweekend2025-5.jpg" alt="Weekend 2025 extra" loading="lazy">
+        <div class="foto-overlay"><div class="foto-label">Weekend 2025 extra</div></div>
       </div>
     </div>
   </div>
@@ -344,18 +378,28 @@ const albums = {
     { src: 'fotos/vaderdagrit-1.jpg', cap: 'Vaderdagrit 2025' },
     { src: 'fotos/vaderdagrit-2.jpg', cap: 'Vaderdagrit 2025 nabespreking' },
   ],
-  weekend: [
+  weekend2025: [
     { src: 'fotos/weekend2025-1.jpg', cap: 'Weekend 2025' },
     { src: 'fotos/weekend2025-2.jpg', cap: 'Weekend 2025' },
     { src: 'fotos/weekend2025-3.jpg', cap: 'Weekend 2025' },
+    { src: 'fotos/weekend2025-5.jpg', cap: 'Weekend 2025 extra' },
+  ],
+  weekend2026: [
+    { src: 'fotos/weekend2026-1.jpg', cap: 'Weekend 2026' },
+    { src: 'fotos/weekend2026-2.jpg', cap: 'Weekend 2026' },
+    { src: 'fotos/weekend2026-3.jpg', cap: 'Weekend 2026' },
+    { src: 'fotos/weekend2026-4.jpg', cap: 'Weekend 2026' },
   ],
 };
 
 // Auto-tellen foto's per album
-document.querySelectorAll('.album').forEach(album => {
-  const count = album.querySelectorAll('.foto-item').length;
-  album.querySelector('.album-count').textContent = `${count} foto${count !== 1 ? "'s" : ''}`;
-});
+function updateCounts() {
+  document.querySelectorAll('.album').forEach(album => {
+    const count = album.querySelectorAll('.foto-item').length;
+    album.querySelector('.album-count').textContent = `${count} foto${count !== 1 ? "'s" : ''}`;
+  });
+}
+updateCounts();
 
 // Filter functie
 function filterAlbums(tag, btn) {
