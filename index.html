@@ -253,17 +253,11 @@
     </div>
 
     <div class="card full">
-      <div class="card-title"><div class="dot dot-purple"></div> 🤔 De Salon-Quiz</div>
-      <p style="font-size:14px;font-weight:500;margin-bottom:10px;color:var(--text)">Welke 'heroïsche' snelheid claimde Jakob deze maand in de statistieken?</p>
-      
-      <div id="quiz" style="display:flex;flex-direction:column;gap:8px">
-        <button class="quiz-opt" onclick="controleerAntwoord(this, false)">A) 32,7 km/u (tijdens het blokken)</button>
-        <button class="quiz-opt" onclick="controleerAntwoord(this, false)">B) 65 km/u (met rugwind)</button>
-        <button class="quiz-opt" data-correct="true" onclick="controleerAntwoord(this, true)">C) 118 km/u (waarschijnlijk op het autodak)</button>
-        <button class="quiz-opt" onclick="controleerAntwoord(this, false)">D) Lichtsneltijd</button>
+      <div class="card-title"><div class="dot dot-purple"></div> 🤔 Quiz</div>
+      <div style="margin-top: 15px; text-align: center;">
+        <img src="waar zijn de fietsen.jpg" alt="Waar zijn de fietsen?" style="width: 100%; max-width: 800px; border-radius: var(--radius-sm); border: 1px solid var(--border); display: block; margin: 0 auto;">
+        <p style="font-size: 13px; color: var(--text2); margin-top: 10px; font-style: italic;">Zoek de fietsen op deze foto...</p>
       </div>
-
-      <div id="quiz-result" style="display:none;margin-top:15px;padding:12px;border-radius:var(--radius-sm);font-size:14px; line-height: 1.4;"></div>
     </div>
 
     <div class="full">
@@ -281,35 +275,6 @@
 <script>
 function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
-}
-
-function controleerAntwoord(gekozenKnop, isCorrect) {
-  const alleKnoppen = document.querySelectorAll('.quiz-opt');
-  const resultaatDiv = document.getElementById('quiz-result');
-  
-  alleKnoppen.forEach(knop => {
-    knop.disabled = true;
-    if (knop.getAttribute('data-correct') === 'true') {
-      knop.classList.add('correct');
-    }
-  });
-
-  if (!isCorrect) {
-    gekozenKnop.classList.add('wrong');
-  }
-
-  resultaatDiv.style.display = 'block';
-  if (isCorrect) {
-    resultaatDiv.style.background = '#d4edda';
-    resultaatDiv.style.color = '#155724';
-    resultaatDiv.style.border = '1px solid #28a745';
-    resultaatDiv.innerHTML = '<strong>✓ Juist!</strong> 118 km/u... We vermoeden dat Jakob zijn Strava vergat uit te zetten in de auto. Of hij heeft hele snelle kuiten gekregen!';
-  } else {
-    resultaatDiv.style.background = '#f8d7da';
-    resultaatDiv.style.color = '#721c24';
-    resultaatDiv.style.border = '1px solid #dc3545';
-    resultaatDiv.innerHTML = '<strong>✗ Fout...</strong> Het juiste antwoord is <strong>C</strong>. De "hoogtemeter-fraude" was deze maand het gesprek van de dag.';
-  }
 }
 
 (async () => {
