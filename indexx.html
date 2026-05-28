@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="fotos/logo-transparant.png">
+<link rel="apple-touch-icon" href="fotos/logo-transparant.png">
+<title>De Saloncoureurs — Editie #3</title>
+<link rel="stylesheet" href="stijl.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" style="width:28px;height:28px;object-fit:contain;" alt="Logo">
+      De Saloncoureurs
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Homepage</a>
+      <a href="kalender.html">Kalender</a> 
+      <a href="leden.html">Leden</a>
+      <a href="statuten.html">Statuten</a>
+      <a href="galerij.html">Galerij</a>
+      <a href="tracker.html">Tracker</a>
+      <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank">Sociale Media ↗</a>
+    </div>
+    <button class="nav-burger" onclick="toggleMenu()">☰</button>
+  </div>
+  <div class="nav-mobile" id="mobileMenu">
+      <a href="index.html" class="active">Homepage</a>
+      <a href="kalender.html">Kalender</a> 
+      <a href="leden.html">Leden</a>
+      <a href="statuten.html">Statuten</a>
+      <a href="galerij.html">Galerij</a>
+      <a href="tracker.html">Tracker</a>
+      <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank">Sociale Media ↗</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <header class="site-header">
+    <div class="logo" style="background:var(--navy3);padding:4px;">
+      <img src="logo.png" style="width:44px;height:44px;object-fit:contain;" alt="Logo">
+    </div>
+    <div class="header-title">
+      <h1>De Saloncoureurs</h1>
+      <p>Site</p>
+    </div>
+    <div class="header-right">
+      <div class="edition-badge">#3 — Mei 2026</div>
+      <nav class="archive-nav">
+        <span class="archive-label">Editie:</span>
+        <a href="editie1.html">#1</a>
+        <a href="editie2.html">#2</a>
+        <a href="index.html" class="current">#3</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="meta-bar">
+    <div class="pill">🖋️ President: <strong>Willem</strong></div>
+    <div class="pill">🧢 Vicepresident: <strong>Lucas</strong></div>
+    <div class="pill">📅 <strong>Mei 2026</strong></div>
+    <div class="pill">💰 Kas: <strong style="color:var(--green-fg)">−€30</strong> <span style="font-size:11px;color:var(--text3); font-weight:normal;">(+€10 pot Wout)</span></div>
+  </div>
+
+  <div class="grid">
+
+    <!-- Terugblik & Vooruitblik -->
+    <div class="card full">
+      <div class="card-title"><div class="dot dot-blue"></div> Terugblik & Vooruitblik</div>
+      <div class="welcome-text">
+        <p style="margin-bottom: 15px;">
+          De maand mei begon moeizaam, maar zodra de temperaturen records begonnen te breken, deden de Saloncoureurs dat ook. We doen onze naam alle eer aan! 
+        </p>
+        <p style="margin-bottom: 15px;">
+          We mogen absoluut trots zijn op de prestaties van de afgelopen maand mei. Tegelijkertijd wensen we alle studenten (en iedereen die een extra duwtje in de rug kan gebruiken) ontzettend veel succes toe met de naderende examens en de blok in de maanden juni en juli.
+        </p>
+        <p>
+          Meer woorden hoeven we hier deze keer niet aan vuil te maken: scroll snel verder en geniet met volle teugen van deze derde officiële update van de site!
+        </p>
+      </div>
+    </div>
+
+    <!-- Prestaties van de maand -->
+    <div class="card">
+      <div class="card-title"><div class="dot dot-green"></div> Prestaties van de maand</div>
+      
+      <div style="font-size: 14px; font-weight: 700; color: var(--text1); margin: -5px 0 15px 24px; font-style: italic; letter-spacing: 0.3px;">
+        "Putting the COUREUR in saloncoureur"
+      </div>
+
+      <div class="renner">
+        <div class="avatar" style="background:var(--amber-bg);color:var(--amber-fg)">📺</div>
+        <div>
+          <div class="renner-name">De mannen van Eurosport</div>
+          <div class="renner-sub">Aangename kennismaking met het deskundige commentaar van Jeroen en Karsten tijdens deze Giro.</div>
+        </div>
+      </div>
+      
+      <div class="renner">
+        <div class="avatar" style="background:var(--blue-bg);color:var(--blue-fg)">🏃‍♂️</div>
+        <div>
+          <div class="renner-name">Jérémie is back</div>
+          <div class="renner-sub">Uit het niets knalde Jimmerie er zomaar even een marathon uit in mei! Kan hij deze vorm vasthouden richting juli?</div>
+        </div>
+      </div>
+      
+      <div class="renner">
+        <div class="avatar" style="background:var(--green-bg);color:var(--green-fg)">📚</div>
+        <div>
+          <div class="renner-name">Ritten Michel</div>
+          <div class="renner-sub">Slaagt er wonderwel in om tussen het blokken door tijd te vinden voor korte, maar uiterst krachtige ritjes.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- In de volgwagen -->
+    <div class="card">
+      <div class="card-title"><div class="dot dot-amber"></div> 📰 In de volgwagen</div>
+      
+      <div class="sanction">
+        <div class="s-name">2 Nieuwe Saloncoureurs! 🆕</div>
+        <div class="s-desc">We mochten deze maand niet één, maar twéé nieuwe renners introduceren. De verwachtingen zijn hooggespannen. Ideaal, want de ploeg kreeg al met heel wat blessures te maken; versterking in de breedte is welkom. Of degraderen zij de huidige kopmannen tot domestiques? <strong>Welkom, Gust en Dries!</strong></div>
+      </div>
+      
+      <div class="sanction">
+        <div class="s-name">Mysterieuze Afzeggingen 🤫</div>
+        <div class="s-desc">Er zijn deze maand afzeggingen gebeurd voor ritten die <em>nooit</em> gepland waren. Een statement tegen te weinig groepsritten? Slechte communicatie vanuit de voorzitters, of een gebrekkige boekhouding bij de coureurs? De renner in kwestie kon er niet van slapen en sprak om 03:00 uur 's nachts een cryptisch audiobericht in...</div>
+      </div>
+
+      <div class="sanction">
+        <div class="s-name">€10 in het potje (Wout) 💰</div>
+        <div class="s-desc">Als een van de weinigen was onze Wout van het begin tot het einde aanwezig bij de Dame Rouge. IJzersterk, net als zijn DJ-set! De dag erna zag hij echter flink af: de zondagsrit was hij compleet vergeten. De renners zijn dan maar naar zijn huis gereden om een herstelrit van 20 km te forceren... tot ze plots Café 21 tegenkwamen.</div>
+      </div>
+
+      <div class="sanction">
+        <div class="s-name">Club van 1.000 💯</div>
+        <div class="s-desc"><strong>Welkom Wout!</strong> De felbegeerde kaap is gerond. Zal het mooie zomerweer ervoor zorgen dat Toon, Andreas en zelfs Michel zich hier binnenkort ook bijvoegen?</div>
+      </div>
+
+      <div class="sanction" style="border-bottom:none;padding-bottom:0">
+        <div class="s-name">Grote vooruitgang! 📈</div>
+        <div class="s-desc">Tijdens de tweede helft van mei waren we ijzersterk. Naast de fiets (massaal gespot op de Sinksenfeesten) én op de fiets: meerdere groepsritten geregistreerd, waaronder één met maar liefst <strong>ZEVEN</strong> renners. Zalig! We komen blijkbaar pas echt los boven de 30 graden.</div>
+      </div>
+    </div>
+
+    <!-- Ziekenboeg -->
+    <div class="card">
+      <div class="card-title"><div class="dot dot-red"></div> 🤕 Ziekenboeg</div>
+      
+      <div class="sanction">
+        <div class="s-name">Jakob</div>
+        <div class="s-desc">Met succes geopereerd! Nu volgt een revalidatie van enkele weken vanuit de comfortabele tuinstoel, om daarna richting de Alpen te trekken en daar à la Wout van Aert aan de wederopbouw te beginnen. (En tussendoor nog even een examen en masterproef fixen).</div>
+        <div class="s-tag" style="background:var(--amber-bg);color:var(--amber-fg)">In herstel</div>
+      </div>
+      
+      <div class="sanction">
+        <div class="s-name">Lucas</div>
+        <div class="s-desc">Is alweer regelmatig op de weg te vinden! Hoewel het zeer explosieve werk nog ontbreekt, lijken de benen veelbelovend voor het najaar. Menig ego van de Saloncoureurs werd al stevig gekwetst in het wiel van deze renner in blessuretijd.</div>
+        <div class="s-tag" style="background:var(--green-bg);color:var(--green-fg)">Wederopbouw</div>
+      </div>
+      
+      <div class="sanction">
+        <div class="s-name">Seba</div>
+        <div class="s-desc">Herstellende van een vervelende liesbreuk. Het is nog enkele weken rustig aan doen om daarna weer gestaag aan de conditie te bouwen richting het najaar. Het ultieme doel? Keiharde revanche tijdens Kuurne-Brussel-Kuurne 2027!</div>
+        <div class="s-tag" style="background:var(--red-bg);color:var(--red-fg)">Lappenmand</div>
+      </div>
+
+      <div style="margin-top:20px; font-size:11px; color:var(--text3); text-align:right; font-style:italic;">
+        Redactie: Willem-Jan van Schip & Wout Thiers
+      </div>
+    </div>
+
+    <!-- Kalender -->
+    <div class="card">
+      <div class="card-title"><div class="dot dot-purple"></div> 📅 Kalender</div>
+      
+      <div class="event-item">
+        <div class="event-date"><div class="month">mei</div><div class="day">31</div></div>
+        <div class="event-info">
+          <div class="ev-title">Rikolto-rit</div>
+          <div class="ev-sub">08:30u — Goed doel rit in Heule (Dessert van mei)</div>
+        </div>
+      </div>
+      
+      <div class="event-item">
+        <div class="event-date"><div class="month">jun</div><div class="day">07</div></div>
+        <div class="event-info">
+          <div class="ev-title">Zondagsrit</div>
+          <div class="ev-sub">Verantwoordelijke: Toon</div>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="month">jun</div><div class="day">12</div></div>
+        <div class="event-info">
+          <div class="ev-title">Bardosrit / Vaderdagrit?</div>
+          <div class="ev-sub">12 t/m 14 juni — Verantwoordelijke: Wout</div>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="month">jun</div><div class="day">21</div></div>
+        <div class="event-info">
+          <div class="ev-title">Triathlon Kortrijk</div>
+          <div class="ev-sub">Supporters en atleten op post!</div>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="month">jun</div><div class="day">28</div></div>
+        <div class="event-info">
+          <div class="ev-title">Zondagsrit</div>
+          <div class="ev-sub">Verantwoordelijke: Lucas</div>
+        </div>
+      </div>
+      
+      <a href="kalender.html" style="display:block;margin-top:15px;text-align:center;font-size:13px;color:var(--blue-fg);text-decoration:none;font-weight:600;">Bekijk de volledige kalender →</a>
+    </div>
+
+    <!-- Ideeën voor originele ritten -->
+    <div class="card full">
+      <div class="card-title"><div class="dot dot-teal"></div>💡 Ideeën voor originele ritten</div>
+      <div style="padding: 5px 10px;">
+        <p style="font-size:13px; color:var(--text2); margin-bottom:15px; font-style:italic;">Is er enthousiasme om binnenkort eens wat originelere ritten op poten te zetten? Laat van je horen!</p>
+        <div class="stat-row" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
+          <div class="stat-box" style="text-align:left; padding:12px;">🥞 <strong>Ontbijtrit?</strong> <span style="font-size:11px; color:var(--text3); display:block; margin-top:4px;">(Mattéo aan de kar?)</span></div>
+          <div class="stat-box" style="text-align:left; padding:12px;">🤝 <strong>Teambuilding</strong> <span style="font-size:11px; color:var(--text3); display:block; margin-top:4px;">Of andere rittenopties</span></div>
+          <div class="stat-box" style="text-align:left; padding:12px;">🏆 <strong>Il Nikko d'oro</strong> <span style="font-size:11px; color:var(--text3); display:block; margin-top:4px;">Goudkuipje op de pedalen</span></div>
+          <div class="stat-box" style="text-align:left; padding:12px;">🍻 <strong>Omer- / caférit</strong> <span style="font-size:11px; color:var(--text3); display:block; margin-top:4px;">Hydratatie gegarandeerd</span></div>
+          <div class="stat-box" style="text-align:left; padding:12px;">🧢 <strong>Brouwerijrit</strong> <span style="font-size:11px; color:var(--text3); display:block; margin-top:4px;">Inclusief de petjesrit</span></div>
+          <div class="stat-box" style="text-align:left; padding:12px;">🌊 <strong>Weekendje zee?</strong> <span style="font-size:11px; color:var(--text3); display:block; margin-top:4px;">Uitwaaien met de ploeg</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Straffen en dopen -->
+    <div class="card">
+      <div class="card-title"><div class="dot dot-red"></div> ⚖️ Straffen en dopen</div>
+      <div class="sanction">
+        <div class="s-name">Jérémie</div>
+        <div class="s-desc">Strafblad / dossier is in de maak bij het tuchtcomité.</div>
+      </div>
+      <div class="sanction">
+        <div class="s-name">Jakob</div>
+        <div class="s-desc">Wordt medisch geëxcuseerd wegens revalidatieverlof?</div>
+      </div>
+      <div class="sanction" style="border-bottom:none;padding-bottom:0">
+        <div class="s-name">Officiële Clubdoop</div>
+        <div class="s-desc">Binnenkort op het menu voor <strong>Gust, Dries en Mattéo</strong>. Geen stress, jongens! 😉</div>
+      </div>
+    </div>
+
+    <!-- Seizoensdoelen -->
+    <div class="card full">
+      <div class="card-title"><div class="dot dot-blue"></div> 🎯 Seizoensdoelen</div>
+      <div class="stat-row" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
+        <div class="stat-box">
+          <div class="stat-label">Kilometers</div>
+          <div class="stat-val" id="seizoen-km">— <span class="stat-unit">/ 40.000 km</span></div>
+          <div style="margin-top:6px;height:4px;background:var(--border);border-radius:2px">
+            <div id="seizoen-km-bar" style="width:0%;height:4px;background:var(--gold);border-radius:2px"></div>
+          </div>
+          <div id="seizoen-km-pct" style="font-size:11px;color:var(--text3);margin-top:3px">Laden...</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Goede doelen</div>
+          <div class="stat-val">0 <span class="stat-unit">/ 3</span></div>
+          <div style="margin-top:6px;height:4px;background:var(--border);border-radius:2px">
+            <div style="width:0%;height:4px;background:var(--blue-fg);border-radius:2px"></div>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Groepsritten</div>
+          <div class="stat-val">6 <span class="stat-unit">/ 10</span></div>
+          <div style="margin-top:6px;height:4px;background:var(--border);border-radius:2px">
+            <div style="width:60%;height:4px;background:var(--green-fg);border-radius:2px"></div>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Voetbalstadia</div>
+          <div class="stat-val">0 <span class="stat-unit">/ 5</span></div>
+          <div style="margin-top:6px;height:4px;background:var(--border);border-radius:2px">
+            <div style="width:0%;height:4px;background:var(--purple-fg);border-radius:2px"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div style="margin-top:20px; padding:12px; background:var(--surface2); border-radius:var(--radius-sm); font-size:13px; border-left:4px solid var(--gold);">
+        <strong>Boodschap van de kopmannen:</strong> "Komaan boys, we zijn heel mooi op weg met enkele van onze doelen! De andere targets mogen we echter absoluut niet uit het oog verliezen!"
+      </div>
+    </div>
+
+    <!-- Quiz -->
+    <div class="card full">
+      <div class="card-title"><div class="dot dot-purple"></div> 🤔 Quiz: Routeplanning van Brico</div>
+      <div style="margin-top: 15px; padding: 0 10px;">
+        <p style="font-size:15px; font-weight:600; color:var(--text1); margin-bottom:10px;">
+          Vraag: Wat heeft Brico gemeen met onze zuiderburen?
+        </p>
+        
+        <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:15px;">
+          <div style="padding:10px 15px; background:var(--green-bg); border:1px solid var(--green-fg); border-radius:var(--radius-sm); font-size:13px; color:var(--text1);">
+            <strong>✅ Correct antwoord:</strong> Hij verwart grindwegen met goed geplaveid asfalt.
+          </div>
+          <div style="padding:10px 15px; background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); font-size:13px; color:var(--text2); font-style:italic;">
+            <strong>❌ Fout antwoord 1:</strong> [Nog toe te voegen optie]
+          </div>
+          <div style="padding:10px 15px; background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); font-size:13px; color:var(--text2); font-style:italic;">
+            <strong>❌ Fout antwoord 2:</strong> [Nog toe te voegen optie]
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quote van de maand -->
+    <div class="full">
+      <div class="quote">
+        <p>"De finale bevat veel bochten, dit moet iets zijn voor (Ben) Turner."</p>
+        <cite> - Jeroen van Eurosport</cite>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="site-footer">De Saloncoureurs &copy; 2026 · Site · Plaagstoten met liefde geschreven</footer>
+</div>
+
+<script>
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+(async () => {
+  try {
+    const res = await fetch('https://firestore.googleapis.com/v1/projects/wtc-saloncoureurs/databases/(default)/documents/stats?pageSize=50');
+    if (!res.ok) return;
+    const data = await res.json();
+    const docs = data.documents || [];
+    const totaal = docs.reduce((som, doc) => {
+      const f = doc.fields || {};
+      return som + parseFloat(f.totalKm?.doubleValue || f.totalKm?.integerValue || 0);
+    }, 0);
+    const doel = 40000;
+    const pct = Math.min((totaal / doel) * 100, 100);
+    const afgerond = Math.round(totaal);
+
+    document.getElementById('seizoen-km').innerHTML =
+      `${afgerond.toLocaleString('nl-BE')} <span class="stat-unit">/ 40.000 km</span>`;
+    document.getElementById('seizoen-km-bar').style.width = pct.toFixed(1) + '%';
+    document.getElementById('seizoen-km-pct').textContent = pct.toFixed(1) + '% voltooid';
+  } catch (e) {
+    console.warn('Seizoensdoel km kon niet geladen worden:', e);
+  }
+})();
+</script>
+</body>
+</html>
