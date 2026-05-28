@@ -52,11 +52,6 @@
       <a href="galerij.html">Galerij</a>
       <a href="tracker.html">Tracker</a>
       <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank">Sociale Media ↗</a>
-      <!-- Toegevoegd om op mobiel tussen edities/pagina's te wisselen -->
-      <div style="padding: 10px 15px; font-weight: bold; margin-top: 5px; border-top: 1px solid #ddd; color: #555;">Archief & Edities</div>
-      <a href="editie1.html">Editie #1</a>
-      <a href="editie2.html">Editie #2</a>
-      <a href="index.html" style="font-weight: bold;">Editie #3 (Huidig)</a>
   </div>
 </nav>
 
@@ -246,7 +241,7 @@
           <div class="stat-box" style="text-align:left; padding:12px;">🥞 <strong>Ontbijtrit?</strong> <span style="font-size:11px; color:var(--text3); display:block; margin-top:4px;">(Mattéo hint hint?)</span></div>
           <div class="stat-box" style="text-align:left; padding:12px;">🤝 <strong>Teambuilding</strong> <span style="font-size:11px; color:var(--text3); display:block; margin-top:4px;">Of andere rittenopties</span></div>
           <div class="stat-box" style="text-align:left; padding:12px;">🏆 <strong>Il Nikko d'oro</strong> <span style="font-size:11px; color:var(--text3); display:block; margin-top:4px;">Tonen wat we waard zijn</span></div>
-          <div class="stat-box" style="text-align:left; padding:12px;">🍻 <strong>Omer- / caférit</strong> <span style="font-size:11px; color:var(--text3); display:block; margin-top:4px;">Hydratatie gegarandeerd</span></div>
+         <div class="stat-box" style="text-align:left; padding:12px;">🍻 <strong>Omer- / caférit</strong> <span style="font-size:11px; color:var(--text3); display:block; margin-top:4px;">Hydratatie gegarandeerd</span></div>
           <div class="stat-box" style="text-align:left; padding:12px;">🧢 <strong>Brouwerijrit</strong> <span style="font-size:11px; color:var(--text3); display:block; margin-top:4px;">Lekker</span></div>
           <div class="stat-box" style="text-align:left; padding:12px;">🌊 <strong>Weekendje zee?</strong> <span style="font-size:11px; color:var(--text3); display:block; margin-top:4px;">Uitwaaien met de ploeg</span></div>
         </div>
@@ -294,7 +289,7 @@
         <div class="stat-box">
           <div class="stat-label">Goede doelen</div>
           <div class="stat-val">0 <span class="stat-unit">/ 3</span></div>
-          <div style="margin-top:6px;height:4px;background:var(--border);border-radius:2px">
+         <div style="margin-top:6px;height:4px;background:var(--border);border-radius:2px">
             <div style="width:0%;height:4px;background:var(--blue-fg);border-radius:2px"></div>
           </div>
         </div>
@@ -330,13 +325,12 @@
           <div class="quiz-option" data-correct="false" data-text="Voorliefde voor één Jupke of net wat meer" onclick="checkAnswer(this)" style="padding:10px 15px; background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); font-size:13px; color:var(--text1);">
             Voorliefde voor één Jupke of net wat meer
           </div>
-          <div class="quiz-option" data-correct="true" data-text="Goede wegen kent hij niet (bij het maken van een ritje)" onclick="checkAnswer(this)" style="padding:10px 15px; background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); font-size:13px; color:var(--text1);">
+         <div class="quiz-option" data-correct="true" data-text="Goede wegen kent hij niet (bij het maken van een ritje)" onclick="checkAnswer(this)" style="padding:10px 15px; background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); font-size:13px; color:var(--text1);">
             Goede wegen kent hij niet (bij het maken van een ritje)
           </div>
-          <div class="quiz-option" data-correct="false" data-text="Zegt Bonjour en geeft een kus aan elke collega op het werk" onclick="checkAnswer(this)" style="padding:10px 15px; background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); font-size:13px; color:var(--text1);">
+         <div class="quiz-option" data-correct="false" data-text="Zegt Bonjour en geeft een kus aan elke collega op het werk" onclick="checkAnswer(this)" style="padding:10px 15px; background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); font-size:13px; color:var(--text1);">
             Zegt Bonjour en geeft een kus aan elke collega op het werk
           </div>
-        </div>
       </div>
     </div>
 
@@ -359,7 +353,6 @@ function toggleMenu() {
 
 function checkAnswer(element) {
   const container = document.getElementById('quiz-container');
-  // Zorg ervoor dat er maar één keer geklikt kan worden
   if (container.classList.contains('answered')) return;
   container.classList.add('answered');
 
@@ -369,20 +362,17 @@ function checkAnswer(element) {
     const originalText = opt.getAttribute('data-text');
 
     if (isCorrect) {
-      // Het juiste antwoord wordt altijd helder groen
       opt.style.background = '#d4edda';
       opt.style.borderColor = '#c3e6cb';
-      opt.style.color = '#155724';
+      opt.style.color = '#155724';
       opt.innerHTML = '<strong>✅ Juist:</strong> ' + originalText;
     } else {
       if (opt === element) {
-        // Als het gekozen antwoord fout was, wordt deze helder rood
         opt.style.background = '#f8d7da';
         opt.style.borderColor = '#f5c6cb';
-        opt.style.color = '#721c24';
+        opt.style.color = '#721c24';
         opt.innerHTML = '<strong>❌ Fout:</strong> ' + originalText;
       } else {
-        // De overige foute opties vervagen lichtjes
         opt.style.opacity = '0.5';
       }
     }
