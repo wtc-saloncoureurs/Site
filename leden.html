@@ -7,93 +7,6 @@
 <link rel="apple-touch-icon" href="fotos/logo-transparant.png">
 <title>De Saloncoureurs — Leden</title>
 <link rel="stylesheet" href="stijl.css">
-<style>
-  /* Specifieke stijlen voor de Leden-grid */
-  .member-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 20px;
-    width: 100%;
-  }
-  
-  .member-card {
-    display: flex;
-    flex-direction: column;
-    background: var(--surface1, #fff);
-    border: 1px solid var(--border, #e2e8f0);
-    border-radius: var(--radius-sm, 8px);
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  
-  .member-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  }
-  
-  .member-img-container {
-    width: 100%;
-    height: 260px;
-    background: var(--surface2, #f1f5f9);
-    overflow: hidden;
-    position: relative;
-    border-bottom: 1px solid var(--border, #e2e8f0);
-  }
-  
-  .member-img-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-  
-  .member-details {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-  }
-  
-  .member-name {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--text1, #1e293b);
-    margin-bottom: 6px;
-  }
-  
-  .member-role-badge {
-    align-self: flex-start;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 12px;
-    margin-bottom: 12px;
-    letter-spacing: 0.5px;
-  }
-  
-  /* Kleurenschema badge overeenkomstig met bestaande CSS */
-  .role-president {
-    background: var(--red-bg, #fee2e2);
-    color: var(--red-fg, #ef4444);
-  }
-  
-  .role-vice {
-    background: var(--amber-bg, #fef3c7);
-    color: var(--amber-fg, #f59e0b);
-  }
-  
-  .role-renner {
-    background: var(--blue-bg, #dbeafe);
-    color: var(--blue-fg, #3b82f6);
-  }
-  
-  .member-bio {
-    font-size: 13px;
-    color: var(--text2, #475569);
-    line-height: 1.5;
-  }
-</style>
 </head>
 <body>
 
@@ -147,198 +60,146 @@
   </header>
 
   <div class="meta-bar">
-    <div class="pill">🚴‍♂️ Aantal Actieve Leden: <strong>14</strong></div>
-    <div class="pill">📈 Elite Niveau: <strong>100%</strong></div>
-    <div class="pill">🏁 Editie: <strong>#3 (Mei 2026)</strong></div>
+    <div class="pill">🖋️ President: <strong>Willem</strong></div>
+    <div class="pill">🧢 Vicepresident: <strong>Lucas</strong></div>
+    <div class="pill">🚴‍♂️ Totaal: <strong>14 Coureurs</strong></div>
   </div>
 
   <div class="grid">
 
-    <!-- Introductie van het peloton -->
+    <!-- Card: Het Bestuur -->
     <div class="card full">
-      <div class="card-title"><div class="dot dot-green"></div> Ons Peloton</div>
-      <div class="welcome-text">
-        <p>
-          Ontmoet de rasechte Flandriens van De Saloncoureurs. Van tactische meesterbreinen in de bestuurskamer tot ontembare kilometervreters en herstellende strijders in de ziekenboeg: dit is de ploeg die weer en wind trotseert (zolang de thermometer maar de dertig graden aantikt).
-        </p>
+      <div class="card-title"><div class="dot dot-blue"></div> Het Bestuur</div>
+      
+      <div class="renner">
+        <img src="fotos/willem.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=W'">
+        <div>
+          <div class="renner-name">Willem</div>
+          <div class="renner-sub">President / Algemene Leiding</div>
+        </div>
+      </div>
+
+      <div class="renner">
+        <img src="fotos/lucas.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=L'">
+        <div>
+          <div class="renner-name">Lucas</div>
+          <div class="renner-sub">Vicepresident / Tactisch Adviseur</div>
+        </div>
       </div>
     </div>
 
-    <!-- Leden Grid -->
+    <!-- Card: Het Peloton (De Renners) -->
     <div class="card full">
-      <div class="card-title"><div class="dot dot-blue"></div> Actieve Leden</div>
-      
-      <div class="member-grid" style="margin-top: 20px;">
-        
-        <!-- Willem (President) -->
-        <div class="member-card">
-          <div class="member-img-container">
-            <img src="fotos/willem.jpg" onerror="this.src='https://placehold.co/260x260/2E4D68/FFFFFF?text=Willem'" alt="Willem">
-          </div>
-          <div class="member-details">
-            <div class="member-name">Willem</div>
-            <span class="member-role-badge role-president">President / Bestuur</span>
-            <p class="member-bio">Onze gerespecteerde leider en rasechte Flandrien. Beheert de clubkas en tikt met veel liefde de updates van de site.</p>
-          </div>
-        </div>
+      <div class="card-title"><div class="dot dot-green"></div> Het Peloton</div>
 
-        <!-- Lucas (Vicepresident) -->
-        <div class="member-card">
-          <div class="member-img-container">
-            <img src="fotos/lucas.jpg" onerror="this.src='https://placehold.co/260x260/2E4D68/FFFFFF?text=Lucas'" alt="Lucas">
-          </div>
-          <div class="member-details">
-            <div class="member-name">Lucas</div>
-            <span class="member-role-badge role-vice">Vicepresident / Bestuur</span>
-            <p class="member-bio">Rechterhand van de president en tactisch vernuft. Rijdt in blessuretijd alweer de stenen uit de wielerbanen.</p>
-          </div>
+      <!-- NIEUW LID: Dries Ziad -->
+      <div class="renner">
+        <img src="fotos/IMG20260521184200.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=DZ'">
+        <div>
+          <div class="renner-name">Dries Ziad</div>
+          <div class="renner-sub">Renner (Nieuw lid)</div>
         </div>
-
-        <!-- NIEUW LID: Dries Ziad -->
-        <div class="member-card">
-          <div class="member-img-container">
-            <img src="fotos/IMG20260521184200.jpg" onerror="this.src='https://placehold.co/260x260/2E4D68/FFFFFF?text=Dries+Ziad'" alt="Dries Ziad">
-          </div>
-          <div class="member-details">
-            <div class="member-name">Dries Ziad</div>
-            <span class="member-role-badge role-renner">Renner (Nieuw!)</span>
-            <p class="member-bio">Kersverse versterking in de breedte. Slaagde er weliswaar al in twee ritten af te zeggen, maar de verwachtingen blijven torenhoog!</p>
-          </div>
-        </div>
-
-        <!-- NIEUW LID: Gust Theys -->
-        <div class="member-card">
-          <div class="member-img-container">
-            <img src="fotos/IMG20260525145740.jpg" onerror="this.src='https://placehold.co/260x260/2E4D68/FFFFFF?text=Gust+Theys'" alt="Gust Theys">
-          </div>
-          <div class="member-details">
-            <div class="member-name">Gust Theys</div>
-            <span class="member-role-badge role-renner">Renner (Nieuw!)</span>
-            <p class="member-bio">Nieuwe top-aanwinst. Staat te trappelen om de gevestigde kopmannen te degraderen tot trouwe domestiques.</p>
-          </div>
-        </div>
-
-        <!-- Wout -->
-        <div class="member-card">
-          <div class="member-img-container">
-            <img src="fotos/wout.jpg" onerror="this.src='https://placehold.co/260x260/2E4D68/FFFFFF?text=Wout'" alt="Wout">
-          </div>
-          <div class="member-details">
-            <div class="member-name">Wout</div>
-            <span class="member-role-badge role-renner">Renner</span>
-            <p class="member-bio">Koning van de Wielermanager, DJ bij Chasse Patate en trouwe fan van Dame Rouge. Soms ietwat vergeetachtig op zondagochtend.</p>
-          </div>
-        </div>
-
-        <!-- Jakob -->
-        <div class="member-card">
-          <div class="member-img-container">
-            <img src="fotos/jakob.jpg" onerror="this.src='https://placehold.co/260x260/2E4D68/FFFFFF?text=Jakob'" alt="Jakob">
-          </div>
-          <div class="member-details">
-            <div class="member-name">Jakob</div>
-            <span class="member-role-badge role-renner">Renner</span>
-            <p class="member-bio">Jin-leider, meester en lid van de Club van 1000. Revalideert momenteel vanuit de tuinstoel voor hij de Alpen temt.</p>
-          </div>
-        </div>
-
-        <!-- Michel -->
-        <div class="member-card">
-          <div class="member-img-container">
-            <img src="fotos/michel.jpg" onerror="this.src='https://placehold.co/260x260/2E4D68/FFFFFF?text=Michel'" alt="Michel">
-          </div>
-          <div class="member-details">
-            <div class="member-name">Michel</div>
-            <span class="member-role-badge role-renner">Renner</span>
-            <p class="member-bio">Blokker en snelheidsduivel. Combineert de boeken feilloos met flukse en uiterst krachtige trainingsritjes.</p>
-          </div>
-        </div>
-
-        <!-- Jérémie -->
-        <div class="member-card">
-          <div class="member-img-container">
-            <img src="fotos/jeremie.jpg" onerror="this.src='https://placehold.co/260x260/2E4D68/FFFFFF?text=J%C3%A9r%C3%A9mie'" alt="Jérémie">
-          </div>
-          <div class="member-details">
-            <div class="member-name">Jérémie</div>
-            <span class="member-role-badge role-renner">Renner</span>
-            <p class="member-bio">Lid van de 'comeback club'. Schudde in mei zomaar een marathon uit zijn mouwen. Klaar voor meer moois in juli!</p>
-          </div>
-        </div>
-
-        <!-- Seba -->
-        <div class="member-card">
-          <div class="member-img-container">
-            <img src="fotos/seba.jpg" onerror="this.src='https://placehold.co/260x260/2E4D68/FFFFFF?text=Seba'" alt="Seba">
-          </div>
-          <div class="member-details">
-            <div class="member-name">Seba</div>
-            <span class="member-role-badge role-renner">Renner</span>
-            <p class="member-bio">Momenteel rustig herstellende van een liesbreuk om sterker dan ooit terug te keren voor Kuurne-Brussel-Kuurne 2027.</p>
-          </div>
-        </div>
-
-        <!-- Mattéo -->
-        <div class="member-card">
-          <div class="member-img-container">
-            <img src="fotos/matteo.jpg" onerror="this.src='https://placehold.co/260x260/2E4D68/FFFFFF?text=Matt%C3%A9o'" alt="Mattéo">
-          </div>
-          <div class="member-details">
-            <div class="member-name">Mattéo</div>
-            <span class="member-role-badge role-renner">Renner</span>
-            <p class="member-bio">Op weg naar de triatlon van Warschau. Trainen, zweten en af en toe een stevige ontbijtrit plannen.</p>
-          </div>
-        </div>
-
-        <!-- Nico -->
-        <div class="member-card">
-          <div class="member-img-container">
-            <img src="fotos/nico.jpg" onerror="this.src='https://placehold.co/260x260/2E4D68/FFFFFF?text=Nico'" alt="Nico">
-          </div>
-          <div class="member-details">
-            <div class="member-name">Nico</div>
-            <span class="member-role-badge role-renner">Renner</span>
-            <p class="member-bio">Stille, ijzersterke kracht van het peloton en een van de trotse pioniers in de Club van 1000.</p>
-          </div>
-        </div>
-
-        <!-- Toon -->
-        <div class="member-card">
-          <div class="member-img-container">
-            <img src="fotos/toon.jpg" onerror="this.src='https://placehold.co/260x260/2E4D68/FFFFFF?text=Toon'" alt="Toon">
-          </div>
-          <div class="member-details">
-            <div class="member-name">Toon</div>
-            <span class="member-role-badge role-renner">Renner</span>
-            <p class="member-bio">Verantwoordelijke voor menig zondagsrit en altijd op zoek naar die extra, uitdagende kilometers.</p>
-          </div>
-        </div>
-
-        <!-- Andreas -->
-        <div class="member-card">
-          <div class="member-img-container">
-            <img src="fotos/andreas.jpg" onerror="this.src='https://placehold.co/260x260/2E4D68/FFFFFF?text=Andreas'" alt="Andreas">
-          </div>
-          <div class="member-details">
-            <div class="member-name">Andreas</div>
-            <span class="member-role-badge role-renner">Renner</span>
-            <p class="member-bio">Trapt vrolijk door weer en wind, met de blik gericht op zijn intrede in de felbegeerde Club van 1000.</p>
-          </div>
-        </div>
-
-        <!-- Brico -->
-        <div class="member-card">
-          <div class="member-img-container">
-            <img src="fotos/brico.jpg" onerror="this.src='https://placehold.co/260x260/2E4D68/FFFFFF?text=Brico'" alt="Brico">
-          </div>
-          <div class="member-details">
-            <div class="member-name">Brico</div>
-            <span class="member-role-badge role-renner">Renner</span>
-            <p class="member-bio">Verwart met de glimlach grindwegen met biljartvlak asfalt. Routeplanner met een avontuurlijk randje.</p>
-          </div>
-        </div>
-
       </div>
+
+      <!-- NIEUW LID: Gust Theys -->
+      <div class="renner">
+        <img src="fotos/IMG20260525145740.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=GT'">
+        <div>
+          <div class="renner-name">Gust Theys</div>
+          <div class="renner-sub">Renner (Nieuw lid)</div>
+        </div>
+      </div>
+
+      <!-- Wout -->
+      <div class="renner">
+        <img src="fotos/wout.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=W'">
+        <div>
+          <div class="renner-name">Wout</div>
+          <div class="renner-sub">Renner / Wielermanager Expert</div>
+        </div>
+      </div>
+
+      <!-- Jakob -->
+      <div class="renner">
+        <img src="fotos/jakob.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=J'">
+        <div>
+          <div class="renner-name">Jakob</div>
+          <div class="renner-sub">Renner / Jin-leider & Influencer</div>
+        </div>
+      </div>
+
+      <!-- Michel -->
+      <div class="renner">
+        <img src="fotos/michel.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=M'">
+        <div>
+          <div class="renner-name">Michel</div>
+          <div class="renner-sub">Renner / Blokker op herhaling</div>
+        </div>
+      </div>
+
+      <!-- Jérémie -->
+      <div class="renner">
+        <img src="fotos/jeremie.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=J'">
+        <div>
+          <div class="renner-name">Jérémie</div>
+          <div class="renner-sub">Renner / Marathonman</div>
+        </div>
+      </div>
+
+      <!-- Seba -->
+      <div class="renner">
+        <img src="fotos/seba.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=S'">
+        <div>
+          <div class="renner-name">Seba</div>
+          <div class="renner-sub">Renner / KBK 2027 Project</div>
+        </div>
+      </div>
+
+      <!-- Mattéo -->
+      <div class="renner">
+        <img src="fotos/matteo.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=M'">
+        <div>
+          <div class="renner-name">Mattéo</div>
+          <div class="renner-sub">Renner / Triatleet in Warschau</div>
+        </div>
+      </div>
+
+      <!-- Nico -->
+      <div class="renner">
+        <img src="fotos/nico.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=N'">
+        <div>
+          <div class="renner-name">Nico</div>
+          <div class="renner-sub">Renner / Club van 1000 Pionier</div>
+        </div>
+      </div>
+
+      <!-- Toon -->
+      <div class="renner">
+        <img src="fotos/toon.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=T'">
+        <div>
+          <div class="renner-name">Toon</div>
+          <div class="renner-sub">Renner / Ritverantwoordelijke</div>
+        </div>
+      </div>
+
+      <!-- Andreas -->
+      <div class="renner">
+        <img src="fotos/andreas.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=A'">
+        <div>
+          <div class="renner-name">Andreas</div>
+          <div class="renner-sub">Renner / Kilometerjager</div>
+        </div>
+      </div>
+
+      <!-- Brico -->
+      <div class="renner">
+        <img src="fotos/brico.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=B'">
+        <div>
+          <div class="renner-name">Brico</div>
+          <div class="renner-sub">Renner / Grindweg Fanaat</div>
+        </div>
+      </div>
+
     </div>
 
   </div>
