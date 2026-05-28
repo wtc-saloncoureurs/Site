@@ -3,22 +3,81 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" href="fotos/logo-transparant.png">
-<link rel="apple-touch-icon" href="fotos/logo-transparant.png">
 <title>De Saloncoureurs — Leden</title>
 <link rel="stylesheet" href="stijl.css">
+<style>
+  .leden-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+  }
+  .lid-card {
+    position: relative;
+    width: 180px;
+    height: 280px;
+    border-radius: 12px;
+    border: 2px solid #d4a92a;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 15px;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
+  }
+  .lid-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+    border-color: #f1c40f;
+  }
+  .lid-card::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60%;
+    background: linear-gradient(transparent, rgba(0,0,0,0.85));
+    z-index: 1;
+  }
+  .lid-naam, .lid-bijnaam, .lid-functie {
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  }
+  .lid-naam { font-weight: bold; font-size: 1.1rem; margin-bottom: 2px; }
+  .lid-bijnaam { font-style: italic; font-size: 0.9rem; opacity: 0.9; margin-bottom: 5px; }
+  .lid-functie {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: rgba(212,169,42,0.2);
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .lid-functie.grijs { color: #ccc; }
+  .lid-functie.groen { color: #2ecc71; }
+</style>
 </head>
 <body>
 
 <nav class="topnav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-      <img src="logo.png" style="width:28px;height:28px;object-fit:contain;" alt="Logo">
+      <img src="logo.png" style="width:28px;height:28px;object-fit:contain;">
       De Saloncoureurs
     </a>
     <div class="nav-links">
       <a href="index.html">Homepage</a>
-      <a href="kalender.html">Kalender</a> 
+      <a href="kalender.html">Kalender</a>
       <a href="leden.html" class="active">Leden</a>
       <a href="statuten.html">Statuten</a>
       <a href="galerij.html">Galerij</a>
@@ -28,13 +87,13 @@
     <button class="nav-burger" onclick="toggleMenu()">☰</button>
   </div>
   <div class="nav-mobile" id="mobileMenu">
-      <a href="index.html">Homepage</a>
-      <a href="kalender.html">Kalender</a> 
-      <a href="leden.html" class="active">Leden</a>
-      <a href="statuten.html">Statuten</a>
-      <a href="galerij.html">Galerij</a>
-      <a href="tracker.html">Tracker</a>
-      <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank">Sociale Media ↗</a>
+    <a href="index.html">Homepage</a>
+    <a href="kalender.html">Kalender</a>
+    <a href="leden.html" class="active">Leden</a>
+    <a href="statuten.html">Statuten</a>
+    <a href="galerij.html">Galerij</a>
+    <a href="tracker.html">Tracker</a>
+    <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank">Sociale Media ↗</a>
   </div>
 </nav>
 
@@ -42,169 +101,105 @@
 
   <header class="site-header">
     <div class="logo" style="background:var(--navy3);padding:4px;">
-      <img src="logo.png" style="width:44px;height:44px;object-fit:contain;" alt="Logo">
+      <img src="logo.png" style="width:44px;height:44px;object-fit:contain;">
     </div>
     <div class="header-title">
       <h1>De Saloncoureurs</h1>
-      <p>Leden</p>
-    </div>
-    <div class="header-right">
-      <div class="edition-badge">#3 — Mei 2026</div>
-      <nav class="archive-nav">
-        <span class="archive-label">Editie:</span>
-        <a href="editie1.html">#1</a>
-        <a href="editie2.html">#2</a>
-        <a href="index.html" class="current">#3</a>
-      </nav>
+      <p>Het Peloton</p>
     </div>
   </header>
 
-  <div class="meta-bar">
-    <div class="pill">🖋️ President: <strong>Willem</strong></div>
-    <div class="pill">🧢 Vicepresident: <strong>Lucas</strong></div>
-    <div class="pill">🚴‍♂️ Totaal: <strong>14 Coureurs</strong></div>
-  </div>
-
   <div class="grid">
-
-    <!-- Card: Het Bestuur -->
     <div class="card full">
-      <div class="card-title"><div class="dot dot-blue"></div> Het Bestuur</div>
-      
-      <div class="renner">
-        <img src="fotos/willem.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=W'">
-        <div>
-          <div class="renner-name">Willem</div>
-          <div class="renner-sub">President / Algemene Leiding</div>
-        </div>
-      </div>
+      <div class="leden-grid">
 
-      <div class="renner">
-        <img src="fotos/lucas.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=L'">
-        <div>
-          <div class="renner-name">Lucas</div>
-          <div class="renner-sub">Vicepresident / Tactisch Adviseur</div>
+        <div class="lid-card" style="background-image: url('fotos/Willem_profiel.jpg');">
+          <div class="lid-naam">Willem Vanden Bussche</div>
+          <div class="lid-bijnaam">"Wieltjeszuiger"</div>
+          <div class="lid-functie">Voorzitter</div>
         </div>
+
+        <div class="lid-card" style="background-image: url('fotos/Lucas_profiel.jpg');">
+          <div class="lid-naam">Lucas Saenen</div>
+          <div class="lid-bijnaam">"Achilles"</div>
+          <div class="lid-functie">Vice-voorzitter</div>
+        </div>
+
+        <div class="lid-card" style="background-image: url('fotos/Andreas_profiel.jpg');">
+          <div class="lid-naam">Andreas De Meester</div>
+          <div class="lid-bijnaam">"Pépé André"</div>
+          <div class="lid-functie groen">CEO</div>
+        </div>
+
+        <div class="lid-card" style="background-image: url('fotos/jakob_profiel.jpg');">
+          <div class="lid-naam">Jakob Vanden Bussche</div>
+          <div class="lid-bijnaam">"Mr. Hernia"</div>
+          <div class="lid-functie groen">Junior Marketeer & Oppositie</div>
+        </div>
+
+        <div class="lid-card" style="background-image: url('fotos/Wout_profiel.jpg');">
+          <div class="lid-naam">Wout Thiers</div>
+          <div class="lid-bijnaam">"Wouter Tuinkabouter"</div>
+          <div class="lid-functie groen">IT-team</div>
+        </div>
+
+        <div class="lid-card" style="background-image: url('fotos/Nicolas_profiel.jpg');">
+          <div class="lid-naam">Nicolas Van Iseghem</div>
+          <div class="lid-bijnaam">"Brico"</div>
+          <div class="lid-functie groen">Oppositielid</div>
+        </div>
+
+        <div class="lid-card" style="background-image: url('fotos/Michel_profiel.jpg');">
+          <div class="lid-naam">Michel Vandewalle</div>
+          <div class="lid-bijnaam">"In-house Alec Segaert"</div>
+          <div class="lid-functie grijs">Renner</div>
+        </div>
+
+        <div class="lid-card" style="background-image: url('fotos/Toon_profiel.jpg');">
+          <div class="lid-naam">Toon Vandenberghe</div>
+          <div class="lid-bijnaam">"Ron Weasly"</div>
+          <div class="lid-functie grijs">Renner</div>
+        </div>
+
+        <div class="lid-card" style="background-image: url('fotos/Thibault_profiel.jpeg');">
+          <div class="lid-naam">Thibault Ghekiere</div>
+          <div class="lid-bijnaam">"Kuurneboy"</div>
+          <div class="lid-functie grijs">Renner</div>
+        </div>
+
+        <div class="lid-card" style="background-image: url('fotos/sebastien_profiel.jpg');">
+          <div class="lid-naam">Sébastien Van Belleghem</div>
+          <div class="lid-bijnaam">"Dokteur"</div>
+          <div class="lid-functie grijs">Renner</div>
+        </div>
+
+        <div class="lid-card" style="background-image: url('fotos/Jeremie_profiel.jpg');">
+          <div class="lid-naam">Jérémie Flamen</div>
+          <div class="lid-bijnaam">"Labberleuter"</div>
+          <div class="lid-functie grijs">Renner</div>
+        </div>
+
+        <div class="lid-card" style="background-image: url('fotos/Matteo_profiel.jpg');">
+          <div class="lid-naam">Mattéo De Ridder</div>
+          <div class="lid-bijnaam">"Triatleet"</div>
+          <div class="lid-functie grijs">Renner</div>
+        </div>
+
+        <div class="lid-card" style="background-image: url('fotos/IMG20260521184200.jpg');">
+          <div class="lid-naam">Dries Ziad</div>
+          <div class="lid-functie grijs">Renner</div>
+        </div>
+
+        <div class="lid-card" style="background-image: url('fotos/IMG20260525145740.jpg');">
+          <div class="lid-naam">Gust Theys</div>
+          <div class="lid-functie grijs">Renner</div>
+        </div>
+
       </div>
     </div>
-
-    <!-- Card: Het Peloton (De Renners) -->
-    <div class="card full">
-      <div class="card-title"><div class="dot dot-green"></div> Het Peloton</div>
-
-      <!-- NIEUW LID: Dries Ziad -->
-      <div class="renner">
-        <img src="fotos/IMG20260521184200.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=DZ'">
-        <div>
-          <div class="renner-name">Dries Ziad</div>
-          <div class="renner-sub">Renner (Nieuw lid)</div>
-        </div>
-      </div>
-
-      <!-- NIEUW LID: Gust Theys -->
-      <div class="renner">
-        <img src="fotos/IMG20260525145740.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=GT'">
-        <div>
-          <div class="renner-name">Gust Theys</div>
-          <div class="renner-sub">Renner (Nieuw lid)</div>
-        </div>
-      </div>
-
-      <!-- Wout -->
-      <div class="renner">
-        <img src="fotos/wout.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=W'">
-        <div>
-          <div class="renner-name">Wout</div>
-          <div class="renner-sub">Renner / Wielermanager Expert</div>
-        </div>
-      </div>
-
-      <!-- Jakob -->
-      <div class="renner">
-        <img src="fotos/jakob.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=J'">
-        <div>
-          <div class="renner-name">Jakob</div>
-          <div class="renner-sub">Renner / Jin-leider & Influencer</div>
-        </div>
-      </div>
-
-      <!-- Michel -->
-      <div class="renner">
-        <img src="fotos/michel.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=M'">
-        <div>
-          <div class="renner-name">Michel</div>
-          <div class="renner-sub">Renner / Blokker op herhaling</div>
-        </div>
-      </div>
-
-      <!-- Jérémie -->
-      <div class="renner">
-        <img src="fotos/jeremie.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=J'">
-        <div>
-          <div class="renner-name">Jérémie</div>
-          <div class="renner-sub">Renner / Marathonman</div>
-        </div>
-      </div>
-
-      <!-- Seba -->
-      <div class="renner">
-        <img src="fotos/seba.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=S'">
-        <div>
-          <div class="renner-name">Seba</div>
-          <div class="renner-sub">Renner / KBK 2027 Project</div>
-        </div>
-      </div>
-
-      <!-- Mattéo -->
-      <div class="renner">
-        <img src="fotos/matteo.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=M'">
-        <div>
-          <div class="renner-name">Mattéo</div>
-          <div class="renner-sub">Renner / Triatleet in Warschau</div>
-        </div>
-      </div>
-
-      <!-- Nico -->
-      <div class="renner">
-        <img src="fotos/nico.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=N'">
-        <div>
-          <div class="renner-name">Nico</div>
-          <div class="renner-sub">Renner / Club van 1000 Pionier</div>
-        </div>
-      </div>
-
-      <!-- Toon -->
-      <div class="renner">
-        <img src="fotos/toon.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=T'">
-        <div>
-          <div class="renner-name">Toon</div>
-          <div class="renner-sub">Renner / Ritverantwoordelijke</div>
-        </div>
-      </div>
-
-      <!-- Andreas -->
-      <div class="renner">
-        <img src="fotos/andreas.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=A'">
-        <div>
-          <div class="renner-name">Andreas</div>
-          <div class="renner-sub">Renner / Kilometerjager</div>
-        </div>
-      </div>
-
-      <!-- Brico -->
-      <div class="renner">
-        <img src="fotos/brico.jpg" class="avatar" style="object-fit:cover;" onerror="this.src='https://placehold.co/44x44/2E4D68/FFFFFF?text=B'">
-        <div>
-          <div class="renner-name">Brico</div>
-          <div class="renner-sub">Renner / Grindweg Fanaat</div>
-        </div>
-      </div>
-
-    </div>
-
   </div>
 
-  <footer class="site-footer">De Saloncoureurs &copy; 2026 · Site · Plaagstoten met liefde geschreven</footer>
+  <footer class="site-footer">De Saloncoureurs &copy; 2026</footer>
 </div>
 
 <script>
