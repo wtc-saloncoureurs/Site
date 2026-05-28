@@ -3,10 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" href="fotos/logo-transparant.png">
+<link class="nav-logo" rel="icon" type="image/png" href="fotos/logo-transparant.png">
 <link rel="apple-touch-icon" href="fotos/logo-transparant.png">
 <title>De Saloncoureurs — Editie #3</title>
 <link rel="stylesheet" href="stijl.css">
+<style>
+  /* Stijlen voor de interactieve quiz */
+  .quiz-option {
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .quiz-option:hover {
+    opacity: 0.85;
+    border-color: var(--text3, #888) !important;
+  }
+  #quiz-container.answered .quiz-option {
+    cursor: default !important;
+  }
+  #quiz-container.answered .quiz-option:hover {
+    opacity: 1 !important;
+  }
+</style>
 </head>
 <body>
 
@@ -68,7 +85,6 @@
 
   <div class="grid">
 
-    <!-- Terugblik & Vooruitblik -->
     <div class="card full">
       <div class="card-title"><div class="dot dot-blue"></div> Terugblik & Vooruitblik</div>
       <div class="welcome-text">
@@ -76,7 +92,7 @@
           De maand mei begon moeizaam, maar zodra de temperaturen records begonnen te breken, deden de Saloncoureurs dat ook. We doen onze naam alle eer aan! 
         </p>
         <p style="margin-bottom: 15px;">
-          We mogen absoluut trots zijn op de prestaties van de afgelopen maand mei. Tegelijkertijd wensen we alle studenten (en iedereen die een extra duwtje in de rug kan gebruiken) ontzettend veel succes toe met de naderende examens en de blok in de maanden juni en juli.
+          We mogen absoluut trots zijn op de prestaties van de afgelopen maand mei. Tegelijkertijd wensen we alle studenten (en iedereen die een extra duwtje in de rug kan gebruiken) ontzettend veel succes toe met de naderende examens en de blok in de maanden juni i juli.
         </p>
         <p>
           Meer woorden hoeven we hier deze keer niet aan vuil te maken: scroll snel verder en geniet met volle teugen van deze derde officiële update van de site!
@@ -84,10 +100,9 @@
       </div>
     </div>
 
-    <!-- Prestaties van de maand -->
     <div class="card">
       <div class="card-title"><div class="dot dot-green"></div> Prestaties van de maand</div>
-      
+       
       <div style="font-size: 14px; font-weight: 700; color: var(--text1); margin: -5px 0 15px 24px; font-style: italic; letter-spacing: 0.3px;">
         "Putting the COUREUR in saloncoureur"
       </div>
@@ -99,7 +114,7 @@
           <div class="renner-sub">Aangename kennismaking met het deskundige commentaar van Jeroen en Karsten tijdens deze Giro.</div>
         </div>
       </div>
-      
+       
       <div class="renner">
         <div class="avatar" style="background:var(--blue-bg);color:var(--blue-fg)">🏃‍♂️</div>
         <div>
@@ -107,7 +122,7 @@
           <div class="renner-sub">Uit het niets knalde Jimmerie er zomaar even een marathon uit in mei! Kan hij deze vorm vasthouden richting juli?</div>
         </div>
       </div>
-      
+       
       <div class="renner">
         <div class="avatar" style="background:var(--green-bg);color:var(--green-fg)">📚</div>
         <div>
@@ -117,15 +132,14 @@
       </div>
     </div>
 
-    <!-- In de volgwagen -->
     <div class="card">
       <div class="card-title"><div class="dot dot-amber"></div> 📰 In de volgwagen</div>
-      
+       
       <div class="sanction">
         <div class="s-name">2 Nieuwe Saloncoureurs! 🆕</div>
         <div class="s-desc">We mochten deze maand niet één, maar twéé nieuwe renners introduceren. De verwachtingen zijn hooggespannen. Ideaal, want de ploeg kreeg al met heel wat blessures te maken; versterking in de breedte is welkom. Of degraderen zij de huidige kopmannen tot domestiques? <strong>Welkom, Gust en Dries!</strong></div>
       </div>
-      
+       
       <div class="sanction">
         <div class="s-name">Mysterieuze Afzeggingen 🤫</div>
         <div class="s-desc">Er zijn deze maand afzeggingen gebeurd voor ritten die <em>nooit</em> gepland waren. Een statement tegen te weinig groepsritten? Slechte communicatie vanuit de voorzitters, of een gebrekkige boekhouding bij de coureurs? De renner in kwestie kon er niet van slapen en sprak om 03:00 uur 's nachts een cryptisch audiobericht in...</div>
@@ -147,22 +161,21 @@
       </div>
     </div>
 
-    <!-- Ziekenboeg -->
     <div class="card">
       <div class="card-title"><div class="dot dot-red"></div> 🤕 Ziekenboeg</div>
-      
+       
       <div class="sanction">
         <div class="s-name">Jakob</div>
         <div class="s-desc">Met succes geopereerd! Nu volgt een revalidatie van enkele weken vanuit de comfortabele tuinstoel, om daarna richting de Alpen te trekken en daar à la Wout van Aert aan de wederopbouw te beginnen. (En tussendoor nog even een examen en masterproef fixen).</div>
         <div class="s-tag" style="background:var(--amber-bg);color:var(--amber-fg)">In herstel</div>
       </div>
-      
+       
       <div class="sanction">
         <div class="s-name">Lucas</div>
         <div class="s-desc">Is alweer regelmatig op de weg te vinden! Hoewel het zeer explosieve werk nog ontbreekt, lijken de benen veelbelovend voor het najaar. Menig ego van de Saloncoureurs werd al stevig gekwetst in het wiel van deze renner in blessuretijd.</div>
         <div class="s-tag" style="background:var(--green-bg);color:var(--green-fg)">Wederopbouw</div>
       </div>
-      
+       
       <div class="sanction">
         <div class="s-name">Seba</div>
         <div class="s-desc">Herstellende van een vervelende liesbreuk. Het is nog enkele weken rustig aan doen om daarna weer gestaag aan de conditie te bouwen richting het najaar. Het ultieme doel? Keiharde revanche tijdens Kuurne-Brussel-Kuurne 2027!</div>
@@ -174,10 +187,9 @@
       </div>
     </div>
 
-    <!-- Kalender -->
     <div class="card">
       <div class="card-title"><div class="dot dot-purple"></div> 📅 Kalender</div>
-      
+       
       <div class="event-item">
         <div class="event-date"><div class="month">mei</div><div class="day">31</div></div>
         <div class="event-info">
@@ -185,7 +197,7 @@
           <div class="ev-sub">08:30u — Goed doel rit in Heule (Dessert van mei)</div>
         </div>
       </div>
-      
+       
       <div class="event-item">
         <div class="event-date"><div class="month">jun</div><div class="day">07</div></div>
         <div class="event-info">
@@ -217,11 +229,10 @@
           <div class="ev-sub">Verantwoordelijke: Lucas</div>
         </div>
       </div>
-      
+       
       <a href="kalender.html" style="display:block;margin-top:15px;text-align:center;font-size:13px;color:var(--blue-fg);text-decoration:none;font-weight:600;">Bekijk de volledige kalender →</a>
     </div>
 
-    <!-- Ideeën voor originele ritten -->
     <div class="card full">
       <div class="card-title"><div class="dot dot-teal"></div>💡 Ideeën voor originele ritten</div>
       <div style="padding: 5px 10px;">
@@ -237,7 +248,6 @@
       </div>
     </div>
 
-    <!-- Straffen en dopen -->
     <div class="card">
       <div class="card-title"><div class="dot dot-red"></div> ⚖️ Straffen en dopen</div>
       <div class="sanction">
@@ -254,7 +264,6 @@
       </div>
     </div>
 
-    <!-- Seizoensdoelen -->
     <div class="card full">
       <div class="card-title"><div class="dot dot-blue"></div> 🎯 Seizoensdoelen</div>
       <div class="stat-row" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
@@ -288,35 +297,33 @@
           </div>
         </div>
       </div>
-      
+       
       <div style="margin-top:20px; padding:12px; background:var(--surface2); border-radius:var(--radius-sm); font-size:13px; border-left:4px solid var(--gold);">
         <strong>Boodschap van de kopmannen:</strong> "Komaan boys, we zijn heel mooi op weg met enkele van onze doelen! De andere targets mogen we echter absoluut niet uit het oog verliezen!"
       </div>
     </div>
 
-    <!-- Quiz -->
     <div class="card full">
       <div class="card-title"><div class="dot dot-purple"></div> 🤔 Quiz: Routeplanning van Brico</div>
       <div style="margin-top: 15px; padding: 0 10px;">
         <p style="font-size:15px; font-weight:600; color:var(--text1); margin-bottom:10px;">
           Vraag: Wat heeft Brico gemeen met onze zuiderburen?
         </p>
-        
-        <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:15px;">
-          <div style="padding:10px 15px; background:var(--green-bg); border:1px solid var(--green-fg); border-radius:var(--radius-sm); font-size:13px; color:var(--text1);">
-            <strong>✅ Correct antwoord:</strong> Goede wegen kent hij niet (bij het maken van een ritje)
+         
+        <div id="quiz-container" style="display:flex; flex-direction:column; gap:8px; margin-bottom:15px;">
+          <div class="quiz-option" data-correct="false" data-text="Voorliefde voor één Jupke of net wat meer" onclick="checkAnswer(this)" style="padding:10px 15px; background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); font-size:13px; color:var(--text1);">
+            Voorliefde voor één Jupke of net wat meer
           </div>
-          <div style="padding:10px 15px; background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); font-size:13px; color:var(--text2); font-style:italic;">
-            <strong>❌ Fout antwoord 1:</strong> Voorliefde voor één Jupke of net wat meer
+          <div class="quiz-option" data-correct="true" data-text="Goede wegen kent hij niet (bij het maken van een ritje)" onclick="checkAnswer(this)" style="padding:10px 15px; background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); font-size:13px; color:var(--text1);">
+            Goede wegen kent hij niet (bij het maken van een ritje)
           </div>
-          <div style="padding:10px 15px; background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); font-size:13px; color:var(--text2); font-style:italic;">
-            <strong>❌ Fout antwoord 2:</strong> Zegt Bonjout en geeft een kus aan elke collega op het werk
+          <div class="quiz-option" data-correct="false" data-text="Zegt Bonjout en geeft een kus aan elke collega op het werk" onclick="checkAnswer(this)" style="padding:10px 15px; background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); font-size:13px; color:var(--text1);">
+            Zegt Bonjout en geeft een kus aan elke collega op het werk
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Quote van de maand -->
     <div class="full">
       <div class="quote">
         <p>"De finale bevat veel bochten, dit moet iets zijn voor (Ben) Turner."</p>
@@ -334,28 +341,35 @@ function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
 }
 
+function checkAnswer(element) {
+  const container = document.getElementById('quiz-container');
+  // Zorg ervoor dat er maar één keer geklikt kan worden
+  if (container.classList.contains('answered')) return;
+  container.classList.add('answered');
+
+  const options = container.querySelectorAll('.quiz-option');
+  options.forEach(opt => {
+    const isCorrect = opt.getAttribute('data-correct') === 'true';
+    const originalText = opt.getAttribute('data-text');
+
+    if (isCorrect) {
+      // Het juiste antwoord wordt altijd groen
+      opt.style.background = 'var(--green-bg)';
+      opt.style.borderColor = 'var(--green-fg)';
+      opt.innerHTML = '<strong>✅ Correct antwoord:</strong> ' + originalText;
+    } else {
+      if (opt === element) {
+        // Als het gekozen antwoord fout was, wordt deze rood
+        opt.style.background = 'var(--red-bg, #fde8e8)';
+        opt.style.borderColor = 'var(--red-fg, #f8b4b4)';
+        opt.innerHTML = '<strong>❌ Fout antwoord:</strong> ' + originalText;
+      } else {
+        // De overige foute opties vervagen lichtjes
+        opt.style.opacity = '0.5';
+      }
+    }
+  });
+}
+
 (async () => {
   try {
-    const res = await fetch('https://firestore.googleapis.com/v1/projects/wtc-saloncoureurs/databases/(default)/documents/stats?pageSize=50');
-    if (!res.ok) return;
-    const data = await res.json();
-    const docs = data.documents || [];
-    const totaal = docs.reduce((som, doc) => {
-      const f = doc.fields || {};
-      return som + parseFloat(f.totalKm?.doubleValue || f.totalKm?.integerValue || 0);
-    }, 0);
-    const doel = 40000;
-    const pct = Math.min((totaal / doel) * 100, 100);
-    const afgerond = Math.round(totaal);
-
-    document.getElementById('seizoen-km').innerHTML =
-      `${afgerond.toLocaleString('nl-BE')} <span class="stat-unit">/ 40.000 km</span>`;
-    document.getElementById('seizoen-km-bar').style.width = pct.toFixed(1) + '%';
-    document.getElementById('seizoen-km-pct').textContent = pct.toFixed(1) + '% voltooid';
-  } catch (e) {
-    console.warn('Seizoensdoel km kon niet geladen worden:', e);
-  }
-})();
-</script>
-</body>
-</html>
