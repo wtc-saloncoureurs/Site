@@ -350,35 +350,28 @@ function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
 }
 
-function checkAnswer(element) {
-  const container = document.getElementById('quiz-container');
-  // Zorg ervoor dat er maar één keer geklikt kan worden
-  if (container.classList.contains('answered')) return;
-  container.classList.add('answered');
+(async () => {
+  try {
+    const res = await fetch('https://firestore.googleapis.com/v1/projects/wtc-saloncoureurs/databases/(default)/documents/stats?pageSize=50');
+    if (!res.ok) return;
+    const data = await res.json();
+    const docs = data.documents || [];
+    const totaal = docs.reduce((som, doc) => {
+      const f = doc.fields || {};
+      return som + parseFloat(f.totalKm?.doubleValue || f.totalKm?.integerValue || 0);
+    }, 0);
+    const doel = 40000;
+    const pct = Math.min((totaal / doel) * 100, 100);
+    const afgerond = Math.round(totaal);
 
-  const options = container.querySelectorAll('.quiz-option');
-  options.forEach(opt => {
-    const isCorrect = opt.getAttribute('data-correct') === 'true';
-    const originalText = opt.getAttribute('data-text');
-
-    if (isCorrect) {
-      // Het juiste antwoord wordt altijd groen
-      opt.style.background = 'var(--green-bg)';
-      opt.style.borderColor = 'var(--green-fg)';
-      opt.innerHTML = '<strong>✅ Correct antwoord:</strong> ' + originalText;
-    } else {
-      if (opt === element) {
-        // Als het gekozen antwoord fout was, wordt deze rood
-        opt.style.background = 'var(--red-bg, #fde8e8)';
-        opt.style.borderColor = 'var(--red-fg, #f8b4b4)';
-        opt.innerHTML = '<strong>❌ Fout antwoord:</strong> ' + originalText;
-      } else {
-        // De overige foute opties vervagen lichtjes
-        opt.style.opacity = '0.5';
-      }
-    }
-  });
-}
+    document.getElementById('seizoen-km').innerHTML =
+      `${afgerond.toLocaleString('nl-BE')} <span class="stat-unit">/ 40.000 km</span>`;
+    document.getElementById('seizoen-km-bar').style.width = pct.toFixed(1) + '%';
+    document.getElementById('seizoen-km-pct').textContent = pct.toFixed(1) + '% voltooid';
+  } catch (e) {
+    console.warn('Seizoensdoel km kon niet geladen worden:', e);
+  }
+})();
 </script>
 </body>
 </html>
