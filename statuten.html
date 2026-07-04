@@ -138,7 +138,7 @@
 <nav class="topnav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-      <img src="logo.png" style="width:28px;height:28px;object-fit:contain;">
+      <img src="logo.png" class="sc-crest" style="width:28px;height:28px;object-fit:contain;" alt="Logo">
       De Saloncoureurs
     </a>
     <div class="nav-links">
@@ -163,7 +163,17 @@
   </div>
 </nav>
 
+<!-- Nieuwsticker (gevuld via sc-animaties.js) -->
+<div class="sc-ticker" id="scTicker"></div>
+
 <div class="page">
+
+  <header class="masthead sc-intro">
+    <div class="mast-kicker sc-rise1">WTC Saloncoureurs · Seizoen 2026</div>
+    <h1 class="mast-title sc-rise2">De Saloncoureurs</h1>
+    <div class="mast-sub sc-rise3">Statuten & reglement</div>
+  </header>
+
 
   <!-- Statuut header -->
   <div class="statuten-header">
@@ -341,10 +351,6 @@
   <footer class="site-footer">De Saloncoureurs &copy; 2026</footer>
 </div>
 
-<script>
-function toggleMenu() {
-  document.getElementById('mobileMenu').classList.toggle('open');
-}
-</script>
+<script src="sc-animaties.js"></script>
 </body>
 </html>
