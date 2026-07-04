@@ -27,21 +27,21 @@
   .seizoen-banner strong { color:var(--gold); }
 
   /* Km hero */
-  .km-hero { background:var(--navy3); border:0.5px solid var(--border2); border-radius:var(--radius); padding:20px; margin-bottom:10px; }
-  .km-hero-top { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
-  .km-hero-icon { font-size:32px; }
-  .km-hero-label { font-size:13px; color:var(--text2); font-weight:600; text-transform:uppercase; letter-spacing:.05em; }
-  .km-hero-val { font-size:42px; font-weight:800; color:var(--gold); line-height:1; margin-top:2px; }
-  .km-hero-sub { font-size:13px; color:var(--text2); margin-top:4px; }
-  .progress-track-hero { height:18px; background:var(--surface2); border-radius:9px; overflow:hidden; border:1px solid var(--border2); }
+  .km-hero { background:var(--navy); border:1px solid rgba(243,194,89,0.28); border-radius:var(--radius); padding:26px 22px 20px; margin-bottom:10px; text-align:center; }
+  .km-hero-top { display:flex; flex-direction:column; align-items:center; gap:2px; margin-bottom:16px; }
+  .km-hero-icon { font-size:34px; margin-bottom:4px; }
+  .km-hero-label { font-size:12px; color:#9fb0c5; font-weight:700; text-transform:uppercase; letter-spacing:.14em; }
+  .km-hero-val { font-family:var(--serif); font-size:clamp(40px,7vw,54px); font-weight:800; color:var(--gold-bright); line-height:1; margin-top:6px; }
+  .km-hero-sub { font-size:13px; color:#9fb0c5; margin-top:6px; }
+  .progress-track-hero { height:18px; background:rgba(255,255,255,0.12); border-radius:9px; overflow:hidden; border:1px solid rgba(255,255,255,0.16); }
   .progress-fill-hero { height:18px; border-radius:9px; background:linear-gradient(to right,#fdf3d0,#f0c84a,#d4a92a,#a07010,#6b4a08); transition:width .8s ease; position:relative; }
   .progress-fill-hero::after { content:attr(data-pct); position:absolute; right:8px; top:50%; transform:translateY(-50%); font-size:11px; font-weight:700; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,0.6); }
-  .progress-labels-hero { display:flex; justify-content:space-between; font-size:11px; color:var(--text2); }
+  .progress-labels-hero { display:flex; justify-content:space-between; font-size:11px; color:#9fb0c5; }
   .dagen-bar { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
-  .dagen-item { flex:1; min-width:80px; background:var(--surface2); border-radius:var(--radius-sm); padding:10px; text-align:center; border:0.5px solid var(--border); }
-  .dagen-val { font-size:22px; font-weight:700; color:var(--gold); }
-  .dagen-label { font-size:10px; color:var(--text2); margin-top:2px; text-transform:uppercase; letter-spacing:.04em; }
-  .last-update { font-size:11px; color:var(--text2); text-align:right; margin-top:10px; }
+  .dagen-item { flex:1; min-width:80px; background:rgba(255,255,255,0.06); border-radius:var(--radius-sm); padding:10px; text-align:center; border:1px solid rgba(255,255,255,0.12); }
+  .dagen-val { font-size:22px; font-weight:700; color:var(--gold-bright); }
+  .dagen-label { font-size:10px; color:#9fb0c5; margin-top:2px; text-transform:uppercase; letter-spacing:.04em; }
+  .last-update { font-size:11px; color:#8090a5; text-align:right; margin-top:10px; }
 
   /* ── Sticky subtab balk ── */
   .klassement-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:10px; }
@@ -103,6 +103,14 @@
 
   .fallback-link { display:inline-block; margin-top:4px; font-size:12px; color:var(--gold); text-decoration:none; padding:6px 14px; border:0.5px solid var(--border2); border-radius:var(--radius-sm); background:var(--gold-pale); }
   .fallback-link:hover { opacity:.8; }
+  /* ── Records per discipline ── */
+  .records-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-bottom:10px; }
+  .record-box { background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:16px 14px; text-align:center; transition:transform .25s ease, box-shadow .25s ease; }
+  .record-box:hover { transform:translateY(-3px); box-shadow:0 10px 22px rgba(22,36,60,.10); }
+  .record-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--gold); margin-bottom:8px; }
+  .record-val { font-family:var(--serif); font-size:26px; font-weight:700; color:var(--text); line-height:1; }
+  .record-val .unit { font-size:13px; font-weight:400; color:var(--text2); font-family:var(--sans); }
+  .record-who { font-family:var(--serif); font-style:italic; font-size:13px; color:var(--text2); margin-top:8px; }
 </style>
 </head>
 <body>
@@ -134,7 +142,6 @@
     <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank">Sociale Media ↗</a>
   </div>
 </nav>
-
 <!-- Nieuwsticker (gevuld via sc-animaties.js) -->
 <div class="sc-ticker" id="scTicker"></div>
 
@@ -205,6 +212,9 @@
       </div>
       <div class="last-update" id="lastUpdate"></div>
     </div>
+
+    <!-- Records per discipline -->
+    <div class="records-grid" id="recordsGrid" style="display:none"></div>
 
     <!-- Klassement kaart met subtabs -->
     <div class="klassement-card" id="klassementCard" style="display:none">
@@ -341,6 +351,29 @@ function maakLeaderboard(containerId, leden, veldFn, eenheidFn, subFn) {
   }).join('');
 }
 
+function topHouder(leden, veldFn) {
+  const s = [...leden].filter(l => veldFn(l) > 0).sort((a,b) => veldFn(b) - veldFn(a));
+  return s[0] || null;
+}
+
+function vulRecords(leden) {
+  const komma = v => v.toFixed(1).replace('.', ',');
+  const defs = [
+    { icon:'🚴',  label:'Kilometers',    veld:l=>l.km,             fmt:v=>`${v.toLocaleString('nl-BE')} <span class="unit">km</span>` },
+    { icon:'⛰️', label:'Hoogtemeters',  veld:l=>l.totalElevation, fmt:v=>`${v.toLocaleString('nl-BE')} <span class="unit">hm</span>` },
+    { icon:'⚡',  label:'Snelste rit',   veld:l=>l.maxAvgSpeed,    fmt:v=>`${komma(v)} <span class="unit">km/u</span>` },
+    { icon:'🚀',  label:'Topsnelheid',   veld:l=>l.maxSpeed,       fmt:v=>`${komma(v)} <span class="unit">km/u</span>` },
+    { icon:'📅',  label:'Meeste ritten', veld:l=>l.aantalRitten,   fmt:v=>`${v} <span class="unit">ritten</span>` },
+  ];
+  const grid = document.getElementById('recordsGrid');
+  grid.innerHTML = defs.map(d => {
+    const w = topHouder(leden, d.veld);
+    if (!w) return `<div class="record-box"><div class="record-label">${d.icon} ${d.label}</div><div class="record-val">—</div><div class="record-who">nog geen data</div></div>`;
+    return `<div class="record-box"><div class="record-label">${d.icon} ${d.label}</div><div class="record-val">${d.fmt(d.veld(w))}</div><div class="record-who">${w.naam}</div></div>`;
+  }).join('');
+  grid.style.display = 'grid';
+}
+
 async function laadData() {
   try {
     const statsRes = await fetch(`${FIRESTORE_BASE}/stats?pageSize=50`);
@@ -422,6 +455,7 @@ function toonData(leden) {
     scRunCount(el);
   });
   scPeloton(document.getElementById('pelotonWrap'), pct);
+  vulRecords(leden);
   document.getElementById('lastUpdate').textContent = `Laatste update: ${new Date().toLocaleDateString('nl-BE')} ${new Date().toLocaleTimeString('nl-BE',{hour:'2-digit',minute:'2-digit'})}`;
 
   // KM klassement
