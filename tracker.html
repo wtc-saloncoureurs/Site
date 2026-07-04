@@ -33,7 +33,7 @@
   .km-hero-label { font-size:13px; color:var(--text2); font-weight:600; text-transform:uppercase; letter-spacing:.05em; }
   .km-hero-val { font-size:42px; font-weight:800; color:var(--gold); line-height:1; margin-top:2px; }
   .km-hero-sub { font-size:13px; color:var(--text2); margin-top:4px; }
-  .progress-track-hero { height:18px; background:rgba(0,0,0,0.3); border-radius:9px; overflow:hidden; margin:14px 0 6px; border:0.5px solid rgba(255,255,255,0.1); }
+  .progress-track-hero { height:18px; background:var(--surface2); border-radius:9px; overflow:hidden; border:1px solid var(--border2); }
   .progress-fill-hero { height:18px; border-radius:9px; background:linear-gradient(to right,#fdf3d0,#f0c84a,#d4a92a,#a07010,#6b4a08); transition:width .8s ease; position:relative; }
   .progress-fill-hero::after { content:attr(data-pct); position:absolute; right:8px; top:50%; transform:translateY(-50%); font-size:11px; font-weight:700; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,0.6); }
   .progress-labels-hero { display:flex; justify-content:space-between; font-size:11px; color:var(--text2); }
@@ -44,13 +44,15 @@
   .last-update { font-size:11px; color:var(--text2); text-align:right; margin-top:10px; }
 
   /* ── Sticky subtab balk ── */
-  .klassement-card { background:var(--surface); border:0.5px solid var(--border); border-radius:var(--radius); overflow:hidden; margin-bottom:10px; }
+  .klassement-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:10px; }
   .subtab-bar {
+    border-radius:var(--radius) var(--radius) 0 0;
+    overflow:hidden;
     display:flex;
     background:var(--surface2);
     border-bottom:0.5px solid var(--border2);
     position:sticky;
-    top:52px;
+    top:54px;
     z-index:50;
   }
   .subtab-btn {
@@ -85,7 +87,7 @@
   .leader-row:last-child { border-bottom:none; }
   .leader-pos { font-size:14px; font-weight:800; width:28px; text-align:center; flex-shrink:0; }
   .leader-pos.p1 { color:#FFD700; }
-  .leader-pos.p2 { color:#C0C0C0; }
+  .leader-pos.p2 { color:#8e99a8; }
   .leader-pos.p3 { color:#CD7F32; }
   .leader-pos.pn { color:var(--text3); }
   .leader-info { flex:1; min-width:0; }
@@ -108,7 +110,7 @@
 <nav class="topnav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-      <img src="logo.png" style="width:28px;height:28px;object-fit:contain;">
+      <img src="logo.png" class="sc-crest" style="width:28px;height:28px;object-fit:contain;" alt="Logo">
       De Saloncoureurs
     </a>
     <div class="nav-links">
@@ -133,16 +135,15 @@
   </div>
 </nav>
 
+<!-- Nieuwsticker (gevuld via sc-animaties.js) -->
+<div class="sc-ticker" id="scTicker"></div>
+
 <div class="page">
 
-  <header class="site-header">
-    <div class="logo" style="background:var(--navy3);padding:4px;">
-      <img src="logo.png" style="width:44px;height:44px;object-fit:contain;">
-    </div>
-    <div class="header-title">
-      <h1>De Saloncoureurs</h1>
-      <p>Live Kilometertracker</p>
-    </div>
+    <header class="masthead sc-intro">
+    <div class="mast-kicker sc-rise1">WTC Saloncoureurs · Seizoen 2026</div>
+    <h1 class="mast-title sc-rise2">De Saloncoureurs</h1>
+    <div class="mast-sub sc-rise3">Live kilometertracker <span class="sc-live"><span class="sc-live-dot"><i></i><b></b></span>LIVE</span></div>
   </header>
 
   <!-- Seizoensvermelding -->
@@ -175,8 +176,13 @@
           <div class="km-hero-sub" id="kmSub">— / 40.000 km</div>
         </div>
       </div>
-      <div class="progress-track-hero">
-        <div class="progress-fill-hero" id="kmBar" style="width:0%" data-pct="0%"></div>
+      <div class="sc-peloton-wrap" id="pelotonWrap" style="margin:30px 0 6px;">
+        <div class="sc-rider r1">🚴</div>
+        <div class="sc-rider r2">🚴</div>
+        <div class="sc-rider r3">🚴</div>
+        <div class="progress-track-hero">
+          <div class="progress-fill-hero" id="kmBar" style="width:0%" data-pct="0%"><span class="sc-shine-el"></span></div>
+        </div>
       </div>
       <div class="progress-labels-hero">
         <span>0 km</span>
@@ -273,16 +279,14 @@
 
 <footer class="site-footer">De Saloncoureurs &copy; 2026</footer>
 
+<script src="sc-animaties.js"></script>
 <script>
-function toggleMenu() {
-  document.getElementById('mobileMenu').classList.toggle('open');
-}
-
 function wisselTab(tab, btn) {
   document.querySelectorAll('.subtab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.klassement-tab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
-  document.getElementById('tab-' + tab).classList.add('active');
+  const cur = document.querySelector('.klassement-tab.active');
+  const next = document.getElementById('tab-' + tab);
+  scSwap(cur, next, (t) => scRunBars(t));
 }
 
 const FIRESTORE_BASE = 'https://firestore.googleapis.com/v1/projects/wtc-saloncoureurs/databases/(default)/documents';
@@ -328,7 +332,7 @@ function maakLeaderboard(containerId, leden, veldFn, eenheidFn, subFn) {
           ${subFn ? `<div class="leader-sub">${subFn(lid)}</div>` : ''}
           <div class="leader-bar-wrap" style="margin-top:4px">
             <div class="leader-track">
-              <div class="leader-fill" style="width:${breedte}%;background:${kleur}"></div>
+              <div class="leader-fill" data-bar style="width:${breedte}%;background:${kleur}"></div>
             </div>
           </div>
         </div>
@@ -403,15 +407,21 @@ function toonData(leden) {
   const resterend = Math.max(0, totaal - verstreken);
   const kmNodig = resterend > 0 ? Math.ceil((SEIZOEN_DOEL - totaalKm) / resterend) : 0;
 
-  document.getElementById('kmTotaal').textContent = totaalKm.toLocaleString('nl-BE') + ' km';
+  const kmEl = document.getElementById('kmTotaal');
+  kmEl.setAttribute('data-cu', totaalKm);
+  kmEl.setAttribute('data-suffix', ' km');
+  scRunCount(kmEl);
   document.getElementById('kmSub').textContent = `${totaalKm.toLocaleString('nl-BE')} / ${SEIZOEN_DOEL.toLocaleString('nl-BE')} km (${pct.toFixed(1)}%)`;
   document.getElementById('kmDagen').textContent = `${verstreken} van de ${totaal} dagen (${((verstreken/totaal)*100).toFixed(1)}%)`;
   const bar = document.getElementById('kmBar');
   bar.style.width = pct.toFixed(1) + '%';
   bar.setAttribute('data-pct', pct.toFixed(1) + '%');
-  document.getElementById('dagenVerstreken').textContent = verstreken;
-  document.getElementById('dagenResterend').textContent = resterend;
-  document.getElementById('kmPerDag').textContent = kmNodig;
+  [['dagenVerstreken', verstreken], ['dagenResterend', resterend], ['kmPerDag', kmNodig]].forEach(([id, v]) => {
+    const el = document.getElementById(id);
+    el.setAttribute('data-cu', v);
+    scRunCount(el);
+  });
+  scPeloton(document.getElementById('pelotonWrap'), pct);
   document.getElementById('lastUpdate').textContent = `Laatste update: ${new Date().toLocaleDateString('nl-BE')} ${new Date().toLocaleTimeString('nl-BE',{hour:'2-digit',minute:'2-digit'})}`;
 
   // KM klassement
@@ -460,6 +470,8 @@ function toonData(leden) {
       return `Langste rit: ${afstand} — ${datum}`;
     }
   );
+
+  scRunBars(document.querySelector('.klassement-tab.active'));
 }
 
 function toonFout() {
