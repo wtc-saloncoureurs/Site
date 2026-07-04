@@ -101,7 +101,7 @@
 <nav class="topnav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-      <img src="logo.png" style="width:28px;height:28px;object-fit:contain;">
+      <img src="logo.png" class="sc-crest" style="width:28px;height:28px;object-fit:contain;" alt="Logo">
       De Saloncoureurs
     </a>
     <div class="nav-links">
@@ -112,7 +112,6 @@
       <a href="galerij.html">Galerij</a>
       <a href="tracker.html">Tracker</a>
       <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank">Sociale Media ↗</a>
-
     </div>
     <button class="nav-burger" onclick="toggleMenu()">☰</button>
   </div>
@@ -127,19 +126,25 @@
   </div>
 </nav>
 
+<!-- Nieuwsticker (gevuld via sc-animaties.js) -->
+<div class="sc-ticker" id="scTicker"></div>
+
 <div class="page">
 
-  <header class="site-header">
-    <div class="logo" style="background:var(--navy3);padding:4px;">
-      <img src="logo.png" style="width:44px;height:44px;object-fit:contain;">
-    </div>
-    <div class="header-title">
-      <h1>De Saloncoureurs</h1>
-      <p>Interactieve Kalender</p>
-    </div>
+    <header class="masthead sc-intro">
+    <div class="mast-kicker sc-rise1">WTC Saloncoureurs · Seizoen 2026</div>
+    <h1 class="mast-title sc-rise2">De Saloncoureurs</h1>
+    <div class="mast-sub sc-rise3">Interactieve kalender</div>
   </header>
 
   <div class="grid">
+    <div class="card full" style="border-top:none">
+      <div class="card-title">⏱️ Aftellen naar de volgende rit</div>
+      <div class="countdown-wrap">
+        <div class="countdown-label" id="volgendeRitLabel">Volgende rit wordt berekend…</div>
+        <div class="countdown-val" id="volgendeRitCountdown">—</div>
+      </div>
+    </div>
     <div class="card full">
       <div class="card-title"><div class="dot dot-blue"></div> Agenda 2026</div>
       <div class="calendar-nav">
@@ -168,11 +173,8 @@
   <footer class="site-footer">De Saloncoureurs &copy; 2026</footer>
 </div>
 
+<script src="sc-animaties.js"></script>
 <script>
-function toggleMenu() {
-  document.getElementById('mobileMenu').classList.toggle('open');
-}
-
 let viewDate = new Date();
 
 const specialEvents = [
@@ -238,6 +240,41 @@ function renderCalendar() {
         grid.appendChild(dayDiv);
     }
 }
+
+/* ── Countdown naar de volgende rit ──
+   Zondagsritten (mrt–nov 2026) + speciale events; startuur aangenomen op 09:00. */
+function volgendeRit() {
+    const nu = new Date();
+    const kandidaten = [];
+    specialEvents.forEach(e => {
+        const d = new Date(e.date + 'T09:00:00');
+        if (d > nu) kandidaten.push({ d, titel: e.title });
+    });
+    for (let i = 0; i < 370; i++) {
+        const d = new Date(nu.getFullYear(), nu.getMonth(), nu.getDate() + i, 9, 0, 0);
+        if (d.getDay() === 0 && d > nu && d.getFullYear() === 2026 && d.getMonth() >= 2 && d.getMonth() <= 10) {
+            kandidaten.push({ d, titel: 'Zondagsrit' });
+            break;
+        }
+    }
+    if (!kandidaten.length) return null;
+    kandidaten.sort((a, b) => a.d - b.d);
+    return kandidaten[0];
+}
+
+(function () {
+    const rit = volgendeRit();
+    const label = document.getElementById('volgendeRitLabel');
+    const val = document.getElementById('volgendeRitCountdown');
+    if (!rit) {
+        label.textContent = 'Geen geplande ritten gevonden.';
+        val.textContent = '—';
+        return;
+    }
+    const datum = rit.d.toLocaleDateString('nl-BE', { weekday: 'long', day: 'numeric', month: 'long' });
+    label.innerHTML = `<strong>${rit.titel}</strong> — ${datum} · 09:00`;
+    scCountdown(val, rit.d, 'De rit is gestart! 🚴');
+})();
 
 renderCalendar();
 </script>
