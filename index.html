@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link class="nav-logo" rel="icon" type="image/png" href="fotos/logo-transparant.png">
+<link rel="icon" type="image/png" href="fotos/logo-transparant.png">
 <link rel="apple-touch-icon" href="fotos/logo-transparant.png">
 <title>De Saloncoureurs — Editie #4</title>
 <link rel="stylesheet" href="stijl.css">
@@ -13,12 +13,13 @@
 <nav class="topnav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-      <img src="logo.png" style="width:28px;height:28px;object-fit:contain;">
+      <img src="logo.png" class="sc-crest" style="width:28px;height:28px;object-fit:contain;" alt="Logo">
       De Saloncoureurs
     </a>
     <div class="nav-links">
       <a href="index.html" class="active">Homepage</a>
-      <a href="kalender.html">Kalender</a> <a href="leden.html">Leden</a>
+      <a href="kalender.html">Kalender</a>
+      <a href="leden.html">Leden</a>
       <a href="statuten.html">Statuten</a>
       <a href="galerij.html">Galerij</a>
       <a href="tracker.html">Tracker</a>
@@ -27,42 +28,40 @@
     <button class="nav-burger" onclick="toggleMenu()">☰</button>
   </div>
   <div class="nav-mobile" id="mobileMenu">
-      <a href="index.html" class="active">Homepage</a>
-      <a href="kalender.html">Kalender</a> <a href="leden.html">Leden</a>
-      <a href="statuten.html">Statuten</a>
-      <a href="galerij.html">Galerij</a>
-      <a href="tracker.html">Tracker</a>
-      <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank">Sociale Media ↗</a>
+    <a href="index.html" class="active">Homepage</a>
+    <a href="kalender.html">Kalender</a>
+    <a href="leden.html">Leden</a>
+    <a href="statuten.html">Statuten</a>
+    <a href="galerij.html">Galerij</a>
+    <a href="tracker.html">Tracker</a>
+    <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank">Sociale Media ↗</a>
   </div>
 </nav>
 
+<!-- Nieuwsticker (gevuld via sc-animaties.js) -->
+<div class="sc-ticker" id="scTicker"></div>
+
 <div class="page">
 
-  <header class="site-header">
-    <div class="logo" style="background:var(--navy3);padding:4px;">
-      <img src="logo.png" style="width:44px;height:44px;object-fit:contain;" alt="Logo">
-    </div>
-    <div class="header-title">
-      <h1>De Saloncoureurs</h1>
-      <p>Site</p>
-    </div>
-    <div class="header-right">
-      <div class="edition-badge">#4 — Juni 2026</div>
-      <nav class="archive-nav">
-        <span class="archive-label">Editie:</span>
-        <a href="editie1.html">#1</a>
-        <a href="editie2.html">#2</a>
-        <a href="editie3.html">#3</a>
-        <a href="index.html" class="current">#4</a>
-      </nav>
+    <header class="masthead sc-intro">
+    <div class="mast-kicker sc-rise1">Clubkroniek · Seizoen 2026</div>
+    <h1 class="mast-title sc-rise2">De Saloncoureurs</h1>
+    <div class="mast-sub sc-rise3">De officiële maandelijkse clubkroniek</div>
+    <div class="edition-pills sc-rise3">
+      <span class="edition-label">Editie</span>
+      <a href="editie1.html">#1 · Mrt</a>
+      <a href="editie2.html">#2 · Apr</a>
+      <a href="editie3.html">#3 · Mei</a>
+      <a href="index.html" class="current">#4 · Jun</a>
     </div>
   </header>
 
-  <div class="meta-bar">
-    <div class="pill">🖋️ President: <strong>Willem</strong></div>
-    <div class="pill">🧢 Vicepresident: <strong>Lucas</strong></div>
-    <div class="pill">📅 <strong>Juni 2026</strong></div>
-    <div class="pill">💰 Kas: <strong style="color:var(--green-fg)">−€30</strong> <span style="font-size:11px;color:var(--text3); font-weight:normal;">(+€10 pot Wout)</span></div>
+    <div class="meta-line">
+    <span>President · <strong>Willem</strong></span>
+    <span class="sep">|</span>
+    <span>Vicepresident · <strong>Lucas</strong></span>
+    <span class="sep">|</span>
+    <span>Kas · <strong style="color:var(--red-fg)">−€30</strong> <span class="meta-note">(+€10 pot Wout)</span></span>
   </div>
 
   <div class="grid">
@@ -218,9 +217,9 @@
       <div class="stat-row" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
         <div class="stat-box">
           <div class="stat-label">Kilometers</div>
-          <div class="stat-val" id="seizoen-km">— <span class="stat-unit">/ 40.000 km</span></div>
+          <div class="stat-val"><span id="seizoen-km-num">—</span> <span class="stat-unit">/ 40.000 km</span></div>
           <div style="margin-top:6px;height:4px;background:var(--border);border-radius:2px">
-            <div id="seizoen-km-bar" style="width:0%;height:4px;background:var(--gold);border-radius:2px"></div>
+            <div id="seizoen-km-bar" class="sc-shine" style="width:0%;height:4px;background:var(--gold);border-radius:2px;transition:width .95s cubic-bezier(.18,.7,.2,1)"><span class="sc-shine-el"></span></div>
           </div>
           <div id="seizoen-km-pct" style="font-size:11px;color:var(--text3);margin-top:3px">Halverwege het seizoen</div>
         </div>
@@ -228,21 +227,21 @@
           <div class="stat-label">Goede doelen</div>
           <div class="stat-val">1 <span class="stat-unit">/ 3</span></div>
           <div style="margin-top:6px;height:4px;background:var(--border);border-radius:2px">
-            <div style="width:0%;height:4px;background:var(--blue-fg);border-radius:2px"></div>
+            <div class="sc-shine" style="width:0%;height:4px;background:var(--blue-fg);border-radius:2px"><span class="sc-shine-el"></span></div>
           </div>
         </div>
         <div class="stat-box">
           <div class="stat-label">Groepsritten</div>
           <div class="stat-val">9 <span class="stat-unit">/ 10</span></div>
           <div style="margin-top:6px;height:4px;background:var(--border);border-radius:2px">
-            <div style="width:90%;height:4px;background:var(--green-fg);border-radius:2px"></div>
+            <div class="sc-shine" style="width:90%;height:4px;background:var(--green-fg);border-radius:2px"><span class="sc-shine-el"></span></div>
           </div>
         </div>
         <div class="stat-box">
           <div class="stat-label">Voetbalstadia</div>
           <div class="stat-val">0 <span class="stat-unit">/ 5</span></div>
           <div style="margin-top:6px;height:4px;background:var(--border);border-radius:2px">
-            <div style="width:0%;height:4px;background:var(--purple-fg);border-radius:2px"></div>
+            <div class="sc-shine" style="width:0%;height:4px;background:var(--purple-fg);border-radius:2px"><span class="sc-shine-el"></span></div>
           </div>
         </div>
       </div>
@@ -271,32 +270,16 @@
   <footer class="site-footer">De Saloncoureurs &copy; 2026 · Site · Plaagstoten met liefde geschreven</footer>
 </div>
 
+<script src="sc-animaties.js"></script>
 <script>
-function toggleMenu() {
-  document.getElementById('mobileMenu').classList.toggle('open');
-}
-
 (async () => {
-  try {
-    const res = await fetch('https://firestore.googleapis.com/v1/projects/wtc-saloncoureurs/databases/(default)/documents/stats?pageSize=50');
-    if (!res.ok) return;
-    const data = await res.json();
-    const docs = data.documents || [];
-    const totaal = docs.reduce((som, doc) => {
-      const f = doc.fields || {};
-      return som + parseFloat(f.totalKm?.doubleValue || f.totalKm?.integerValue || 0);
-    }, 0);
-    const doel = 40000;
-    const pct = Math.min((totaal / doel) * 100, 100);
-    const afgerond = Math.round(totaal);
-
-    document.getElementById('seizoen-km').innerHTML =
-      `${afgerond.toLocaleString('nl-BE')} <span class="stat-unit">/ 40.000 km</span>`;
-    document.getElementById('seizoen-km-bar').style.width = pct.toFixed(1) + '%';
-    document.getElementById('seizoen-km-pct').textContent = pct.toFixed(1) + '% voltooid';
-  } catch (e) {
-    console.warn('Seizoensdoel km kon niet geladen worden:', e);
-  }
+  const s = await scHaalStats();
+  if (!s) return;
+  const num = document.getElementById('seizoen-km-num');
+  num.setAttribute('data-cu', Math.round(s.totaal));
+  scRunCount(num);
+  document.getElementById('seizoen-km-bar').style.width = s.pct.toFixed(1) + '%';
+  document.getElementById('seizoen-km-pct').textContent = s.pct.toFixed(1) + '% voltooid';
 })();
 </script>
 </body>
