@@ -137,14 +137,15 @@
     <div class="mast-sub sc-rise3">Interactieve kalender</div>
   </header>
 
-  <div class="grid">
-    <div class="card full" style="border-top:none">
-      <div class="card-title">⏱️ Aftellen naar de volgende rit</div>
-      <div class="countdown-wrap">
-        <div class="countdown-label" id="volgendeRitLabel">Volgende rit wordt berekend…</div>
-        <div class="countdown-val" id="volgendeRitCountdown">—</div>
-      </div>
+  <div class="countdown-hero">
+    <div class="countdown-hero-left">
+      <div class="countdown-hero-kicker">Volgende groepsrit</div>
+      <div class="countdown-hero-detail" id="volgendeRitLabel">Wordt berekend…</div>
     </div>
+    <div class="countdown-hero-timer" id="volgendeRitCountdown">—</div>
+  </div>
+
+  <div class="grid">
     <div class="card full">
       <div class="card-title"><div class="dot dot-blue"></div> Agenda 2026</div>
       <div class="calendar-nav">
@@ -272,7 +273,9 @@ function volgendeRit() {
         return;
     }
     const datum = rit.d.toLocaleDateString('nl-BE', { weekday: 'long', day: 'numeric', month: 'long' });
-    label.innerHTML = `<strong>${rit.titel}</strong> — ${datum} · 09:00`;
+    label.innerHTML = rit.titel === 'Zondagsrit'
+        ? `<strong>${datum}</strong> · 09:00`
+        : `<strong>${rit.titel}</strong> · ${datum}`;
     scCountdown(val, rit.d, 'De rit is gestart! 🚴');
 })();
 
