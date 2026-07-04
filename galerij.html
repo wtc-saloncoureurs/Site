@@ -134,7 +134,7 @@
 <nav class="topnav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-      <img src="logo.png" style="width:28px;height:28px;object-fit:contain;">
+      <img src="logo.png" class="sc-crest" style="width:28px;height:28px;object-fit:contain;" alt="Logo">
       De Saloncoureurs
     </a>
     <div class="nav-links">
@@ -159,16 +159,15 @@
   </div>
 </nav>
 
+<!-- Nieuwsticker (gevuld via sc-animaties.js) -->
+<div class="sc-ticker" id="scTicker"></div>
+
 <div class="page">
 
-  <header class="site-header">
-    <div class="logo" style="background:var(--navy3);padding:4px;">
-      <img src="logo.png" style="width:44px;height:44px;object-fit:contain;">
-    </div>
-    <div class="header-title">
-      <h1>De Saloncoureurs</h1>
-      <p>Galerij</p>
-    </div>
+    <header class="masthead sc-intro">
+    <div class="mast-kicker sc-rise1">WTC Saloncoureurs · Seizoen 2026</div>
+    <h1 class="mast-title sc-rise2">De Saloncoureurs</h1>
+    <div class="mast-sub sc-rise3">Galerij</div>
   </header>
 
   <!-- Filter balk -->
@@ -353,11 +352,8 @@
   De Saloncoureurs &copy; 2026
 </footer>
 
+<script src="sc-animaties.js"></script>
 <script>
-function toggleMenu() {
-  document.getElementById('mobileMenu').classList.toggle('open');
-}
-
 const albums = {
   triathlon: [
     { src: 'fotos/triathlon-1.jpg', cap: 'Triathlon Kortrijk 2025' },
