@@ -9,10 +9,10 @@ const SC_SEIZOEN_DOEL = 40000;
 
 /* Vaste ticker-items — hier handmatig bij te werken per editie */
 const SC_TICKER_VAST_VOOR = [
-  { tekst: 'KAS: −€30 (+€10 POT WOUT)', ster: true },
+  { tekst: 'KAS: −€10', ster: true },
 ];
 const SC_TICKER_VAST_NA = [
-  { tekst: 'SUCCES MET DE TOUR-PRONO — DE TOUR START OP 4 JULI', ster: true },
+  { tekst: 'EINDESEIZOENSVERGADERING OP 19 SEPTEMBER — HOU DE DATUM VRIJ', ster: true },
 ];
 
 /* ── Mobiel menu ── */
