@@ -175,10 +175,41 @@
     <button class="filter-btn active" onclick="filterAlbums('all', this)">Alle</button>
     <button class="filter-btn" onclick="filterAlbums('2026', this)">2026</button>
     <button class="filter-btn" onclick="filterAlbums('2025', this)">2025</button>
+    <button class="filter-btn" onclick="filterAlbums('alpen', this)">Fietsreis Alpen</button>
     <button class="filter-btn" onclick="filterAlbums('triathlon', this)">Triathlon</button>
     <button class="filter-btn" onclick="filterAlbums('tandem', this)">Tandem Rit</button>
     <button class="filter-btn" onclick="filterAlbums('vaderdag', this)">Vaderdagrit</button>
     <button class="filter-btn" onclick="filterAlbums('weekend', this)">Weekend</button>
+  </div>
+
+  <!-- ALBUM: Fietsreis Alpen 2026 -->
+  <div class="album" data-tags="2026 alpen">
+    <div class="album-header">
+      <div class="album-icon">🏔️</div>
+      <div class="album-info">
+        <div class="album-titel">Fietsreis Alpen 2026</div>
+        <div class="album-sub">2026</div>
+      </div>
+      <div class="album-count"></div>
+    </div>
+    <div class="foto-grid">
+      <div class="foto-item" onclick="openLight(0, 'alpen2026')">
+        <img src="fotos/WTC_Alpen26_1.jpeg" alt="Fietsreis Alpen 2026" loading="lazy">
+        <div class="foto-overlay"><div class="foto-label">Fietsreis Alpen 2026</div></div>
+      </div>
+      <div class="foto-item" onclick="openLight(1, 'alpen2026')">
+        <img src="fotos/WTC_Alpen26_2.jpeg" alt="Fietsreis Alpen 2026" loading="lazy">
+        <div class="foto-overlay"><div class="foto-label">Fietsreis Alpen 2026</div></div>
+      </div>
+      <div class="foto-item" onclick="openLight(2, 'alpen2026')">
+        <img src="fotos/WTC_Alpen26_3.jpeg" alt="Fietsreis Alpen 2026" loading="lazy">
+        <div class="foto-overlay"><div class="foto-label">Fietsreis Alpen 2026</div></div>
+      </div>
+      <div class="foto-item" onclick="openLight(3, 'alpen2026')">
+        <img src="fotos/WTC_Alpen26_4.jpeg" alt="Fietsreis Alpen 2026" loading="lazy">
+        <div class="foto-overlay"><div class="foto-label">Fietsreis Alpen 2026</div></div>
+      </div>
+    </div>
   </div>
 
   <!-- ALBUM: Weekend 2026 -->
@@ -355,6 +386,12 @@
 <script src="sc-animaties.js"></script>
 <script>
 const albums = {
+  alpen2026: [
+    { src: 'fotos/WTC_Alpen26_1.jpeg', cap: 'Fietsreis Alpen 2026' },
+    { src: 'fotos/WTC_Alpen26_2.jpeg', cap: 'Fietsreis Alpen 2026' },
+    { src: 'fotos/WTC_Alpen26_3.jpeg', cap: 'Fietsreis Alpen 2026' },
+    { src: 'fotos/WTC_Alpen26_4.jpeg', cap: 'Fietsreis Alpen 2026' },
+  ],
   triathlon: [
     { src: 'fotos/triathlon-1.jpg', cap: 'Triathlon Kortrijk 2025' },
     { src: 'fotos/triathlon-2.jpg', cap: 'Triathlon Kortrijk 2025' },
@@ -378,7 +415,7 @@ const albums = {
     { src: 'fotos/weekend2025-1.jpg', cap: 'Weekend 2025' },
     { src: 'fotos/weekend2025-2.jpg', cap: 'Weekend 2025' },
     { src: 'fotos/weekend2025-3.jpg', cap: 'Weekend 2025' },
-    { src: 'fotos/weekend2025-5.jpg', cap: 'Weekend 2025 extra' },
+    { src: 'fotos/fietsweekend2025-5.jpg', cap: 'Weekend 2025 extra' },
   ],
   weekend2026: [
     { src: 'fotos/weekend2026-1.jpg', cap: 'Weekend 2026' },
