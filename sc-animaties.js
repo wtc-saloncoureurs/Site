@@ -186,3 +186,24 @@ function scCountdown(el, target, doneTekst) {
 
 /* ── Auto-init ── */
 document.addEventListener('DOMContentLoaded', scBouwTicker);
+
+// 🍂 Herfstanimatie
+function startHerfstAnimatie() {
+  const bladeren = ["🍂", "🍁", "🍃"];
+  const aantalBladeren = 14;
+
+  for (let i = 0; i < aantalBladeren; i++) {
+    const blad = document.createElement("span");
+    blad.className = "sc-leaf";
+    blad.textContent = bladeren[Math.floor(Math.random() * bladeren.length)];
+
+    blad.style.left = Math.random() * 100 + "vw";
+    blad.style.animationDuration = (8 + Math.random() * 8) + "s";
+    blad.style.animationDelay = (-Math.random() * 15) + "s";
+    blad.style.fontSize = (15 + Math.random() * 15) + "px";
+
+    document.body.appendChild(blad);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", startHerfstAnimatie);
