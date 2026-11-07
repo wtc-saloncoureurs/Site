@@ -8,234 +8,73 @@
 <title>De Saloncoureurs — Editie #8 · Oktober</title>
 <link rel="stylesheet" href="stijl.css">
 <style>
-  .roddels .s-name {
-    font-weight: 700;
-    font-style: italic;
-    letter-spacing: 0.3px;
-    color: var(--text1);
+  .roddels .s-name { font-weight:700; font-style:italic; letter-spacing:.3px; color:var(--text1); }
+  .roddels .sanction { padding-left:24px; }
+  .sc-callout { margin-top:18px; padding:12px 14px; background:var(--surface2); border-left:4px solid var(--gold); border-radius:var(--radius-sm); font-size:13px; }
+  .sc-card-list { margin:0; padding-left:20px; }
+  .sc-card-list li { margin:7px 0; }
+  .sc-sublist { margin:8px 0 0; padding-left:20px; }
+  .sc-quote { margin-top:18px; padding:16px; text-align:center; background:var(--surface2); border-radius:var(--radius-sm); border:1px solid var(--border); font-size:16px; font-style:italic; }
+  .esv-card { border: 4px solid #d4af37 !important; box-sizing: border-box; }
+  .sc-leaf { position:fixed; top:-50px; z-index:9999; pointer-events:none; user-select:none; opacity:.78; animation:sc-leaf-fall linear infinite; }
+  @keyframes sc-leaf-fall {
+    0% { transform:translate3d(0,-10vh,0) rotate(0deg); }
+    25% { transform:translate3d(28px,25vh,0) rotate(100deg); }
+    50% { transform:translate3d(-22px,52vh,0) rotate(190deg); }
+    75% { transform:translate3d(32px,80vh,0) rotate(285deg); }
+    100% { transform:translate3d(-12px,115vh,0) rotate(380deg); }
   }
-  .roddels .sanction { padding-left: 24px; }
-  .sc-callout {
-    margin-top: 18px;
-    padding: 12px 14px;
-    background: var(--surface2);
-    border-left: 4px solid var(--gold);
-    border-radius: var(--radius-sm);
-    font-size: 13px;
-  }
-  .sc-card-list { margin: 0; padding-left: 20px; }
-  .sc-card-list li { margin: 7px 0; }
-  .sc-sublist { margin: 8px 0 0; padding-left: 20px; }
-  .sc-quote {
-    margin-top: 18px;
-    padding: 16px;
-    text-align: center;
-    background: var(--surface2);
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--border);
-    font-size: 16px;
-    font-style: italic;
-  }
+  @media (prefers-reduced-motion: reduce) { .sc-leaf { display:none; } }
 </style>
 </head>
 <body>
 <nav class="topnav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">
-      <img src="logo.png" class="sc-crest" style="width:28px;height:28px;object-fit:contain;" alt="Logo">
-      De Saloncoureurs
-    </a>
-    <div class="nav-links">
-      <a href="index.html">Homepage</a>
-      <a href="kalender.html">Kalender</a>
-      <a href="leden.html">Leden</a>
-      <a href="statuten.html">Statuten</a>
-      <a href="galerij.html">Galerij</a>
-      <a href="tracker.html">Tracker</a>
-      <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank" rel="noopener noreferrer">Sociale Media ↗</a>
-    </div>
+    <a href="index.html" class="nav-logo"><img src="logo.png" class="sc-crest" style="width:28px;height:28px;object-fit:contain;" alt="Logo"> De Saloncoureurs</a>
+    <div class="nav-links"><a href="index.html">Homepage</a><a href="kalender.html">Kalender</a><a href="leden.html">Leden</a><a href="statuten.html">Statuten</a><a href="galerij.html">Galerij</a><a href="tracker.html">Tracker</a><a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank" rel="noopener noreferrer">Sociale Media ↗</a></div>
     <button class="nav-burger" type="button" onclick="toggleMenu()" aria-label="Menu openen">☰</button>
   </div>
-  <div class="nav-mobile" id="mobileMenu">
-    <a href="index.html">Homepage</a>
-    <a href="kalender.html">Kalender</a>
-    <a href="leden.html">Leden</a>
-    <a href="statuten.html">Statuten</a>
-    <a href="galerij.html">Galerij</a>
-    <a href="tracker.html">Tracker</a>
-    <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank" rel="noopener noreferrer">Sociale Media ↗</a>
-  </div>
+  <div class="nav-mobile" id="mobileMenu"><a href="index.html">Homepage</a><a href="kalender.html">Kalender</a><a href="leden.html">Leden</a><a href="statuten.html">Statuten</a><a href="galerij.html">Galerij</a><a href="tracker.html">Tracker</a><a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank" rel="noopener noreferrer">Sociale Media ↗</a></div>
 </nav>
-
 <div class="sc-ticker" id="scTicker"></div>
-
 <div class="page">
-  <header class="masthead sc-intro">
-    <div class="mast-kicker sc-rise1">Clubkroniek · Seizoen 2026</div>
-    <h1 class="mast-title sc-rise2">De Saloncoureurs</h1>
-    <div class="mast-sub sc-rise3">De officiële maandelijkse clubkroniek</div>
-    <div class="edition-pills sc-rise3">
-      <span class="edition-label">Editie</span>
-      <a href="editie1.html">#1 · Mrt</a>
-      <a href="editie2.html">#2 · Apr</a>
-      <a href="editie3.html">#3 · Mei</a>
-      <a href="editie4.html">#4 · Jun</a>
-      <a href="editie5.html">#5 · Jul</a>
-      <a href="editie6.html">#6 · Aug</a>
-      <a href="editie7.html">#7 · Sep</a>
-      <a href="editie8.html" class="current">#8 · Okt</a>
-    </div>
-  </header>
-
-  <div class="meta-line">
-    <span>President · <strong>Willem</strong></span>
-    <span class="sep">|</span>
-    <span>Vicepresident · <strong>Lucas</strong></span>
-    <span class="sep">|</span>
-    <span>Editie · <strong>Oktober 2026</strong></span>
-  </div>
-
-  <div class="grid">
-
-    <div class="card full">
-      <div class="card-title"><div class="dot dot-blue"></div> Terugblik &amp; vooruitblik</div>
-      <div class="welcome-text">
-        <p>Het werd kouder, donkerder en zelfs het uur veranderde. Toch bleken veel Saloncoureurs daar niet door uit hun lood te worden geslagen. Ze vonden hun armstukken en koplampen weer terug, en ook de klok werd gemakkelijk aangepast om in oktober wekelijks buiten te komen.</p>
-        <p>Een maand zou niet compleet zijn als hij niet begon met een katerrit. Daarnaast werden er heel wat flandrienritjes genoteerd: niet alleen door het flandrienweer, maar ook de Pater, de Kwaremont, de Tiegem en de Kluisberg werden getemd. De zondagsritten leken bovendien populairder dan ooit. Mooi gedaan, heren!</p>
-        <div class="sc-callout"><strong>📌 Save the date:</strong> gelieve allemaal <strong>19 december</strong> vrij te houden voor de eindeseizoensvergadering (ESV). Meer info vind je verder op deze pagina. Gelieve het te laten weten indien je er niet bij kunt zijn.</div>
-      </div>
-    </div>
-
-    <div class="card full roddels">
-      <div class="card-title"><div class="dot dot-green"></div> Gefundeerde en minder gefundeerde roddels</div>
-      <div class="sanction"><div class="s-name">🏛️ <strong>Oppositiesucces:</strong> oppositie haalt vernietigend uit met ambitieus 10-puntenplan dat 0 punten telt.</div></div>
-      <div class="sanction"><div class="s-name">💰 <strong>Financieel genageld:</strong> begrotingstekort opgelost. Willem zet BDW met 1-0 weg.</div></div>
-      <div class="sanction"><div class="s-name">⛰️ Saloncoureurs verkennen de cols van LBL: stevige training gekoppeld aan parcoursverkenning.</div></div>
-      <div class="sanction"><div class="s-name">🚴 Tweede comeback van Lucas is een feit, deze keer op de fiets.</div></div>
-      <div class="sanction"><div class="s-name">🧪 Jakob probeert wederom een nieuwe trainingsmethode.</div></div>
-      <div class="sanction"><div class="s-name">🚲 <strong>Groot nieuws:</strong> Wout koopt fiets van idool: “Mooiste dag van mijn leven. Nu mag ik hopelijk wel bij WTC De Canyons.”</div></div>
-      <div class="sanction"><div class="s-name">📝 Eerste inschrijvingen voor LBL lopen binnen: grote ambities.</div></div>
-      <div class="sanction"><div class="s-name">🎓 Vlerickers bekijken werking club: “We borrow your watch to tell you the time, and bill you hourly for the privilege of holding it.”</div></div>
-      <div class="sanction"><div class="s-name">⚠️ <strong>Schandaal:</strong> anonieme coureur stelt prioriteiten van Seba in vraag: “Alsof je job belangrijker is dan de WTC.”</div></div>
-      <div class="sanction"><div class="s-name">📉 <strong>Crisis bij het bestuur:</strong> dreigende rentesneeuwbal. Neemt Jakob eindelijk verantwoordelijkheid of koopt hij een nieuwe fiets?</div></div>
-      <div class="sanction" style="border-bottom:none;padding-bottom:0"><div class="s-name">⌚ Gust neemt tijdens een fietstocht afscheid van goede vriend Garmin.</div></div>
-    </div>
-
-    <div class="card full">
-      <div class="card-title"><div class="dot dot-amber"></div> 📊 Prestaties van de maand</div>
-      <p style="font-size:13px;color:var(--text2);">Enkele dagen stevige wind schiepen opportuniteiten. Enkele coureurs wisten ook iets te sprokkelen:</p>
-      <div class="sanction"><div class="s-name">🌬️ Jakob en Wout waaien de top 10 binnen op de Argendaalstraat.</div></div>
-      <div class="sanction" style="border-bottom:none;padding-bottom:0"><div class="s-name">🏆 Mattéo ongenaakbaar in het najaar</div><div class="s-desc">Vierde op de Egemveldegemweg, vierde op de Processiestraat en zesde op de Rekkemstraat (E403, rond punt).</div></div>
-    </div>
-
-    <div class="card">
-      <div class="card-title"><div class="dot dot-blue"></div> Club van 1.000</div>
-      <div class="sanction" style="border-bottom:none;padding-bottom:0">
-        <div class="s-name">🎯 Thibault richting 1.000 km</div>
-        <div class="s-desc">“Wat goed is, komt rap”, maar discipline is des te belangrijker. We duimen dat Thibault de grens van 1.000 km nog haalt. Stuur gerust in de groep voor een rit. We zetten je graag uit de koude wind tijdens de resterende 350 km.</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title"><div class="dot dot-purple"></div> De soloclub</div>
-      <div class="sanction">
-        <div class="s-name">🚴 Drie renners, drie soloritten</div>
-        <div class="s-desc">Het werd al eerder aangehaald: de Saloncoureurs lijken soms meer op een soloclub dan een wielerclub. Dat werd bevestigd op zaterdag 31 oktober. Maar liefst drie renners werkten in de namiddag afzonderlijk een rit van 40 tot 50 kilometer af. Hier is natuurlijk niets mis mee.</div>
-      </div>
-      <div class="sanction" style="border-bottom:none;padding-bottom:0"><div class="s-desc">De chat is er om gebruikt te worden. Stuur elkaar een bericht om te motiveren en samen het kilometeraantal te bereiken. Daarin kadert ook de oproep hieronder.</div></div>
-    </div>
-
-    <div class="card full">
-      <div class="card-title"><div class="dot dot-green"></div> 🍻 Oproep: meer drinken met de Saloncoureurs</div>
-      <ul class="sc-card-list">
-        <li><strong>Voorstel:</strong> kotentocht in Kortrijk in november, december of januari, eventueel als vrijdagavondrit.</li>
-        <li>Andreas, Mattéo, Séba en Gust: wanneer is de housewarming?</li>
-        <li>Andreas: gezamenlijke hittetraining bij de haard?</li>
-        <li>Toon, Wout en Jakob: wanneer trakteren jullie om de nieuwe job te vieren?</li>
-        <li>Wout: wanneer is de receptie om de nieuwe vélo te presenteren?</li>
-        <li>Lucas en Willem: steeds welkom bij ons voor een drankje. Nodig gerust jezelf uit. Jakob doet dit ook.</li>
-        <li>Thibault en Michel: wanneer leren jullie ons netwerken als echte Vlerickers?</li>
-        <li>Andere spontane initiatieven zijn steeds welkom!</li>
-      </ul>
-    </div>
-
-    <div class="card full">
-      <div class="card-title"><div class="dot dot-amber"></div> Nico rekruteert</div>
-      <div class="sanction" style="border-bottom:none;padding-bottom:0">
-        <div class="s-name">🔎 Nieuwe slachtoffers gezocht</div>
-        <div class="s-desc">De kilometervreter was deze maand ijverig op zoek naar nieuwe slachtoffers om te doen afzien in zijn wiel, of gewoon naar wat compagnie tijdens zijn vele kilometers. Hij schudde al de hand van wereldreiziger Stan. Met die handdruk werd vastgelegd dat Stan zich na zijn wereldreis bij de Saloncoureurs zal scharen. We kijken ernaar uit!</div>
-        <div class="s-desc">Verder ging Nico op zwier met zijn baas Tom, die als sterke schakel wel eens voor de rol van kopman zou kunnen gaan. Vooral op het vlak van bochtenwerk kan hij de groep nog wat bijleren.</div>
-        <div class="s-desc">En daar stopt het niet. Ook Mauro, momenteel bezig met de aankoop van een koersfiets, werd meegevraagd op een ritje in het donker. De heren werkten ongeveer 45 km af. Mauro lijkt dus al helemaal klaar voor een zondagsrit met de Saloncoureurs. De drie heren worden bij deze uitgenodigd om hun inschrijvingsformulier in te sturen.</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title"><div class="dot dot-blue"></div> Zes vertegenwoordigers op de Groeningequiz</div>
-      <div class="sanction" style="border-bottom:none;padding-bottom:0">
-        <div class="s-name">🧠 27 november</div>
-        <div class="s-desc">Mattéo, Wout, Jakob, Willem, Dries en Séba vertegenwoordigen WTC De Saloncoureurs op het hoogste quizniveau van Kortrijk. De tenue van de Saloncoureurs zal hopelijk sterk zichtbaar zijn en wie weet staan ze zelfs op het podium. Dat zal vast beter gaan dan bij de “Camiongs”! Veel succes en plezier aan onze afgevaardigden.</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title"><div class="dot dot-red"></div> Kulakberg versus Thibault Ghekiere</div>
-      <div class="sanction" style="border-bottom:none;padding-bottom:0">
-        <div class="s-name">⛰️ Uitstel is geen afstel</div>
-        <div class="s-desc">Dit gevecht lijkt voorlopig uit te blijven, maar uitstel is zeker geen afstel. Naar verluidt zou hij de Kulakberg, zoals de bijbel het voorschrijft, niet zomaar 13 keer oprijden, maar meteen 100 keer. Op die manier is de ondergrens van 1.000 km mogelijk wel erg snel bereikt.</div>
-      </div>
-    </div>
-
-    <div class="card full">
-      <div class="card-title"><div class="dot dot-purple"></div> 📅 De eindeseizoensvergadering</div>
-      <div class="welcome-text">
-        <p>Dag heren van de Saloncoureurs,</p>
-        <p>Op zaterdag <strong>19 december</strong> spreken we af voor de ESV van WTC De Saloncoureurs. We verwelkomen jullie vanaf <strong>16.30 uur</strong> met een hapje en een drankje, waarna we er om <strong>17.00 uur</strong> invliegen.</p>
-        <p>We beginnen meteen met de serieuze onderwerpen, in een logische volgorde:</p>
-        <ol class="sc-card-list">
-          <li>Wat zijn de doelen voor volgend seizoen en waar willen we naartoe?</li>
-          <li>De regels aanpassen in functie van de doelstellingen.</li>
-          <li>De planning voor volgend seizoen om onze doelen te bereiken.</li>
-          <li>De straffen van dit seizoen afwerken om volgend seizoen met een schone lei te beginnen.</li>
-          <li>Na de straffen worden de renners geprezen voor hun sterke prestaties van dit seizoen: de Salon d’Ors.</li>
-          <li>Plezier maken met de groep tijdens de quiz van Balti Volleybal. Het startuur wordt nog bevestigd.</li>
-        </ol>
-        <p>Indien iemand nog onderwerpen wil voorstellen, gelieve dit te melden.</p>
-        <p>Het voorstel voor na de vergadering is om met een tweetal teams de quiz van Balti, de volleybalclub van Lucas, te gaan kantelen. We kijken ernaar uit.</p>
-        <div class="sc-callout"><strong>Afwezigheden:</strong> Wout gaat met zijn vriendin naar Lord of the Rings/Hobbit met liveorkest. Séba moet werken. Wie niet aanwezig kan zijn, laat dit nog weten, inclusief de reden.</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title"><div class="dot dot-red"></div> ⚖️ Straffen</div>
-      <div class="sanction"><div class="s-name">🍺 Uitstaande doop</div><div class="s-desc">Dries, Gust en Mattéo.</div></div>
-      <div class="sanction" style="border-bottom:none;padding-bottom:0"><div class="s-name">🎒 Met item fietsen</div><div class="s-desc">Séba en Thibault.</div></div>
-    </div>
-
-    <div class="card">
-      <div class="card-title"><div class="dot dot-red"></div> 🤕 Blessures</div>
-      <div class="sanction"><div class="s-name">Nico</div><div class="s-desc">Onderrug.</div></div>
-      <div class="sanction" style="border-bottom:none;padding-bottom:0"><div class="s-name">De tracker</div><div class="s-desc">Hier wordt naar gekeken.</div></div>
-    </div>
-
-    <div class="card full">
-      <div class="card-title"><div class="dot dot-green"></div> 🚲 Verantwoordelijken zondagsritten</div>
-      <div class="podium-row"><div class="rank">📅</div><div class="p-name"><strong>1 november</strong></div><div class="p-km">Gust</div></div>
-      <div class="podium-row"><div class="rank">📅</div><div class="p-name"><strong>8 november</strong></div><div class="p-km">Toon</div></div>
-      <div class="podium-row"><div class="rank">📅</div><div class="p-name"><strong>15 november</strong></div><div class="p-km">Lucas</div></div>
-      <div class="podium-row"><div class="rank">📅</div><div class="p-name"><strong>22 november</strong></div><div class="p-km">Wout</div></div>
-      <div class="podium-row"><div class="rank">📅</div><div class="p-name"><strong>29 november</strong></div><div class="p-km">Jakob</div></div>
-      <div class="sc-callout"><strong>Ideeën om sterk te eindigen:</strong> een rit met chocomelk en pannenkoeken, een jeneverrit, ontbijtrit, halloween- of verkleedrit, een rit in een specifieke figuur zoals een kalkoen, 13 keer de Kulakberg, een alternatieve competitie, een huizentochtrit of een Cyclostudio-class. Wees creatief en voorzie gerust een alternatief als het weer fietsen niet toelaat.</div>
-    </div>
-
-    <div class="card full">
-      <div class="card-title"><div class="dot dot-blue"></div> Quote van de maand</div>
-      <div class="sc-quote"><strong>“Be a retard in motion”</strong><br><span style="font-size:12px;color:var(--text3);">~ Nico, toegeëigend door WTC De Saloncoureurs</span></div>
-    </div>
-
-  </div>
-
-  <footer class="site-footer">De Saloncoureurs &copy; 2026 · Site · Plaagstoten met liefde geschreven</footer>
+<header class="masthead sc-intro"><div class="mast-kicker sc-rise1">Clubkroniek · Seizoen 2026</div><h1 class="mast-title sc-rise2">De Saloncoureurs</h1><div class="mast-sub sc-rise3">De officiële maandelijkse clubkroniek</div><div class="edition-pills sc-rise3"><span class="edition-label">Editie</span><a href="editie1.html">#1 · Mrt</a><a href="editie2.html">#2 · Apr</a><a href="editie3.html">#3 · Mei</a><a href="editie4.html">#4 · Jun</a><a href="editie5.html">#5 · Jul</a><a href="editie6.html">#6 · Aug</a><a href="editie7.html">#7 · Sep</a><a href="editie8.html" class="current">#8 · Okt</a></div></header>
+<div class="meta-line"><span>President · <strong>Willem</strong></span><span class="sep">|</span><span>Vicepresident · <strong>Lucas</strong></span><span class="sep">|</span><span>Editie · <strong>Oktober 2026</strong></span></div>
+<div class="grid">
+<div class="card full"><div class="card-title"><div class="dot dot-blue"></div> Terugblik &amp; vooruitblik</div><div class="welcome-text"><p>Het werd kouder, donkerder en zelfs het uur veranderde. Toch bleken veel Saloncoureurs daar niet door uit hun lood te worden geslagen. Ze vonden hun armstukken en koplampen weer terug, en ook de klok werd gemakkelijk aangepast om in oktober wekelijks buiten te komen.</p><p>Een maand zou niet compleet zijn als hij niet begon met een katerrit. Daarnaast werden er heel wat flandrienritjes genoteerd: niet alleen door het flandrienweer, maar ook de Pater, de Kwaremont, de Tiegem en de Kluisberg werden getemd. De zondagsritten leken bovendien populairder dan ooit. Mooi gedaan, heren!</p><div class="sc-callout"><strong>📌 Save the date:</strong> gelieve allemaal <strong>19 december</strong> vrij te houden voor de eindeseizoensvergadering (ESV). Meer info vind je verder op deze pagina. Gelieve het te laten weten indien je er niet bij kunt zijn.</div></div></div>
+<div class="card full roddels"><div class="card-title"><div class="dot dot-green"></div> Gefundeerde en minder gefundeerde roddels</div>
+<div class="sanction"><div class="s-name">🏛️ <strong>Oppositiesucces:</strong> oppositie haalt vernietigend uit met ambitieus 10-puntenplan dat 0 punten telt.</div></div><div class="sanction"><div class="s-name">💰 <strong>Financieel genageld:</strong> begrotingstekort opgelost. Willem zet BDW met 1-0 weg.</div></div><div class="sanction"><div class="s-name">⛰️ Saloncoureurs verkennen de cols van LBL: stevige training gekoppeld aan parcoursverkenning.</div></div><div class="sanction"><div class="s-name">🚴 Tweede comeback van het seizoen van Lucas is een feit. </div></div><div class="sanction"><div class="s-name">🧪 Jakob probeert wederom een nieuwe trainingsmethode.</div></div><div class="sanction"><div class="s-name">🚲 <strong>Groot nieuws:</strong> Wout koopt fiets van idool: “Mooiste dag van mijn leven. Nu mag ik hopelijk wel bij WTC De Canyons.”</div></div><div class="sanction"><div class="s-name">📝 Eerste inschrijvingen voor LBL lopen binnen: grote ambities.</div></div><div class="sanction"><div class="s-name">🎓 Vlerickers bekijken werking club: “We borrow your watch to tell you the time, and bill you hourly for the privilege of holding it.”</div></div><div class="sanction"><div class="s-name">⚠️ <strong>Schandaal:</strong> anonieme coureur stelt prioriteiten van Seba in vraag: “Alsof je job belangrijker is dan de WTC.”</div></div><div class="sanction"><div class="s-name">📉 <strong>Crisis bij het bestuur:</strong> dreigende rentesneeuwbal. Neemt Jakob eindelijk verantwoordelijkheid of koopt hij een nieuwe fiets?</div></div><div class="sanction" style="border-bottom:none;padding-bottom:0"><div class="s-name">⌚ Gust neemt tijdens een fietstocht afscheid van goede vriend Garmin.</div></div></div>
+<div class="card full"><div class="card-title"><div class="dot dot-amber"></div> 📊 Prestaties van de maand</div><p style="font-size:13px;color:var(--text2);">Enkele dagen stevige wind schiepen opportuniteiten. Enkele coureurs wisten ook iets te sprokkelen:</p><div class="sanction"><div class="s-name">🌬️ Jakob en Wout waaien de top 10 binnen op de Argendaalstraat.</div></div><div class="sanction" style="border-bottom:none;padding-bottom:0"><div class="s-name">🏆 Mattéo ongenaakbaar in het najaar</div><div class="s-desc">Vierde op de Egemveldegemweg, vierde op de Processiestraat en zesde op de Rekkemstraat (E403, rond punt).</div></div></div>
+<div class="card"><div class="card-title"><div class="dot dot-blue"></div> Club van 1.000</div><div class="sanction" style="border-bottom:none;padding-bottom:0"><div class="s-name">🎯 Thibault richting 1.000 km</div><div class="s-desc">“Wat goed is, komt rap”, maar discipline is des te belangrijker. We duimen dat Thibault de grens van 1.000 km nog haalt. Stuur gerust in de groep voor een rit. We zetten je graag uit de koude wind tijdens de resterende 350 km.</div></div></div>
+<div class="card"><div class="card-title"><div class="dot dot-purple"></div> De soloclub</div><div class="sanction"><div class="s-name">🚴 Drie renners, drie soloritten</div><div class="s-desc">Het werd al eerder aangehaald: de Saloncoureurs lijken soms meer op een soloclub dan een wielerclub. Dat werd bevestigd op zaterdag 31 oktober. Maar liefst drie renners werkten in de namiddag afzonderlijk een rit van 40 tot 50 kilometer af. Hier is natuurlijk niets mis mee.</div></div><div class="sanction" style="border-bottom:none;padding-bottom:0"><div class="s-desc">De chat is er om gebruikt te worden. Stuur elkaar een bericht om te motiveren en samen het kilometeraantal te bereiken. Daarin kadert ook de oproep hieronder.</div></div></div>
+<div class="card full"><div class="card-title"><div class="dot dot-green"></div> 🍻 Oproep: meer drinken met de Saloncoureurs</div><ul class="sc-card-list"><li><strong>Voorstel:</strong> kotentocht in Kortrijk in november, december of januari, eventueel als vrijdagavondrit.</li><li><strong>Andreas, Mattéo, Séba en Gust:</strong> wanneer is de housewarming?</li><li><strong>Andreas:</strong> gezamenlijke hittetraining bij de haard?</li><li><strong>Toon, Wout en Jakob:</strong> wanneer trakteren jullie om de nieuwe job te vieren?</li><li><strong>Wout:</strong> wanneer is de receptie om de nieuwe vélo te presenteren?</li><li><strong>Lucas en Willem:</strong> steeds welkom bij ons voor een drankje. Nodig gerust jezelf uit. Jakob doet dit ook.</li><li><strong>Thibault en Michel:</strong> wanneer leren jullie ons netwerken als echte Vlerickers?</li><li>Andere spontane initiatieven zijn steeds welkom!</li></ul></div>
+<div class="card full"><div class="card-title"><div class="dot dot-amber"></div> Nico rekruteert</div><div class="sanction" style="border-bottom:none;padding-bottom:0"><div class="s-name">🔎 Nieuwe slachtoffers gezocht</div><div class="s-desc">De kilometervreter was deze maand ijverig op zoek naar nieuwe slachtoffers om te doen afzien in zijn wiel, of gewoon naar wat compagnie tijdens zijn vele kilometers. Hij schudde al de hand van wereldreiziger Stan. Met die handdruk werd vastgelegd dat Stan zich na zijn wereldreis bij de Saloncoureurs zal scharen. We kijken ernaar uit!</div><div class="s-desc">Verder ging Nico op zwier met zijn baas Tom, die als sterke schakel wel eens voor de rol van kopman zou kunnen gaan. Vooral op het vlak van bochtenwerk kan hij de groep nog wat bijleren.</div><div class="s-desc">En daar stopt het niet. Ook Mauro, momenteel bezig met de aankoop van een koersfiets, werd meegevraagd op een ritje in het donker. De heren werkten ongeveer 45 km af. Mauro lijkt dus al helemaal klaar voor een zondagsrit met de Saloncoureurs. De drie heren worden bij deze uitgenodigd om hun inschrijvingsformulier in te sturen.</div></div></div>
+<div class="card"><div class="card-title"><div class="dot dot-blue"></div> Zes vertegenwoordigers op de Groeningequiz</div><div class="sanction" style="border-bottom:none;padding-bottom:0"><div class="s-name">🧠 27 november</div><div class="s-desc">Mattéo, Wout, Jakob, Willem, Dries en Séba vertegenwoordigen WTC De Saloncoureurs op het hoogste quizniveau van Kortrijk. De tenue van de Saloncoureurs zal hopelijk sterk zichtbaar zijn en wie weet staan ze zelfs op het podium. Dat zal vast beter gaan dan bij de “Camiongs”! Veel succes en plezier aan onze afgevaardigden.</div></div></div>
+<div class="card"><div class="card-title"><div class="dot dot-red"></div> Kulakberg versus Thibault Ghekiere</div><div class="sanction" style="border-bottom:none;padding-bottom:0"><div class="s-name">⛰️ Uitstel is geen afstel</div><div class="s-desc">Dit gevecht lijkt voorlopig uit te blijven, maar uitstel is zeker geen afstel. Naar verluidt zou hij de Kulakberg, zoals de bijbel het voorschrijft, niet zomaar 13 keer oprijden, maar meteen 100 keer. Op die manier is de ondergrens van 1.000 km mogelijk wel erg snel bereikt.</div></div></div>
+<div class="card full esv-card" style="border:4px solid #d4af37 !important; box-sizing:border-box;"><div class="card-title"><div class="dot dot-purple"></div> 📅 De  eindeseizoensvergadering</div><div class="welcome-text"><p>Dag heren van de Saloncoureurs,</p><p>Op zaterdag <strong>19 december</strong> spreken we af voor de ESV van WTC De Saloncoureurs. We verwelkomen jullie vanaf <strong>16.30 uur</strong> met een hapje en een drankje, waarna we er om <strong>17.00 uur</strong> invliegen.</p><p>We beginnen meteen met de serieuze onderwerpen, in een logische volgorde:</p><ol class="sc-card-list"><li>Wat zijn de <strong>doelen</strong> voor volgend seizoen en waar willen we naartoe?</li><li>De <strong>regels</strong> aanpassen in functie van de doelstellingen.</li><li>De <strong>planning</strong> voor volgend seizoen om onze doelen te bereiken.</li><li>De <strong>straffen</strong> van dit seizoen afwerken om volgend seizoen met een schone lei te beginnen.</li><li>Na de straffen worden de renners geprezen voor hun sterke prestaties van dit seizoen: <strong>de Salon d’Ors</strong>.</li><li>Plezier maken met de groep tijdens de <strong>quiz van Balti Volleybal</strong>. Het startuur wordt nog bevestigd.</li></ol><p>Indien iemand nog onderwerpen wil voorstellen, gelieve dit te melden.</p><p>Het voorstel voor na de vergadering is om met een tweetal teams de quiz van Balti, de volleybalclub van Lucas, te gaan kantelen. We kijken ernaar uit.</p><div class="sc-callout"><strong>Afwezigheden:</strong><br><strong>Wout</strong> gaat met zijn vriendin naar Lord of the Rings/Hobbit met liveorkest.<br><strong>Séba </strong> moet werken.<br><strong>Wie niet aanwezig kan zijn, laat dit nog weten, inclusief de reden.</strong></div></div></div>
+<div class="card"><div class="card-title"><div class="dot dot-red"></div> ⚖️ Straffen</div><div class="sanction"><div class="s-name">🍺 Uitstaande doop</div><div class="s-desc">Dries, Gust en Mattéo.</div></div><div class="sanction" style="border-bottom:none;padding-bottom:0"><div class="s-name">🎒 Met item fietsen</div><div class="s-desc">Séba en Thibault.</div></div></div>
+<div class="card"><div class="card-title"><div class="dot dot-red"></div> 🤕 Blessures</div><div class="sanction"><div class="s-name">Nico</div><div class="s-desc">Onderrug.</div></div><div class="sanction" style="border-bottom:none;padding-bottom:0"><div class="s-name">De tracker</div><div class="s-desc">Hier wordt naar gekeken.</div></div></div>
+<div class="card full"><div class="card-title"><div class="dot dot-green"></div> 🚲 Verantwoordelijken zondagsritten</div><div class="podium-row"><div class="rank">📅</div><div class="p-name"><strong>1 november</strong></div><div class="p-km">Gust</div></div><div class="podium-row"><div class="rank">📅</div><div class="p-name"><strong>8 november</strong></div><div class="p-km">Toon</div></div><div class="podium-row"><div class="rank">📅</div><div class="p-name"><strong>15 november</strong></div><div class="p-km">Lucas</div></div><div class="podium-row"><div class="rank">📅</div><div class="p-name"><strong>22 november</strong></div><div class="p-km">Wout</div></div><div class="podium-row"><div class="rank">📅</div><div class="p-name"><strong>29 november</strong></div><div class="p-km">Jakob</div></div><div class="sc-callout"><strong>Ideeën om sterk te eindigen:</strong> een rit met chocomelk en pannenkoeken, een jeneverrit, ontbijtrit, halloween- of verkleedrit, een rit in een specifieke figuur zoals een kalkoen, 13 keer de Kulakberg, een alternatieve competitie, een huizentochtrit of een Cyclostudio-class. Wees creatief en voorzie gerust een alternatief als het weer fietsen niet toelaat.</div></div>
+<div class="card full"><div class="card-title"><div class="dot dot-blue"></div> Quote van de maand</div><div class="sc-quote"><strong>“Be a retard in motion”</strong><br><span style="font-size:12px;color:var(--text3);">~ Nico </span></div></div>
+</div>
+<footer class="site-footer">De Saloncoureurs &copy; 2026 · Site · Plaagstoten met liefde geschreven</footer>
 </div>
 <script src="sc-animaties.js"></script>
+<script>
+(function () {
+  const leaves = ["🍂", "🍁", "🍃"];
+  const count = 14;
+  for (let i = 0; i < count; i++) {
+    const leaf = document.createElement("span");
+    leaf.className = "sc-leaf";
+    leaf.textContent = leaves[Math.floor(Math.random() * leaves.length)];
+    leaf.style.left = (Math.random() * 100) + "vw";
+    leaf.style.fontSize = (15 + Math.random() * 15) + "px";
+    leaf.style.animationDuration = (8 + Math.random() * 8) + "s";
+    leaf.style.animationDelay = (-Math.random() * 15) + "s";
+    document.body.appendChild(leaf);
+  }
+})();
+</script>
 </body>
 </html>
