@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="fotos/logo-transparant.png">
+<link rel="apple-touch-icon" href="fotos/logo-transparant.png">
+<title>De Saloncoureurs — Doelstellingen</title>
+<link rel="stylesheet" href="stijl.css">
+<style>
+  .goals-intro {
+    margin-bottom: 12px;
+    padding: 14px 16px;
+    background: rgba(212,169,42,.08);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius-sm);
+    color: var(--text2);
+    font-size: 13px;
+    text-align: center;
+  }
+  .goals-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .goal-card {
+    position: relative;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    box-shadow: 0 8px 24px rgba(22,36,60,.06);
+  }
+  .goal-card.completed {
+    border-color: rgba(52,168,83,.45);
+    background: linear-gradient(145deg, var(--surface), rgba(52,168,83,.07));
+  }
+  .goal-card.km-card {
+    grid-column: 1 / -1;
+    background: var(--navy);
+    border-color: rgba(243,194,89,.32);
+    color: #fff;
+  }
+  .goal-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .goal-title-wrap { display: flex; align-items: center; gap: 11px; }
+  .goal-icon { font-size: 28px; line-height: 1; }
+  .goal-title { font-family: var(--serif); font-size: 21px; font-weight: 800; color: var(--text); }
+  .goal-card.km-card .goal-title { color: var(--gold-bright); }
+  .goal-description { margin-top: 4px; font-size: 12px; color: var(--text2); }
+  .goal-card.km-card .goal-description { color: #9fb0c5; }
+  .goal-status {
+    flex-shrink: 0;
+    padding: 5px 9px;
+    border-radius: 999px;
+    background: var(--surface2);
+    color: var(--text2);
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .goal-status.done { background: var(--green-bg); color: var(--green-fg); }
+  .goal-status.live { background: rgba(212,169,42,.15); color: var(--gold-bright); }
+  .goal-value { font-family: var(--serif); font-size: 34px; font-weight: 800; color: var(--text); line-height: 1; }
+  .goal-card.km-card .goal-value { color: var(--gold-bright); font-size: clamp(38px, 7vw, 54px); }
+  .goal-unit { font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--text2); }
+  .goal-card.km-card .goal-unit { color: #9fb0c5; }
+  .goal-track { height: 12px; margin-top: 15px; overflow: hidden; background: var(--surface2); border-radius: 999px; border: 1px solid var(--border); }
+  .goal-card.km-card .goal-track { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.16); }
+  .goal-fill { width: 0; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #f0c84a, #d4a92a, #a07010); transition: width .8s ease; }
+  .goal-fill.green { background: linear-gradient(90deg, #76c98b, #34a853); }
+  .goal-fill.blue { background: linear-gradient(90deg, #79b7ef, #367fbd); }
+  .goal-meta { display: flex; justify-content: space-between; gap: 12px; margin-top: 8px; font-size: 11px; color: var(--text3); }
+  .goal-card.km-card .goal-meta { color: #9fb0c5; }
+  .goal-link { display: inline-block; margin-top: 16px; color: var(--gold-bright); font-size: 12px; font-weight: 700; text-decoration: none; }
+  .goal-link:hover { text-decoration: underline; }
+  .goal-loading { color: #9fb0c5; font-size: 12px; margin-top: 10px; }
+  .goal-error { display: none; margin-top: 12px; color: #ffb2b2; font-size: 12px; }
+  @media (max-width: 720px) {
+    .goals-grid { grid-template-columns: 1fr; }
+    .goal-card.km-card { grid-column: auto; }
+    .goal-head { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" class="sc-crest" style="width:28px;height:28px;object-fit:contain;" alt="Logo">
+      De Saloncoureurs
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Homepage</a>
+      <a href="kalender.html">Kalender</a>
+      <a href="leden.html">Leden</a>
+      <a href="statuten.html">Statuten</a>
+      <a href="galerij.html">Galerij</a>
+      <a href="tracker.html">Tracker</a>
+      <a href="doelstellingen.html" class="active">Doelstellingen</a>
+      <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank" rel="noopener noreferrer">Sociale Media ↗</a>
+    </div>
+    <button class="nav-burger" type="button" onclick="toggleMenu()" aria-label="Menu openen">☰</button>
+  </div>
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="index.html">Homepage</a>
+    <a href="kalender.html">Kalender</a>
+    <a href="leden.html">Leden</a>
+    <a href="statuten.html">Statuten</a>
+    <a href="galerij.html">Galerij</a>
+    <a href="tracker.html">Tracker</a>
+    <a href="doelstellingen.html" class="active">Doelstellingen</a>
+    <a href="https://www.instagram.com/wtcsaloncoureurs/" target="_blank" rel="noopener noreferrer">Sociale Media ↗</a>
+  </div>
+</nav>
+
+<div class="sc-ticker" id="scTicker"></div>
+
+<div class="page">
+  <header class="masthead sc-intro">
+    <div class="mast-kicker sc-rise1">WTC Saloncoureurs · Seizoen 2026</div>
+    <h1 class="mast-title sc-rise2">Doelstellingen</h1>
+    <div class="mast-sub sc-rise3">Samen op weg naar een geslaagd seizoen</div>
+  </header>
+
+  <div class="goals-intro">
+    De voortgang van de kilometers wordt live opgehaald uit dezelfde Strava- en Firestoregegevens als de kilometertracker. De overige doelstellingen worden hieronder als vaste clubdoelen weergegeven.
+  </div>
+
+  <main class="goals-grid">
+    <section class="goal-card km-card">
+      <div class="goal-head">
+        <div class="goal-title-wrap">
+          <div class="goal-icon">🚴</div>
+          <div>
+            <div class="goal-title">40.000 kilometer</div>
+            <div class="goal-description">Live gekoppeld aan de kilometertracker</div>
+          </div>
+        </div>
+        <div class="goal-status live">Live</div>
+      </div>
+      <div class="goal-value" id="kmValue">— <span class="goal-unit">/ 40.000 km</span></div>
+      <div class="goal-track"><div class="goal-fill" id="kmFill"></div></div>
+      <div class="goal-meta"><span id="kmPct">Data laden…</span><span id="kmRemaining">—</span></div>
+      <div class="goal-loading" id="kmLoading">Kilometerstand ophalen…</div>
+      <div class="goal-error" id="kmError">De live kilometerstand kon niet worden geladen. Bekijk de kilometertracker voor de meest recente stand.</div>
+      <a class="goal-link" href="tracker.html">Bekijk de volledige kilometertracker ↗</a>
+    </section>
+
+    <section class="goal-card completed">
+      <div class="goal-head">
+        <div class="goal-title-wrap"><div class="goal-icon">🏟️</div><div><div class="goal-title">Vijf voetbalstadia</div><div class="goal-description">Vijf verschillende voetbalstadia bezoeken per fiets</div></div></div>
+        <div class="goal-status done">Behaald</div>
+      </div>
+      <div class="goal-value">5 <span class="goal-unit">/ 5</span></div>
+      <div class="goal-track"><div class="goal-fill green" style="width:100%"></div></div>
+      <div class="goal-meta"><span>100% voltooid</span><span>✓ Doel behaald</span></div>
+    </section>
+
+    <section class="goal-card completed">
+      <div class="goal-head">
+        <div class="goal-title-wrap"><div class="goal-icon">👥</div><div><div class="goal-title">Tien groepsritten</div><div class="goal-description">Groepsritten met minimaal vijf deelnemers</div></div></div>
+        <div class="goal-status done">Behaald</div>
+      </div>
+      <div class="goal-value">10 <span class="goal-unit">/ 10</span></div>
+      <div class="goal-track"><div class="goal-fill green" style="width:100%"></div></div>
+      <div class="goal-meta"><span>100% voltooid</span><span>✓ Doel behaald</span></div>
+    </section>
+
+    <section class="goal-card">
+      <div class="goal-head">
+        <div class="goal-title-wrap"><div class="goal-icon">💛</div><div><div class="goal-title">Drie goede doelen</div><div class="goal-description">Als club bijdragen aan drie goede doelen</div></div></div>
+        <div class="goal-status">Bezig</div>
+      </div>
+      <div class="goal-value">1 <span class="goal-unit">/ 3</span></div>
+      <div class="goal-track"><div class="goal-fill blue" style="width:33.333%"></div></div>
+      <div class="goal-meta"><span>33,3% voltooid</span><span>Nog 2 te gaan</span></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">De Saloncoureurs &copy; 2026 · Samen sterk, op en naast de fiets</footer>
+</div>
+
+<script src="sc-animaties.js"></script>
+<script>
+const FIRESTORE_BASE = 'https://firestore.googleapis.com/v1/projects/wtc-saloncoureurs/databases/(default)/documents';
+const SEIZOEN_DOEL = 40000;
+
+function firestoreGetal(field) {
+  if (!field) return 0;
+  return Number(field.doubleValue ?? field.integerValue ?? 0) || 0;
+}
+
+async function laadKilometerdoel() {
+  const valueEl = document.getElementById('kmValue');
+  const fillEl = document.getElementById('kmFill');
+  const pctEl = document.getElementById('kmPct');
+  const remainingEl = document.getElementById('kmRemaining');
+  const loadingEl = document.getElementById('kmLoading');
+  const errorEl = document.getElementById('kmError');
+
+  try {
+    const response = await fetch(`${FIRESTORE_BASE}/stats?pageSize=50`);
+    if (!response.ok) throw new Error('Stats ophalen mislukt');
+
+    const data = await response.json();
+    const totaalKm = (data.documents || []).reduce((som, document) => {
+      return som + firestoreGetal(document.fields?.totalKm);
+    }, 0);
+
+    const afgerond = Math.round(totaalKm);
+    const percentage = Math.min((afgerond / SEIZOEN_DOEL) * 100, 100);
+    const resterend = Math.max(SEIZOEN_DOEL - afgerond, 0);
+
+    valueEl.innerHTML = `${afgerond.toLocaleString('nl-BE')} <span class="goal-unit">/ ${SEIZOEN_DOEL.toLocaleString('nl-BE')} km</span>`;
+    fillEl.style.width = `${percentage.toFixed(1)}%`;
+    pctEl.textContent = `${percentage.toFixed(1).replace('.', ',')}% voltooid`;
+    remainingEl.textContent = resterend > 0 ? `Nog ${resterend.toLocaleString('nl-BE')} km` : '✓ Doel behaald';
+    loadingEl.style.display = 'none';
+  } catch (error) {
+    console.error(error);
+    loadingEl.style.display = 'none';
+    errorEl.style.display = 'block';
+    pctEl.textContent = 'Live stand niet beschikbaar';
+    remainingEl.textContent = '';
+  }
+}
+
+laadKilometerdoel();
+</script>
+</body>
+</html>
